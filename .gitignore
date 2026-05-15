@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude code / local dev tools (not part of project)
+.agents/
+.impeccable/
+skills-lock.json
+CLAUDE.md
+AGENTS.md
