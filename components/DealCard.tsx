@@ -39,16 +39,13 @@ export default function DealCard({ deal, draggable = false, onDragStart }: DealC
       style={{
         background: 'var(--surface2)',
         borderColor: 'var(--border)',
-        boxShadow: 'var(--shadow-sm)',
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = 'var(--border2)';
-        (e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-md)';
         (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-        (e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-sm)';
         (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
       }}
     >

@@ -70,7 +70,7 @@ export default function SettingsPage() {
         {/* Analyst Profile */}
         <section
           className="rounded-xl overflow-hidden"
-          style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
+          style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
         >
           <div
             className="px-5 py-3.5"
@@ -105,7 +105,7 @@ export default function SettingsPage() {
         {/* Data & Pipeline */}
         <section
           className="rounded-xl overflow-hidden"
-          style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
+          style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
         >
           <div
             className="px-5 py-3.5"
@@ -221,8 +221,8 @@ export default function SettingsPage() {
             onClick={handleSave}
             className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-100"
             style={{ background: 'var(--brand)', color: 'var(--bg)' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px rgba(244,197,66,0.25)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
           >
             <Save size={13} />
             Save changes

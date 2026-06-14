@@ -157,8 +157,8 @@ export default function PipelinePage() {
               href="/app/upload"
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-100"
               style={{ background: 'var(--brand)', color: 'var(--bg)' }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px rgba(244,197,66,0.25)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
             >
               <Plus size={14} />
               New Deal
@@ -264,7 +264,7 @@ export default function PipelinePage() {
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-100"
                 style={
                   view === v
-                    ? { background: 'var(--surface3)', color: 'var(--text)', boxShadow: 'var(--shadow-sm)' }
+                    ? { background: 'var(--surface3)', color: 'var(--text)' }
                     : { color: 'var(--muted)' }
                 }
               >
@@ -279,7 +279,7 @@ export default function PipelinePage() {
         {deals.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-32 text-center">
             <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4"
+              className="w-14 h-14 rounded-lg flex items-center justify-center mb-4"
               style={{ background: 'var(--brand-dim)', border: '1px solid rgba(244,197,66,0.25)' }}
             >
               <Plus size={24} style={{ color: 'var(--brand)' }} />
@@ -303,7 +303,7 @@ export default function PipelinePage() {
           /* Table view */
           <div
             className="rounded-xl overflow-hidden"
-            style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
+            style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
           >
             <div className="overflow-x-auto">
               <table className="w-full">

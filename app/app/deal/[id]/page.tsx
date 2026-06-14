@@ -247,8 +247,8 @@ export default function DealPage() {
               whileTap={{ scale: 0.97 }}
               className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-100 disabled:opacity-50"
               style={{ background: 'var(--brand)', color: 'var(--bg)' }}
-              onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => { if (!(e.currentTarget as HTMLButtonElement).disabled) { (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 14px rgba(244,197,66,0.25)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'; }}}
-              onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
+              onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => { if (!(e.currentTarget as HTMLButtonElement).disabled) { (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'; }}}
+              onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
             >
               <FileText size={13} />
               {generatingMemo ? 'Generating...' : 'Generate Memo'}
@@ -269,7 +269,7 @@ export default function DealPage() {
           >
             {/* Company Overview */}
             <Reveal>
-            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <SectionHeader label="Company Overview" />
               <div className="px-5 py-3">
                 <InfoRow label="Problem" value={deal.analysis.problem} />
@@ -304,7 +304,7 @@ export default function DealPage() {
 
             {/* Market */}
             <Reveal>
-            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <SectionHeader label="Market" />
               <div className="px-5 py-4">
                 {deal.analysis.market.tam || deal.analysis.market.sam ? (
@@ -335,7 +335,7 @@ export default function DealPage() {
 
             {/* Traction */}
             <Reveal>
-            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <SectionHeader label="Traction" />
               <div className="px-5 py-4">
                 {deal.analysis.traction.length > 0 ? (
@@ -354,7 +354,7 @@ export default function DealPage() {
 
             {/* Team */}
             <Reveal>
-            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <SectionHeader label="Team" />
               <div className="px-5 py-4 space-y-4">
                 {deal.analysis.team.map((member, i) => (
@@ -389,7 +389,7 @@ export default function DealPage() {
           >
             {/* Thesis Fit */}
             <Reveal>
-            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <SectionHeader label="Thesis Fit Analysis" />
               <div className="px-5 py-4">
                 {/* Score display */}
@@ -439,7 +439,7 @@ export default function DealPage() {
 
             {/* Red Flags */}
             <Reveal>
-            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <SectionHeader label="Red Flags" />
               <div className="px-5 py-4">
                 {deal.redFlags.length === 0 ? (
@@ -485,7 +485,7 @@ export default function DealPage() {
 
             {/* Analyst Notes */}
             <Reveal>
-            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <div
                 className="px-5 py-3 flex items-center justify-between"
                 style={{ borderBottom: '1px solid var(--border)', background: 'var(--surface2)' }}
@@ -517,7 +517,7 @@ export default function DealPage() {
             {/* AI Detection */}
             {deal.aiDetection && (
               <Reveal>
-              <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
+              <div className="rounded-xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
                 <div
                   className="px-5 py-3 flex items-center justify-between"
                   style={{ borderBottom: '1px solid var(--border)', background: 'var(--surface2)' }}

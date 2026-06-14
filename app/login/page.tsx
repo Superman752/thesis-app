@@ -53,7 +53,7 @@ export default function LoginPage() {
           <Link href="/" className="flex items-center gap-2.5 mb-8 w-fit">
             <div
               className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-              style={{ background: 'var(--brand)', boxShadow: '0 0 16px rgba(244,197,66,0.2)' }}
+              style={{ background: 'var(--brand)' }}
             >
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                 <rect x="2" y="2"    width="12" height="2.5" rx="1" fill="#09090B"/>
@@ -141,13 +141,11 @@ export default function LoginPage() {
               style={{ background: 'var(--brand)', color: '#09090B' }}
               onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
                 if (!(e.currentTarget as HTMLButtonElement).disabled) {
-                  (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(244,197,66,0.28)';
                   (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
                 }
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
-                (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                (e.currentTarget as HTMLElement).style.transform  = 'translateY(0)';
+                (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
               }}
             >
               {loading ? 'Opening...' : (<>Open Thesis <ArrowRight size={15} /></>)}

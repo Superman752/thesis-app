@@ -203,7 +203,7 @@ export default function UploadPage() {
                       minHeight: 300,
                       border: `1.5px dashed ${isDragging ? 'var(--brand)' : 'var(--border2)'}`,
                       background: isDragging ? 'var(--brand-dim)' : 'var(--surface)',
-                      boxShadow: isDragging ? '0 0 0 3px var(--brand-glow)' : 'none',
+                      outline: isDragging ? '2px solid var(--brand)' : 'none',
                     }}
                     onDragOver={(e)  => { e.preventDefault(); setIsDragging(true); }}
                     onDragLeave={() => setIsDragging(false)}
@@ -332,7 +332,7 @@ export default function UploadPage() {
 
               <div
                 className="rounded-xl overflow-hidden"
-                style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
+                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
               >
                 {/* File info row */}
                 <div className="flex items-center gap-3.5 px-5 py-4">
@@ -409,12 +409,10 @@ export default function UploadPage() {
                     className="w-full flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-semibold transition-all duration-100"
                     style={{ background: 'var(--brand)', color: '#09090B' }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.boxShadow  = '0 4px 16px rgba(244,197,66,0.3)';
-                      (e.currentTarget as HTMLElement).style.transform  = 'translateY(-1px)';
+                      (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.boxShadow  = 'none';
-                      (e.currentTarget as HTMLElement).style.transform  = 'translateY(0)';
+                      (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
                     }}
                   >
                     <Zap size={15} />
@@ -433,7 +431,7 @@ export default function UploadPage() {
             <motion.div key="analyzing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <div
                 className="max-w-2xl rounded-xl overflow-hidden"
-                style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
+                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
               >
                 {/* File header */}
                 <div

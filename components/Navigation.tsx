@@ -59,7 +59,7 @@ export default function Navigation() {
         >
           <div
             className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-            style={{ background: 'var(--brand)', boxShadow: '0 0 14px rgba(244,197,66,0.22)' }}
+            style={{ background: 'var(--brand)' }}
           >
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
               <rect x="2" y="2" width="12" height="2.5" rx="1" fill="#09090B"/>

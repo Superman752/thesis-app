@@ -122,8 +122,8 @@ export default function MemoPage() {
             onClick={() => window.print()}
             className="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold transition-all duration-100"
             style={{ background: 'var(--brand)', color: 'var(--bg)' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 14px rgba(244,197,66,0.25)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
           >
             <Printer size={12} />
             Print / Export PDF
