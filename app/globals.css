@@ -59,10 +59,14 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
+  font-family: 'Geist', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
 }
 
 .font-mono {
