@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
+import { MagicCard } from '@/components/magicui/magic-card';
 
 function ScrollReveal({
   children,
@@ -374,12 +375,18 @@ export default function FeaturesPage() {
                     <div style={{ width: 36, height: 2, background: 'rgba(244,197,66,0.4)' }} />
                   </div>
                   <div className="flex-1 flex items-center">
-                    <div
-                      className="w-full flex items-center justify-center"
-                      style={{ height: 140, background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}
+                    <MagicCard
+                      className="w-full"
+                      gradientColor="rgba(244,197,66,0.06)"
+                      gradientSize={250}
                     >
-                      <feat.icon size={36} style={{ color: 'rgba(255,255,255,0.06)' }} />
-                    </div>
+                      <div
+                        className="w-full flex items-center justify-center"
+                        style={{ height: 140, background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}
+                      >
+                        <feat.icon size={36} style={{ color: 'rgba(255,255,255,0.06)' }} />
+                      </div>
+                    </MagicCard>
                   </div>
                 </div>
                 {i < FEATURES.length - 1 && <div style={{ marginTop: 80, height: 1, background: 'rgba(255,255,255,0.04)' }} />}

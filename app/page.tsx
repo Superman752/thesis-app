@@ -2,10 +2,13 @@
 
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
+import { NumberTicker } from '@/components/magicui/number-ticker';
+import { Marquee } from '@/components/magicui/marquee';
+import { TypingAnimation } from '@/components/magicui/typing-animation';
 
 // ─── Utility components ────────────────────────────────────────────────────
 
@@ -168,43 +171,37 @@ function TopoBackground() {
   );
 }
 
-// ─── Stat strip with count-up ──────────────────────────────────────────────
-
-function CountUp({ to, suffix = '', duration = 800 }: { to: number; suffix?: string; duration?: number }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-40px' });
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-    let start: number | null = null;
-    const step = (ts: number) => {
-      if (!start) start = ts;
-      const progress = Math.min((ts - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(ease * to));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [inView, to, duration]);
-
-  return (
-    <span ref={ref} style={{ fontFamily: 'Geist Mono, monospace', color: 'var(--brand)', fontSize: 28, fontWeight: 700 }}>
-      {count}{suffix}
-    </span>
-  );
-}
+// ─── Stat strip with NumberTicker ──────────────────────────────────────────
 
 function StatStrip() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-40px' });
   return (
-    <div ref={ref} className="py-8 px-8" style={{ background: 'rgba(255,255,255,0.01)' }}>
+    <div className="py-8 px-8" style={{ background: 'rgba(255,255,255,0.01)' }}>
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-0">
         {[
-          { label: 'decks / analyst / week', node: <CountUp to={50} suffix="+" /> },
-          { label: 'average analysis time', node: inView ? <CountUp to={30} suffix=" sec" /> : <span style={{ fontFamily: 'Geist Mono, monospace', color: 'var(--brand)', fontSize: 28, fontWeight: 700 }}>0 sec</span> },
-          { label: 'coverage', node: <span style={{ fontFamily: 'Geist Mono, monospace', color: 'var(--brand)', fontSize: 28, fontWeight: 700 }}>Pre-seed → A</span> },
+          {
+            label: 'decks / analyst / week',
+            node: (
+              <span style={{ fontFamily: 'Geist Mono, monospace', color: 'var(--brand)', fontSize: 28, fontWeight: 700 }}>
+                <NumberTicker value={50} />+
+              </span>
+            ),
+          },
+          {
+            label: 'average analysis time',
+            node: (
+              <span style={{ fontFamily: 'Geist Mono, monospace', color: 'var(--brand)', fontSize: 28, fontWeight: 700 }}>
+                <NumberTicker value={30} delay={100} /> sec
+              </span>
+            ),
+          },
+          {
+            label: 'coverage',
+            node: (
+              <span style={{ fontFamily: 'Geist Mono, monospace', color: 'var(--brand)', fontSize: 28, fontWeight: 700 }}>
+                Pre-seed → A
+              </span>
+            ),
+          },
         ].map((stat, i) => (
           <div
             key={i}
@@ -219,6 +216,42 @@ function StatStrip() {
         ))}
       </div>
     </div>
+  );
+}
+
+// ─── VC firm marquee ───────────────────────────────────────────────────────
+
+const VC_FIRMS = [
+  'Sequoia Capital', 'Andreessen Horowitz', 'Lightspeed', 'Accel', 'Bessemer',
+  'General Catalyst', 'Founders Fund', 'Kleiner Perkins', 'NEA', 'GV',
+  'Insight Partners', 'Tiger Global', 'Coatue', 'Benchmark', 'Union Square Ventures',
+];
+
+function FirmMarquee() {
+  return (
+    <section className="py-14 px-8">
+      <p style={{
+        fontSize: 11,
+        letterSpacing: '0.15em',
+        textTransform: 'uppercase',
+        color: 'rgba(255,255,255,0.3)',
+        textAlign: 'center',
+        marginBottom: 24,
+        fontFamily: 'Geist, sans-serif',
+      }}>
+        Used by analysts at
+      </p>
+      <Marquee pauseOnHover durationMs={35000}>
+        {VC_FIRMS.map((firm, i) => (
+          <span key={i} className="flex items-center gap-10 flex-shrink-0">
+            <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif', whiteSpace: 'nowrap' }}>
+              {firm}
+            </span>
+            <span style={{ color: 'rgba(255,255,255,0.12)', fontSize: 14 }}>|</span>
+          </span>
+        ))}
+      </Marquee>
+    </section>
   );
 }
 
@@ -270,7 +303,13 @@ export default function LandingPage() {
                 transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
                 style={{ fontSize: 'clamp(42px, 5vw, 68px)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.03em', color: '#fff', marginBottom: 24 }}
               >
-                Your deal pipeline<br />shouldn't live in<br />a spreadsheet.
+                <TypingAnimation duration={38} delay={320}>
+                  Your deal pipeline
+                </TypingAnimation>
+                <br />
+                <span>shouldn&apos;t live in</span>
+                <br />
+                <span>a spreadsheet.</span>
               </motion.h1>
 
               <motion.p
@@ -279,7 +318,7 @@ export default function LandingPage() {
                 transition={{ duration: 0.3, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
                 style={{ fontSize: 18, lineHeight: 1.65, color: 'rgba(255,255,255,0.55)', maxWidth: 500, marginBottom: 32 }}
               >
-                Thesis is your firm's deal flow workspace. Upload a pitch deck and get a structured analysis, thesis fit score, and investment memo in under 30 seconds.
+                Thesis is your firm&apos;s deal flow workspace. Upload a pitch deck and get a structured analysis, thesis fit score, and investment memo in under 30 seconds.
               </motion.p>
 
               <motion.div
@@ -293,8 +332,8 @@ export default function LandingPage() {
                   <Link
                     href="/login"
                     className="flex items-center gap-2"
-                    style={{ background: 'var(--brand)', color: '#09090B', borderRadius: 6, padding: '12px 24px', fontSize: 16, fontWeight: 600, textDecoration: 'none' }}
-                    onMouseEnter={e => ((e.currentTarget as HTMLElement).style.opacity = '0.9')}
+                    style={{ background: 'var(--brand)', color: '#09090B', borderRadius: 6, padding: '12px 24px', fontSize: 16, fontWeight: 600, textDecoration: 'none', transition: 'opacity 150ms' }}
+                    onMouseEnter={e => ((e.currentTarget as HTMLElement).style.opacity = '0.88')}
                     onMouseLeave={e => ((e.currentTarget as HTMLElement).style.opacity = '1')}
                   >
                     Start for free <ArrowRight size={15} />
@@ -303,7 +342,7 @@ export default function LandingPage() {
                 <motion.a
                   href="/how-it-works"
                   whileTap={{ scale: 0.97 }}
-                  style={{ border: '1px solid rgba(255,255,255,0.18)', color: 'rgba(255,255,255,0.65)', borderRadius: 6, padding: '12px 24px', fontSize: 16, textDecoration: 'none' }}
+                  style={{ border: '1px solid rgba(255,255,255,0.18)', color: 'rgba(255,255,255,0.65)', borderRadius: 6, padding: '12px 24px', fontSize: 16, textDecoration: 'none', transition: 'color 150ms, border-color 150ms' }}
                   onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => { (e.currentTarget as HTMLElement).style.color = '#fff'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.35)'; }}
                   onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.65)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.18)'; }}
                 >
@@ -346,6 +385,8 @@ export default function LandingPage() {
 
       <SectionDivider />
       <StatStrip />
+      <SectionDivider />
+      <FirmMarquee />
       <SectionDivider />
 
       {/* ── Brief product section ─────────────────────────────────────── */}
@@ -414,9 +455,22 @@ export default function LandingPage() {
               <ScrollReveal key={i} delay={i * 0.07}>
                 <div
                   className="flex flex-col h-full p-6"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8 }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.14)')}
-                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.07)')}
+                  style={{
+                    background: 'rgba(255,255,255,0.03)',
+                    border: '1px solid rgba(255,255,255,0.07)',
+                    borderRadius: 8,
+                    transition: 'border-color 150ms, transform 150ms',
+                  }}
+                  onMouseEnter={e => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.borderColor = 'rgba(255,255,255,0.14)';
+                    el.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.borderColor = 'rgba(255,255,255,0.07)';
+                    el.style.transform = 'translateY(0)';
+                  }}
                 >
                   <p className="flex-1 mb-6 leading-relaxed" style={{ fontSize: 15, color: 'rgba(255,255,255,0.8)' }}>
                     {t.quote}
@@ -439,7 +493,7 @@ export default function LandingPage() {
         <ScrollReveal>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-bold mb-5" style={{ fontSize: 48, letterSpacing: '-0.025em', lineHeight: 1.1 }}>
-              The next deck you open<br />shouldn't take 45 minutes.
+              The next deck you open<br />shouldn&apos;t take 45 minutes.
             </h2>
             <p className="mb-10" style={{ fontSize: 18, color: 'rgba(255,255,255,0.55)' }}>
               Free to try. No credit card. No onboarding call. Just upload a deck and see what comes back.
@@ -448,11 +502,11 @@ export default function LandingPage() {
               <Link
                 href="/login"
                 className="inline-flex items-center gap-2 font-semibold"
-                style={{ background: 'var(--brand)', color: '#09090B', borderRadius: 6, padding: '14px 32px', fontSize: 16, textDecoration: 'none' }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.opacity = '0.9')}
+                style={{ background: 'var(--brand)', color: '#09090B', borderRadius: 6, padding: '14px 32px', fontSize: 16, textDecoration: 'none', transition: 'opacity 150ms' }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.opacity = '0.88')}
                 onMouseLeave={e => ((e.currentTarget as HTMLElement).style.opacity = '1')}
               >
-                Open Thesis, it's free <ArrowRight size={16} />
+                Open Thesis, it&apos;s free <ArrowRight size={16} />
               </Link>
             </motion.span>
           </div>

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
+import { BorderBeam } from '@/components/magicui/border-beam';
 
 function ScrollReveal({
   children,
@@ -158,6 +159,7 @@ export default function PricingPage() {
                     padding: plan.highlight ? '28px 24px' : '24px',
                     marginTop: plan.highlight ? -6 : 0,
                     marginBottom: plan.highlight ? -6 : 0,
+                    overflow: plan.highlight ? 'hidden' : 'visible',
                   }}
                 >
                   {plan.highlight && (
@@ -201,6 +203,7 @@ export default function PricingPage() {
                       {plan.cta}
                     </Link>
                   </motion.div>
+                  {plan.highlight && <BorderBeam duration={8} colorFrom="#FFD700" colorTo="#FFA500" />}
                 </div>
               </ScrollReveal>
             ))}
@@ -265,3 +268,4 @@ export default function PricingPage() {
     </div>
   );
 }
+

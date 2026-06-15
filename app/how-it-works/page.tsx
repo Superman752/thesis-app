@@ -108,12 +108,27 @@ export default function HowItWorksPage() {
 
       <SectionDivider />
 
-      {/* Steps — vertical detailed layout */}
+      {/* Steps — vertical detailed layout with stagger */}
       <section className="py-24 px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="space-y-0">
+          <motion.div
+            className="space-y-0"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.2 } },
+            }}
+          >
             {STEPS.map((s, i) => (
-              <ScrollReveal key={i} delay={i * 0.08}>
+              <motion.div
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, x: -24 },
+                  visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: [0.23, 1, 0.32, 1] } },
+                }}
+              >
                 <div className="flex gap-10 pb-16">
                   {/* Step number + connector */}
                   <div className="flex flex-col items-center flex-shrink-0">
@@ -131,7 +146,15 @@ export default function HowItWorksPage() {
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 pt-2 pb-16">
+                  <div
+                    className="flex-1 pt-4 pb-8 px-6"
+                    style={{
+                      borderLeft: '2px solid rgba(255,215,0,0.3)',
+                      background: 'rgba(255,255,255,0.02)',
+                      borderRadius: '0 8px 8px 0',
+                      marginBottom: 16,
+                    }}
+                  >
                     <div className="flex items-center gap-3 mb-4">
                       <s.icon size={16} style={{ color: 'var(--brand)' }} />
                       <h2 className="font-bold" style={{ fontSize: 24, letterSpacing: '-0.02em', lineHeight: 1.2, color: '#fff' }}>
@@ -146,9 +169,9 @@ export default function HowItWorksPage() {
                     </p>
                   </div>
                 </div>
-              </ScrollReveal>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
