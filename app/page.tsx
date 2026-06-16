@@ -9,6 +9,7 @@ import SiteFooter from '@/components/SiteFooter';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { TypingAnimation } from '@/components/magicui/typing-animation';
 import { TestimonialsMarquee } from '@/components/testimonials-marquee';
+import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 
 // ─── Utility components ────────────────────────────────────────────────────
 
@@ -328,24 +329,20 @@ export default function LandingPage() {
               </motion.div>
             </div>
 
-            {/* Floating card */}
-            <motion.div
-              className="hidden lg:block flex-shrink-0 w-[360px]"
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
-            >
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', repeatType: 'loop' }}
-              >
-                <DealAnalysisMockup />
-              </motion.div>
-            </motion.div>
-
           </div>
         </div>
       </section>
+
+      {/* Product preview — tilts in on scroll */}
+      <ContainerScroll
+        titleComponent={
+          <p className="text-xs font-medium tracking-[0.2em] uppercase mb-4" style={{ color: 'rgba(255,255,255,0.35)' }}>
+            Live analysis preview
+          </p>
+        }
+      >
+        <DealAnalysisMockup />
+      </ContainerScroll>
 
       <SectionDivider />
       <StatStrip />
