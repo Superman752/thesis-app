@@ -1,12 +1,15 @@
-﻿'use client';
+'use client';
 
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { Check, Star, ArrowRight } from 'lucide-react';
+import confetti from 'canvas-confetti';
+import NumberFlow from '@number-flow/react';
+import { useMediaQuery } from '@/hooks/use-media-query';
+import { cn } from '@/lib/utils';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
-import { BorderBeam } from '@/components/magicui/border-beam';
 
 function ScrollReveal({
   children,
@@ -45,12 +48,28 @@ function SectionDivider() {
   );
 }
 
-const PRICING = [
+interface Plan {
+  name: string;
+  price: number;
+  yearlyPrice: number;
+  period: string;
+  features: string[];
+  description: string;
+  buttonText: string;
+  href: string;
+  isPopular: boolean;
+}
+
+const PLANS: Plan[] = [
   {
     name: 'Solo Analyst',
-    price: 'Free',
-    period: '',
-    tagline: 'Get started at no cost',
+    price: 0,
+    yearlyPrice: 0,
+    period: 'month',
+    description: 'Get started at no cost',
+    buttonText: 'Start for free',
+    href: '/login',
+    isPopular: false,
     features: [
       '10 pitch decks per month',
       'Full deal analysis and extraction',
@@ -58,14 +77,16 @@ const PRICING = [
       'Thesis scoring',
       'Basic pipeline tracking',
     ],
-    cta: 'Start for free',
-    highlight: false,
   },
   {
     name: 'Pro',
-    price: '$19',
-    period: '/month',
-    tagline: 'For the serious analyst',
+    price: 19,
+    yearlyPrice: 15,
+    period: 'month',
+    description: 'For the serious analyst',
+    buttonText: 'Start Pro',
+    href: '/login',
+    isPopular: true,
     features: [
       'Unlimited pitch decks',
       'AI authorship detection',
@@ -74,14 +95,16 @@ const PRICING = [
       'Priority processing',
       'Everything in Solo',
     ],
-    cta: 'Start Pro',
-    highlight: true,
   },
   {
     name: 'Firm',
-    price: '$99',
-    period: '/month',
-    tagline: 'For the entire fund',
+    price: 99,
+    yearlyPrice: 79,
+    period: 'month',
+    description: 'For the entire fund',
+    buttonText: 'Talk to us',
+    href: '/login',
+    isPopular: false,
     features: [
       'Up to 10 analysts',
       'Shared investment thesis config',
@@ -90,8 +113,6 @@ const PRICING = [
       'Slack digest and notifications',
       'Everything in Pro',
     ],
-    cta: 'Talk to us',
-    highlight: false,
   },
 ];
 
@@ -110,7 +131,7 @@ const FAQ = [
   },
   {
     q: 'How does Firm billing work?',
-    a: "Flat $99/month for up to 10 analysts. Unlimited decks across the team. Contact us for larger teams.",
+    a: 'Flat $99/month for up to 10 analysts. Unlimited decks across the team. Contact us for larger teams.',
   },
 ];
 
@@ -118,12 +139,37 @@ export default function PricingPage() {
   const geist = { fontFamily: 'Geist, sans-serif' } as const;
   const mono = { fontFamily: 'Geist Mono, monospace' } as const;
 
+  const [isMonthly, setIsMonthly] = useState(true);
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+  const switchRef = useRef<HTMLButtonElement>(null);
+
+  const handleToggle = (nextChecked: boolean) => {
+    setIsMonthly(!nextChecked);
+    if (nextChecked && switchRef.current) {
+      const rect = switchRef.current.getBoundingClientRect();
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: {
+          x: (rect.left + rect.width / 2) / window.innerWidth,
+          y: (rect.top + rect.height / 2) / window.innerHeight,
+        },
+        colors: ['#FFD700', '#ffffff', '#22c55e'],
+        ticks: 200,
+        gravity: 1.2,
+        decay: 0.94,
+        startVelocity: 30,
+        shapes: ['circle'],
+      });
+    }
+  };
+
   return (
     <div style={{ background: 'var(--bg)', color: 'var(--text)', ...geist }} className="min-h-screen">
       <SiteNavbar />
 
       {/* Page header */}
-      <section className="py-20 px-8">
+      <section className="pt-20 pb-10 px-8">
         <div className="max-w-5xl mx-auto text-center">
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
@@ -141,6 +187,48 @@ export default function PricingPage() {
           >
             No per-deck fees, no surprise charges, no enterprise pricing theater.
           </motion.p>
+
+          {/* Monthly / Annual toggle */}
+          <div className="flex items-center justify-center gap-3" style={{ marginTop: 28 }}>
+            <span style={{ fontSize: 13, color: isMonthly ? '#fff' : 'rgba(255,255,255,0.4)', transition: 'color 200ms' }}>
+              Monthly
+            </span>
+            <button
+              ref={switchRef}
+              type="button"
+              role="switch"
+              aria-checked={!isMonthly}
+              aria-label="Toggle annual billing"
+              onClick={() => handleToggle(isMonthly)}
+              style={{
+                position: 'relative',
+                width: 44,
+                height: 24,
+                borderRadius: 99,
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                background: isMonthly ? 'rgba(255,255,255,0.15)' : 'var(--brand)',
+                transition: 'background 200ms ease',
+              }}
+            >
+              <span
+                style={{
+                  position: 'absolute',
+                  top: 2,
+                  left: isMonthly ? 2 : 22,
+                  width: 20,
+                  height: 20,
+                  borderRadius: '50%',
+                  background: isMonthly ? '#fff' : '#09090B',
+                  transition: 'left 200ms cubic-bezier(0.23,1,0.32,1)',
+                }}
+              />
+            </button>
+            <span style={{ fontSize: 13, color: !isMonthly ? '#fff' : 'rgba(255,255,255,0.4)', fontWeight: 500, transition: 'color 200ms' }}>
+              Annual <span style={{ color: 'var(--brand)' }}>(Save 20%)</span>
+            </span>
+          </div>
         </div>
       </section>
 
@@ -148,64 +236,114 @@ export default function PricingPage() {
       <section className="pb-24 px-8">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
-            {PRICING.map((plan, i) => (
-              <ScrollReveal key={plan.name} delay={i * 0.07}>
-                <div
-                  className="relative flex flex-col"
-                  style={{
-                    background: plan.highlight ? 'rgba(12,12,14,0.9)' : 'var(--surface2)',
-                    border: plan.highlight ? '1px solid rgba(244,197,66,0.6)' : '1px solid rgba(255,255,255,0.07)',
-                    borderRadius: 8,
-                    padding: plan.highlight ? '28px 24px' : '24px',
-                    marginTop: plan.highlight ? -6 : 0,
-                    marginBottom: plan.highlight ? -6 : 0,
-                    overflow: plan.highlight ? 'hidden' : 'visible',
-                  }}
-                >
-                  {plan.highlight && (
-                    <div
-                      className="absolute inset-0 pointer-events-none"
-                      style={{ borderRadius: 8, background: 'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(244,197,66,0.04) 0%, transparent 70%)' }}
-                    />
-                  )}
-                  <div className="mb-5 relative">
-                    <div style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', fontWeight: 500, marginBottom: 8 }}>
-                      {plan.name}
-                    </div>
-                    <div className="flex items-baseline gap-1 mb-1">
-                      <span style={{ ...mono, fontWeight: 700, fontSize: 48, color: plan.highlight ? 'var(--brand)' : 'var(--text)', lineHeight: 1 }}>
-                        {plan.price}
-                      </span>
-                      {plan.period && <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)' }}>{plan.period}</span>}
-                    </div>
-                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>{plan.tagline}</p>
+            {PLANS.map((plan, index) => (
+              <motion.div
+                key={plan.name}
+                initial={{ y: 40, opacity: 0 }}
+                whileInView={
+                  isDesktop
+                    ? {
+                        y: plan.isPopular ? -16 : 0,
+                        opacity: 1,
+                        scale: plan.isPopular ? 1.0 : 0.97,
+                      }
+                    : { opacity: 1, y: 0, scale: 1 }
+                }
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, type: 'spring', stiffness: 100, damping: 30, delay: 0.15 + index * 0.06 }}
+                className={cn('relative flex flex-col')}
+                style={{
+                  borderRadius: 8,
+                  padding: 24,
+                  background: plan.isPopular ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.02)',
+                  border: plan.isPopular ? '1px solid rgba(255,215,0,0.6)' : '1px solid rgba(255,255,255,0.07)',
+                  marginTop: !plan.isPopular && isDesktop ? 20 : 0,
+                }}
+              >
+                {plan.isPopular && (
+                  <div
+                    className="absolute top-0 right-0 flex items-center gap-1"
+                    style={{ background: 'var(--brand)', padding: '3px 9px', borderRadius: '0 8px 0 8px' }}
+                  >
+                    <Star size={11} style={{ fill: '#09090B', color: '#09090B' }} />
+                    <span style={{ color: '#09090B', fontSize: 11, fontWeight: 600 }}>Most popular</span>
                   </div>
-                  <ul className="flex-1" style={{ marginBottom: 24 }}>
-                    {plan.features.map(f => (
-                      <li key={f} className="flex items-start gap-2.5" style={{ marginBottom: 10, fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>
-                        <CheckCircle2 size={13} style={{ color: plan.highlight ? 'var(--brand)' : 'var(--green)', flexShrink: 0, marginTop: 2 }} />
-                        {f}
+                )}
+
+                <div className="flex-1 flex flex-col">
+                  <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>
+                    {plan.name}
+                  </p>
+
+                  <div className="flex items-end gap-1" style={{ marginTop: 16 }}>
+                    <span style={{ ...mono, fontSize: 48, fontWeight: 700, color: '#fff', lineHeight: 1 }}>
+                      {plan.price === 0 ? (
+                        'Free'
+                      ) : (
+                        <NumberFlow
+                          value={isMonthly ? plan.price : plan.yearlyPrice}
+                          format={{ style: 'currency', currency: 'USD', maximumFractionDigits: 0 }}
+                          willChange
+                        />
+                      )}
+                    </span>
+                    {plan.price !== 0 && (
+                      <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 4 }}>/{plan.period}</span>
+                    )}
+                  </div>
+
+                  <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', marginTop: 6 }}>
+                    {plan.price === 0 ? 'Free forever' : isMonthly ? 'billed monthly' : 'billed annually'}
+                  </p>
+
+                  <ul className="flex flex-col flex-1" style={{ marginTop: 24, gap: 10 }}>
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2.5">
+                        <Check size={15} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} />
+                        <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>{feature}</span>
                       </li>
                     ))}
                   </ul>
+
+                  <hr style={{ width: '100%', margin: '20px 0', border: 0, borderTop: '1px solid rgba(255,255,255,0.07)' }} />
+
                   <motion.div whileTap={{ scale: 0.97 }}>
                     <Link
-                      href="/login"
+                      href={plan.href}
                       className="block text-center font-semibold"
                       style={
-                        plan.highlight
-                          ? { background: 'var(--brand)', color: '#09090B', borderRadius: 6, padding: '10px', fontSize: 14, textDecoration: 'none' }
-                          : { background: 'var(--surface)', color: 'var(--text)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 6, padding: '10px', fontSize: 14, textDecoration: 'none' }
+                        plan.isPopular
+                          ? { background: 'var(--brand)', color: '#09090B', borderRadius: 6, padding: '10px', fontSize: 14, textDecoration: 'none', transition: 'opacity 150ms' }
+                          : { background: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 6, padding: '10px', fontSize: 14, textDecoration: 'none', transition: 'border-color 150ms, color 150ms' }
                       }
-                      onMouseEnter={e => ((e.currentTarget as HTMLElement).style.opacity = '0.85')}
-                      onMouseLeave={e => ((e.currentTarget as HTMLElement).style.opacity = '1')}
+                      onMouseEnter={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        if (plan.isPopular) {
+                          el.style.opacity = '0.88';
+                        } else {
+                          el.style.borderColor = 'rgba(255,215,0,0.4)';
+                          el.style.color = 'var(--brand)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        if (plan.isPopular) {
+                          el.style.opacity = '1';
+                        } else {
+                          el.style.borderColor = 'rgba(255,255,255,0.15)';
+                          el.style.color = '#fff';
+                        }
+                      }}
                     >
-                      {plan.cta}
+                      {plan.buttonText}
                     </Link>
                   </motion.div>
-                  {plan.highlight && <BorderBeam duration={8} colorFrom="#FFD700" colorTo="#FFA500" />}
+
+                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', textAlign: 'center', marginTop: 14 }}>
+                    {plan.description}
+                  </p>
                 </div>
-              </ScrollReveal>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -248,7 +386,7 @@ export default function PricingPage() {
         <div className="max-w-2xl mx-auto text-center">
           <ScrollReveal>
             <h2 className="font-bold mb-5" style={{ fontSize: 36, letterSpacing: '-0.02em', lineHeight: 1.1 }}>
-              The next deck you open<br />shouldn't take 45 minutes.
+              The next deck you open<br />shouldn&apos;t take 45 minutes.
             </h2>
             <p className="mb-8" style={{ fontSize: 16, color: 'rgba(255,255,255,0.55)' }}>
               Free to try. No credit card. No onboarding call.
@@ -258,7 +396,7 @@ export default function PricingPage() {
               className="inline-flex items-center gap-2 font-semibold"
               style={{ background: 'var(--brand)', color: '#09090B', borderRadius: 6, padding: '12px 28px', fontSize: 15, textDecoration: 'none' }}
             >
-              Open Thesis, it's free <ArrowRight size={15} />
+              Open Thesis, it&apos;s free <ArrowRight size={15} />
             </Link>
           </ScrollReveal>
         </div>
@@ -268,4 +406,3 @@ export default function PricingPage() {
     </div>
   );
 }
-

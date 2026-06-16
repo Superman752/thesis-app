@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Upload, ScanSearch, Share2, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -46,22 +46,16 @@ function SectionDivider() {
 
 const STEPS = [
   {
-    step: '1',
-    icon: Upload,
     title: 'Upload the deck',
     desc: 'Drag in any pitch deck PDF. Thesis reads the full document natively. No copying, no formatting, no manual extraction.',
     detail: 'Supports any PDF up to 50MB. Thesis sends the document directly to Claude as a document content block — no OCR, no text extraction, no parsing library in the middle.',
   },
   {
-    step: '2',
-    icon: ScanSearch,
     title: 'Review the analysis',
     desc: 'Deal data structured. Thesis criteria scored. Red flags surfaced. AI authorship checked. All in about 30 seconds.',
     detail: 'Six scoring dimensions run in parallel: market size, team, traction, stage fit, business model, and sector match. Each dimension has its own prompt and falls back gracefully if the deck is missing information.',
   },
   {
-    step: '3',
-    icon: Share2,
     title: 'Share the memo',
     desc: 'One-page investment memo ready for your partner meeting. Export it, share it with the team, or move the deal to the next stage.',
     detail: 'The memo is structured like an analyst wrote it: company overview, thesis alignment, key risks, and a recommendation. Ready to paste into a partner deck or send to the team.',
@@ -108,11 +102,10 @@ export default function HowItWorksPage() {
 
       <SectionDivider />
 
-      {/* Steps — vertical detailed layout with stagger */}
+      {/* Steps — clean stacked cards with stagger */}
       <section className="py-24 px-8">
         <div className="max-w-4xl mx-auto">
           <motion.div
-            className="space-y-0"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
@@ -128,46 +121,31 @@ export default function HowItWorksPage() {
                   hidden: { opacity: 0, x: -24 },
                   visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: [0.23, 1, 0.32, 1] } },
                 }}
+                style={{ marginBottom: 16 }}
               >
-                <div className="flex gap-10 pb-16">
-                  {/* Step number + connector */}
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <div
-                      className="w-12 h-12 flex items-center justify-center"
-                      style={{ background: 'var(--brand-dim)', border: '1px solid rgba(244,197,66,0.3)', borderRadius: 8, flexShrink: 0 }}
-                    >
-                      <span style={{ ...mono, fontWeight: 700, fontSize: 20, color: 'var(--brand)' }}>{s.step}</span>
-                    </div>
-                    {i < STEPS.length - 1 && (
-                      <div
-                        style={{ width: 1, flex: 1, background: 'rgba(255,255,255,0.06)', marginTop: 12 }}
-                      />
-                    )}
+                <div
+                  style={{
+                    borderTop: '1px solid rgba(255,255,255,0.07)',
+                    borderRight: '1px solid rgba(255,255,255,0.07)',
+                    borderBottom: '1px solid rgba(255,255,255,0.07)',
+                    borderLeft: '2px solid rgba(255,215,0,0.25)',
+                    background: 'rgba(255,255,255,0.02)',
+                    borderRadius: 8,
+                    padding: 24,
+                  }}
+                >
+                  <div style={{ ...mono, fontSize: 11, color: 'var(--brand)', letterSpacing: '0.15em', marginBottom: 14 }}>
+                    {String(i + 1).padStart(2, '0')}
                   </div>
-
-                  {/* Content */}
-                  <div
-                    className="flex-1 pt-4 pb-8 px-6"
-                    style={{
-                      borderLeft: '2px solid rgba(255,215,0,0.3)',
-                      background: 'rgba(255,255,255,0.02)',
-                      borderRadius: '0 8px 8px 0',
-                      marginBottom: 16,
-                    }}
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <s.icon size={16} style={{ color: 'var(--brand)' }} />
-                      <h2 className="font-bold" style={{ fontSize: 24, letterSpacing: '-0.02em', lineHeight: 1.2, color: '#fff' }}>
-                        {s.title}
-                      </h2>
-                    </div>
-                    <p className="mb-4" style={{ fontSize: 16, color: 'rgba(255,255,255,0.7)', lineHeight: 1.65 }}>
-                      {s.desc}
-                    </p>
-                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', lineHeight: 1.65, maxWidth: 520 }}>
-                      {s.detail}
-                    </p>
-                  </div>
+                  <h2 style={{ ...geist, fontSize: 20, fontWeight: 600, color: '#fff', letterSpacing: '-0.01em', marginBottom: 10 }}>
+                    {s.title}
+                  </h2>
+                  <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, marginBottom: 12 }}>
+                    {s.desc}
+                  </p>
+                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', lineHeight: 1.65, maxWidth: 560 }}>
+                    {s.detail}
+                  </p>
                 </div>
               </motion.div>
             ))}

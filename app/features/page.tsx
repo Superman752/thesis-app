@@ -252,16 +252,16 @@ export default function FeaturesPage() {
       <SectionDivider />
 
       {/* Problem section */}
-      <section className="py-24 px-8" style={{ background: 'var(--light-bg)' }}>
+      <section className="py-24 px-8" style={{ background: 'transparent' }}>
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <h2
               className="font-bold text-center mb-4"
-              style={{ fontSize: 36, color: 'var(--light-text)', letterSpacing: '-0.02em', lineHeight: 1.1 }}
+              style={{ fontSize: 36, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.1 }}
             >
               Every analyst does this manually.<br />Nobody should have to.
             </h2>
-            <p className="text-center text-base mb-14" style={{ color: 'rgba(24,24,27,0.55)', maxWidth: 500, margin: '0 auto 56px' }}>
+            <p className="text-center text-base mb-14" style={{ color: 'rgba(255,255,255,0.55)', maxWidth: 500, margin: '0 auto 56px' }}>
               Read the deck. Extract market size. Google the founders. Write the notes. Score against thesis. Put it in the spreadsheet. Repeat 50 times a week.
             </p>
           </ScrollReveal>
@@ -274,11 +274,11 @@ export default function FeaturesPage() {
               <ScrollReveal key={item.stat} delay={i * 0.07}>
                 <div
                   className="p-6 h-full"
-                  style={{ background: 'white', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 8 }}
+                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8 }}
                 >
                   <div style={{ ...mono, fontWeight: 700, fontSize: 30, color: 'var(--brand)', marginBottom: 4 }}>{item.stat}</div>
-                  <div className="text-sm font-semibold mb-2" style={{ color: 'var(--light-text)' }}>{item.label}</div>
-                  <div className="text-sm leading-relaxed" style={{ color: 'rgba(24,24,27,0.55)' }}>{item.detail}</div>
+                  <div className="text-sm font-semibold mb-2" style={{ color: '#fff' }}>{item.label}</div>
+                  <div className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>{item.detail}</div>
                 </div>
               </ScrollReveal>
             ))}
