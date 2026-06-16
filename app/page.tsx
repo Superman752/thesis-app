@@ -7,8 +7,8 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
 import { NumberTicker } from '@/components/magicui/number-ticker';
-import { Marquee } from '@/components/magicui/marquee';
 import { TypingAnimation } from '@/components/magicui/typing-animation';
+import { TestimonialsMarquee } from '@/components/testimonials-marquee';
 
 // ─── Utility components ────────────────────────────────────────────────────
 
@@ -219,42 +219,6 @@ function StatStrip() {
   );
 }
 
-// ─── VC firm marquee ───────────────────────────────────────────────────────
-
-const VC_FIRMS = [
-  'Sequoia Capital', 'Andreessen Horowitz', 'Lightspeed', 'Accel', 'Bessemer',
-  'General Catalyst', 'Founders Fund', 'Kleiner Perkins', 'NEA', 'GV',
-  'Insight Partners', 'Tiger Global', 'Coatue', 'Benchmark', 'Union Square Ventures',
-];
-
-function FirmMarquee() {
-  return (
-    <section className="py-14 px-8">
-      <p style={{
-        fontSize: 11,
-        letterSpacing: '0.15em',
-        textTransform: 'uppercase',
-        color: 'rgba(255,255,255,0.3)',
-        textAlign: 'center',
-        marginBottom: 24,
-        fontFamily: 'Geist, sans-serif',
-      }}>
-        Used by analysts at
-      </p>
-      <Marquee pauseOnHover durationMs={35000}>
-        {VC_FIRMS.map((firm, i) => (
-          <span key={i} className="flex items-center gap-10 flex-shrink-0">
-            <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', fontFamily: 'Geist, sans-serif', whiteSpace: 'nowrap' }}>
-              {firm}
-            </span>
-            <span style={{ color: 'rgba(255,255,255,0.12)', fontSize: 14 }}>|</span>
-          </span>
-        ))}
-      </Marquee>
-    </section>
-  );
-}
-
 // ─── Page ──────────────────────────────────────────────────────────────────
 
 export default function LandingPage() {
@@ -386,8 +350,6 @@ export default function LandingPage() {
       <SectionDivider />
       <StatStrip />
       <SectionDivider />
-      <FirmMarquee />
-      <SectionDivider />
 
       {/* ── Brief product section ─────────────────────────────────────── */}
       <section className="py-24 px-8">
@@ -424,67 +386,7 @@ export default function LandingPage() {
       <SectionDivider />
 
       {/* ── Testimonials ─────────────────────────────────────────────── */}
-      <section className="py-24 px-8" style={{ background: 'var(--surface)' }}>
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal>
-            <p style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', fontWeight: 500, marginBottom: 16 }}>
-              WHAT ANALYSTS SAY
-            </p>
-            <h2 className="font-bold mb-14" style={{ fontSize: 36, letterSpacing: '-0.02em', lineHeight: 1.1 }}>
-              Used by analysts who move fast.
-            </h2>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              {
-                quote: "I've been running it on every inbound for six weeks. The red flag detection surfaces things I would have missed on page 12.",
-                name: 'Sarah Chen',
-                role: 'Principal, Meridian Ventures',
-              },
-              {
-                quote: 'The thesis scoring is what sold me. Every deal gets evaluated against the same criteria, which means my instincts get better over time, not just my workflow.',
-                name: 'Marcus Webb',
-                role: 'Associate, Foundry Capital',
-              },
-              {
-                quote: "Our Monday IC prep used to take half the day. Now it's two hours. The memos aren't perfect, but they're a better starting point than anything I could write in that time.",
-                name: 'Priya Nair',
-                role: 'Senior Analyst, Clearwater Partners',
-              },
-            ].map((t, i) => (
-              <ScrollReveal key={i} delay={i * 0.07}>
-                <div
-                  className="flex flex-col h-full p-6"
-                  style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.07)',
-                    borderRadius: 8,
-                    transition: 'border-color 150ms, transform 150ms',
-                  }}
-                  onMouseEnter={e => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.borderColor = 'rgba(255,255,255,0.14)';
-                    el.style.transform = 'translateY(-2px)';
-                  }}
-                  onMouseLeave={e => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.borderColor = 'rgba(255,255,255,0.07)';
-                    el.style.transform = 'translateY(0)';
-                  }}
-                >
-                  <p className="flex-1 mb-6 leading-relaxed" style={{ fontSize: 15, color: 'rgba(255,255,255,0.8)' }}>
-                    {t.quote}
-                  </p>
-                  <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 12 }}>
-                    <div style={{ fontSize: 14, fontWeight: 500, color: '#fff', marginBottom: 2 }}>{t.name}</div>
-                    <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>{t.role}</div>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialsMarquee />
 
       <SectionDivider />
 
