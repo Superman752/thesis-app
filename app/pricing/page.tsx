@@ -10,6 +10,7 @@ import { useMediaQuery } from '@/hooks/use-media-query';
 import { cn } from '@/lib/utils';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
+import { FAQAccordion } from '@/components/faq-accordion';
 
 function ScrollReveal({
   children,
@@ -113,25 +114,6 @@ const PLANS: Plan[] = [
       'Slack digest and notifications',
       'Everything in Pro',
     ],
-  },
-];
-
-const FAQ = [
-  {
-    q: 'What counts as a pitch deck?',
-    a: 'Any PDF you upload. One upload = one deck, regardless of page count.',
-  },
-  {
-    q: 'Can I change plans later?',
-    a: "Yes. Upgrade or downgrade anytime. You're billed monthly with no lock-in.",
-  },
-  {
-    q: 'Is there a trial for Pro?',
-    a: "The Solo plan is free forever with 10 decks/month. That's the trial. No time limit.",
-  },
-  {
-    q: 'How does Firm billing work?',
-    a: 'Flat $99/month for up to 10 analysts. Unlimited decks across the team. Contact us for larger teams.',
   },
 ];
 
@@ -352,32 +334,7 @@ export default function PricingPage() {
       <SectionDivider />
 
       {/* FAQ */}
-      <section className="py-24 px-8" style={{ background: 'var(--surface)' }}>
-        <div className="max-w-3xl mx-auto">
-          <ScrollReveal>
-            <h2 className="font-bold mb-10" style={{ fontSize: 32, letterSpacing: '-0.02em', lineHeight: 1.1 }}>
-              Common questions.
-            </h2>
-          </ScrollReveal>
-          <div className="space-y-0">
-            {FAQ.map((item, i) => (
-              <ScrollReveal key={i} delay={i * 0.06}>
-                <div
-                  style={{
-                    borderTop: '1px solid rgba(255,255,255,0.07)',
-                    paddingTop: 20,
-                    paddingBottom: 20,
-                  }}
-                >
-                  <h3 className="font-semibold mb-2" style={{ fontSize: 15, color: '#fff' }}>{item.q}</h3>
-                  <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', lineHeight: 1.65, margin: 0 }}>{item.a}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }} />
-          </div>
-        </div>
-      </section>
+      <FAQAccordion />
 
       <SectionDivider />
 

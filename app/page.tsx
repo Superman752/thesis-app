@@ -9,7 +9,8 @@ import SiteFooter from '@/components/SiteFooter';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { TypingAnimation } from '@/components/magicui/typing-animation';
 import { TestimonialsMarquee } from '@/components/testimonials-marquee';
-import { ContainerScroll } from '@/components/ui/container-scroll-animation';
+import { PulsatingButton } from '@/registry/magicui/pulsating-button';
+import { InteractiveHoverButton } from '@/registry/magicui/interactive-hover-button';
 
 // ─── Utility components ────────────────────────────────────────────────────
 
@@ -293,26 +294,8 @@ export default function LandingPage() {
                 className="flex items-center gap-3 flex-wrap"
                 style={{ marginBottom: 24 }}
               >
-                <motion.span whileTap={{ scale: 0.97 }} style={{ display: 'inline-flex' }}>
-                  <Link
-                    href="/login"
-                    className="flex items-center gap-2"
-                    style={{ background: 'var(--brand)', color: '#09090B', borderRadius: 6, padding: '12px 24px', fontSize: 16, fontWeight: 600, textDecoration: 'none', transition: 'opacity 150ms' }}
-                    onMouseEnter={e => ((e.currentTarget as HTMLElement).style.opacity = '0.88')}
-                    onMouseLeave={e => ((e.currentTarget as HTMLElement).style.opacity = '1')}
-                  >
-                    Start for free <ArrowRight size={15} />
-                  </Link>
-                </motion.span>
-                <motion.a
-                  href="/how-it-works"
-                  whileTap={{ scale: 0.97 }}
-                  style={{ border: '1px solid rgba(255,255,255,0.18)', color: 'rgba(255,255,255,0.65)', borderRadius: 6, padding: '12px 24px', fontSize: 16, textDecoration: 'none', transition: 'color 150ms, border-color 150ms' }}
-                  onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => { (e.currentTarget as HTMLElement).style.color = '#fff'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.35)'; }}
-                  onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.65)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.18)'; }}
-                >
-                  See how it works
-                </motion.a>
+                <PulsatingButton href="/login">Start for free →</PulsatingButton>
+                <InteractiveHoverButton href="/how-it-works">See how it works</InteractiveHoverButton>
               </motion.div>
 
               <motion.div
@@ -329,20 +312,28 @@ export default function LandingPage() {
               </motion.div>
             </div>
 
+            {/* Floating product card */}
+            <motion.div
+              initial={{ opacity: 0, y: 24, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
+              className="relative hidden lg:flex items-center justify-center"
+            >
+              {/* Glow behind the card */}
+              <div
+                className="absolute inset-0 rounded-2xl pointer-events-none"
+                style={{
+                  background: 'radial-gradient(ellipse at center, rgba(234,179,8,0.06) 0%, transparent 70%)',
+                  filter: 'blur(40px)',
+                }}
+              />
+              {/* The existing DealAnalysisMockup, unchanged */}
+              <DealAnalysisMockup />
+            </motion.div>
+
           </div>
         </div>
       </section>
-
-      {/* Product preview — tilts in on scroll */}
-      <ContainerScroll
-        titleComponent={
-          <p className="text-xs font-medium tracking-[0.2em] uppercase mb-4" style={{ color: 'rgba(255,255,255,0.35)' }}>
-            Live analysis preview
-          </p>
-        }
-      >
-        <DealAnalysisMockup />
-      </ContainerScroll>
 
       <SectionDivider />
       <StatStrip />

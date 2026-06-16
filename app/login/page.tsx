@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { BorderBeam } from '@/registry/magicui/border-beam';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -41,7 +42,7 @@ export default function LoginPage() {
       >
         {/* Card */}
         <div
-          className="rounded-xl"
+          className="rounded-xl relative overflow-hidden"
           style={{
             background: 'var(--surface)',
             border: '1px solid var(--border)',
@@ -156,6 +157,8 @@ export default function LoginPage() {
           <p className="text-xs text-center mt-6" style={{ color: 'var(--muted3)' }}>
             No account needed. Data stays in your browser.
           </p>
+
+          <BorderBeam duration={8} size={200} />
         </div>
 
         {/* Back link below card */}
