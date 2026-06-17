@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 function ThesisLogo() {
@@ -21,9 +20,9 @@ function ThesisLogo() {
         }}
       >
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <rect x="2" y="2" width="12" height="2.5" rx="1" fill="#09090B" />
-          <rect x="2" y="6.75" width="8" height="2.5" rx="1" fill="#09090B" />
-          <rect x="2" y="11.5" width="5" height="2.5" rx="1" fill="#09090B" />
+          <rect x="2" y="2" width="12" height="2.5" rx="1" fill="#FFFFFF" />
+          <rect x="2" y="6.75" width="8" height="2.5" rx="1" fill="#FFFFFF" />
+          <rect x="2" y="11.5" width="5" height="2.5" rx="1" fill="#FFFFFF" />
         </svg>
       </div>
       <span
@@ -32,7 +31,7 @@ function ThesisLogo() {
           fontWeight: 700,
           letterSpacing: '-0.02em',
           fontSize: 16,
-          color: 'var(--brand)',
+          color: '#171717',
           lineHeight: 1,
         }}
       >
@@ -50,13 +49,6 @@ const NAV_LINKS = [
 
 export default function SiteNavbar() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   return (
     <>
@@ -65,15 +57,15 @@ export default function SiteNavbar() {
         className="w-full flex items-center justify-center gap-3 flex-wrap px-4"
         style={{
           height: 40,
-          background: 'rgba(255,255,255,0.03)',
-          borderBottom: '1px solid rgba(255,255,255,0.07)',
+          background: '#FAFAFA',
+          borderBottom: '1px solid #EAEAEA',
           fontFamily: 'Geist, sans-serif',
         }}
       >
         <span
           style={{
             background: 'var(--brand)',
-            color: '#09090B',
+            color: '#FFFFFF',
             borderRadius: 4,
             fontSize: 11,
             fontWeight: 700,
@@ -82,7 +74,7 @@ export default function SiteNavbar() {
         >
           NEW
         </span>
-        <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>
+        <span style={{ fontSize: 13, color: '#666666' }}>
           AI authorship detection now available for all plans
         </span>
         <Link
@@ -95,16 +87,13 @@ export default function SiteNavbar() {
         </Link>
       </div>
 
-      {/* Navbar — sticky, becomes opaque on scroll */}
+      {/* Navbar — sticky, white */}
       <header
         className="sticky top-0 left-0 right-0 z-50 flex items-center justify-between px-8"
         style={{
           height: 56,
-          background: scrolled ? 'rgba(0,0,0,0.85)' : 'transparent',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
-          backdropFilter: scrolled ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
-          transition: 'background 200ms ease, border-color 200ms ease, backdrop-filter 200ms ease',
+          background: '#FFFFFF',
+          borderBottom: '1px solid #EAEAEA',
           fontFamily: 'Geist, sans-serif',
         }}
       >
@@ -119,14 +108,14 @@ export default function SiteNavbar() {
                 href={href}
                 style={{
                   fontSize: 14,
-                  color: isActive ? '#fff' : 'rgba(255,255,255,0.55)',
+                  color: isActive ? '#171717' : '#666666',
                   textDecoration: 'none',
                   transition: 'color 150ms',
                 }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#fff')}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#171717')}
                 onMouseLeave={e => {
                   if (!isActive)
-                    (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.55)';
+                    (e.currentTarget as HTMLElement).style.color = '#666666';
                 }}
               >
                 {label}
@@ -140,27 +129,27 @@ export default function SiteNavbar() {
             href="/login"
             style={{
               fontSize: 14,
-              color: 'rgba(255,255,255,0.55)',
+              color: '#666666',
               textDecoration: 'none',
               transition: 'color 150ms',
             }}
-            onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#fff')}
-            onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.55)')}
+            onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#171717')}
+            onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = '#666666')}
           >
             Log in
           </Link>
           <motion.span whileTap={{ scale: 0.97 }} style={{ display: 'inline-flex' }}>
             <Link
               href="/login"
+              className="rounded-lg px-4 py-2 text-sm font-medium"
               style={{
-                fontSize: 14,
-                fontWeight: 600,
-                background: 'var(--brand)',
-                color: '#09090B',
-                borderRadius: 6,
-                padding: '8px 16px',
+                background: '#D4A017',
+                color: '#FFFFFF',
                 textDecoration: 'none',
+                transition: 'background 150ms',
               }}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#B8860B')}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#D4A017')}
             >
               Start for free
             </Link>

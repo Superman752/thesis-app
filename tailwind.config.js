@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        gold: { DEFAULT: '#D4A017', hover: '#B8860B' },
+      },
       fontFamily: {
         sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['var(--font-dm-mono)', 'DM Mono', 'ui-monospace', 'monospace'],

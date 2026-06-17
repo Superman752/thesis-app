@@ -38,7 +38,7 @@ function SectionDivider() {
         width: '100%',
         height: 1,
         background:
-          'radial-gradient(ellipse 60% 1px at 50% 50%, rgba(255,255,255,0.09) 0%, transparent 100%)',
+          'radial-gradient(ellipse 60% 1px at 50% 50%, rgba(0,0,0,0.08) 0%, transparent 100%)',
       }}
     />
   );
@@ -67,7 +67,7 @@ export default function HowItWorksPage() {
   const mono = { fontFamily: 'Geist Mono, monospace' } as const;
 
   return (
-    <div style={{ background: 'var(--bg)', color: 'var(--text)', ...geist }} className="min-h-screen">
+    <div style={{ background: '#FFFFFF', color: '#171717', ...geist }} className="min-h-screen">
       <SiteNavbar />
 
       {/* Page header */}
@@ -83,7 +83,7 @@ export default function HowItWorksPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', fontWeight: 500, marginBottom: 16 }}
+            style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#666666', fontWeight: 500, marginBottom: 16 }}
           >
             PROCESS
           </motion.p>
@@ -91,7 +91,7 @@ export default function HowItWorksPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-            style={{ fontSize: 40, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#fff', marginBottom: 16 }}
+            style={{ fontSize: 40, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#171717', marginBottom: 16 }}
           >
             Three steps. Thirty seconds.
           </motion.h1>
@@ -99,7 +99,7 @@ export default function HowItWorksPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: 0.08, ease: [0.23, 1, 0.32, 1] }}
-            style={{ fontSize: 16, color: 'rgba(255,255,255,0.55)', maxWidth: 480 }}
+            style={{ fontSize: 16, color: '#666666', maxWidth: 480 }}
           >
             From PDF to investment memo without leaving your browser.
           </motion.p>
@@ -123,26 +123,24 @@ export default function HowItWorksPage() {
                 style={{ marginBottom: 16 }}
               >
                 <div
+                  className="shadow-sm"
                   style={{
-                    borderTop: '1px solid rgba(255,255,255,0.07)',
-                    borderRight: '1px solid rgba(255,255,255,0.07)',
-                    borderBottom: '1px solid rgba(255,255,255,0.07)',
-                    borderLeft: '2px solid rgba(255,215,0,0.25)',
-                    background: 'rgba(255,255,255,0.02)',
-                    borderRadius: 8,
+                    border: '1px solid #EAEAEA',
+                    background: '#FFFFFF',
+                    borderRadius: 12,
                     padding: 24,
                   }}
                 >
-                  <div style={{ ...mono, fontSize: 11, color: 'var(--brand)', letterSpacing: '0.15em', marginBottom: 14 }}>
+                  <div style={{ ...mono, fontSize: 11, color: '#D4A017', letterSpacing: '0.15em', marginBottom: 14 }}>
                     {String(i + 1).padStart(2, '0')}
                   </div>
-                  <h2 style={{ ...geist, fontSize: 20, fontWeight: 600, color: '#fff', letterSpacing: '-0.01em', marginBottom: 10 }}>
+                  <h2 style={{ ...geist, fontSize: 20, fontWeight: 600, color: '#171717', letterSpacing: '-0.01em', marginBottom: 10 }}>
                     {s.title}
                   </h2>
-                  <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, marginBottom: 12 }}>
+                  <p style={{ fontSize: 15, color: '#666666', lineHeight: 1.65, marginBottom: 12 }}>
                     {s.desc}
                   </p>
-                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', lineHeight: 1.65, maxWidth: 560 }}>
+                  <p style={{ fontSize: 13, color: '#999999', lineHeight: 1.65, maxWidth: 560 }}>
                     {s.detail}
                   </p>
                 </div>
@@ -155,13 +153,13 @@ export default function HowItWorksPage() {
       <SectionDivider />
 
       {/* Under the hood */}
-      <section className="py-24 px-8" style={{ background: 'var(--surface)' }}>
+      <section className="py-24 px-8" style={{ background: '#FAFAFA' }}>
         <div className="max-w-4xl mx-auto">
           <ScrollReveal>
-            <p style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', fontWeight: 500, marginBottom: 16 }}>
+            <p style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#666666', fontWeight: 500, marginBottom: 16 }}>
               UNDER THE HOOD
             </p>
-            <h2 className="font-bold mb-8" style={{ fontSize: 32, letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+            <h2 className="font-bold mb-8" style={{ fontSize: 32, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#171717' }}>
               How Thesis reads PDFs.
             </h2>
           </ScrollReveal>
@@ -186,11 +184,11 @@ export default function HowItWorksPage() {
             ].map((card, i) => (
               <ScrollReveal key={i} delay={i * 0.06}>
                 <div
-                  className="p-6 h-full"
-                  style={{ background: 'var(--surface2)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 8 }}
+                  className="p-6 h-full shadow-sm"
+                  style={{ background: '#FFFFFF', border: '1px solid #EAEAEA', borderRadius: 12 }}
                 >
-                  <h3 className="font-semibold mb-2" style={{ fontSize: 15, color: '#fff' }}>{card.title}</h3>
-                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', lineHeight: 1.65 }}>{card.body}</p>
+                  <h3 className="font-semibold mb-2" style={{ fontSize: 15, color: '#171717' }}>{card.title}</h3>
+                  <p style={{ fontSize: 13, color: '#666666', lineHeight: 1.65 }}>{card.body}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -204,16 +202,18 @@ export default function HowItWorksPage() {
       <section className="py-20 px-8">
         <div className="max-w-2xl mx-auto text-center">
           <ScrollReveal>
-            <h2 className="font-bold mb-5" style={{ fontSize: 36, letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+            <h2 className="font-bold mb-5" style={{ fontSize: 36, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#171717' }}>
               See it on your next deck.
             </h2>
-            <p className="mb-8" style={{ fontSize: 16, color: 'rgba(255,255,255,0.55)' }}>
+            <p className="mb-8" style={{ fontSize: 16, color: '#666666' }}>
               Free to try. No credit card. No onboarding call.
             </p>
             <Link
               href="/login"
               className="inline-flex items-center gap-2 font-semibold"
-              style={{ background: 'var(--brand)', color: '#09090B', borderRadius: 6, padding: '12px 28px', fontSize: 15, textDecoration: 'none' }}
+              style={{ background: '#D4A017', color: '#FFFFFF', borderRadius: 8, padding: '12px 28px', fontSize: 15, textDecoration: 'none', transition: 'background 150ms' }}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#B8860B')}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#D4A017')}
             >
               Upload a deck <ArrowRight size={15} />
             </Link>

@@ -43,7 +43,7 @@ function SectionDivider() {
         width: '100%',
         height: 1,
         background:
-          'radial-gradient(ellipse 60% 1px at 50% 50%, rgba(255,255,255,0.09) 0%, transparent 100%)',
+          'radial-gradient(ellipse 60% 1px at 50% 50%, rgba(0,0,0,0.08) 0%, transparent 100%)',
       }}
     />
   );
@@ -136,7 +136,7 @@ export default function PricingPage() {
           x: (rect.left + rect.width / 2) / window.innerWidth,
           y: (rect.top + rect.height / 2) / window.innerHeight,
         },
-        colors: ['#FFD700', '#ffffff', '#22c55e'],
+        colors: ['#D4A017', '#171717', '#16A34A'],
         ticks: 200,
         gravity: 1.2,
         decay: 0.94,
@@ -147,7 +147,7 @@ export default function PricingPage() {
   };
 
   return (
-    <div style={{ background: 'var(--bg)', color: 'var(--text)', ...geist }} className="min-h-screen">
+    <div style={{ background: '#FFFFFF', color: '#171717', ...geist }} className="min-h-screen">
       <SiteNavbar />
 
       {/* Page header */}
@@ -157,7 +157,7 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-            style={{ fontSize: 40, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#fff', marginBottom: 16 }}
+            style={{ fontSize: 40, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#171717', marginBottom: 16 }}
           >
             Simple, honest pricing.
           </motion.h1>
@@ -165,14 +165,14 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: 0.08, ease: [0.23, 1, 0.32, 1] }}
-            style={{ fontSize: 16, color: 'rgba(255,255,255,0.55)' }}
+            style={{ fontSize: 16, color: '#666666' }}
           >
             No per-deck fees, no surprise charges, no enterprise pricing theater.
           </motion.p>
 
           {/* Monthly / Annual toggle */}
           <div className="flex items-center justify-center gap-3" style={{ marginTop: 28 }}>
-            <span style={{ fontSize: 13, color: isMonthly ? '#fff' : 'rgba(255,255,255,0.4)', transition: 'color 200ms' }}>
+            <span style={{ fontSize: 13, color: isMonthly ? '#171717' : '#666666', transition: 'color 200ms' }}>
               Monthly
             </span>
             <button
@@ -190,7 +190,7 @@ export default function PricingPage() {
                 border: 'none',
                 cursor: 'pointer',
                 padding: 0,
-                background: isMonthly ? 'rgba(255,255,255,0.15)' : 'var(--brand)',
+                background: isMonthly ? '#E5E5E5' : '#D4A017',
                 transition: 'background 200ms ease',
               }}
             >
@@ -202,13 +202,14 @@ export default function PricingPage() {
                   width: 20,
                   height: 20,
                   borderRadius: '50%',
-                  background: isMonthly ? '#fff' : '#09090B',
+                  background: '#FFFFFF',
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
                   transition: 'left 200ms cubic-bezier(0.23,1,0.32,1)',
                 }}
               />
             </button>
-            <span style={{ fontSize: 13, color: !isMonthly ? '#fff' : 'rgba(255,255,255,0.4)', fontWeight: 500, transition: 'color 200ms' }}>
-              Annual <span style={{ color: 'var(--brand)' }}>(Save 20%)</span>
+            <span style={{ fontSize: 13, color: !isMonthly ? '#171717' : '#666666', fontWeight: 500, transition: 'color 200ms' }}>
+              Annual <span style={{ color: '#D4A017' }}>(Save 20%)</span>
             </span>
           </div>
         </div>
@@ -233,32 +234,32 @@ export default function PricingPage() {
                 }
                 viewport={{ once: true }}
                 transition={{ duration: 1.2, type: 'spring', stiffness: 100, damping: 30, delay: 0.15 + index * 0.06 }}
-                className={cn('relative flex flex-col')}
+                className={cn('relative flex flex-col shadow-sm')}
                 style={{
-                  borderRadius: 8,
+                  borderRadius: 12,
                   padding: 24,
-                  background: plan.isPopular ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.02)',
-                  border: plan.isPopular ? '1px solid rgba(255,215,0,0.6)' : '1px solid rgba(255,255,255,0.07)',
+                  background: plan.isPopular ? '#FFFDF5' : '#FFFFFF',
+                  border: plan.isPopular ? '1px solid #D4A017' : '1px solid #EAEAEA',
                   marginTop: !plan.isPopular && isDesktop ? 20 : 0,
                 }}
               >
                 {plan.isPopular && (
                   <div
                     className="absolute top-0 right-0 flex items-center gap-1"
-                    style={{ background: 'var(--brand)', padding: '3px 9px', borderRadius: '0 8px 0 8px' }}
+                    style={{ background: '#D4A017', padding: '3px 9px', borderRadius: '0 12px 0 8px' }}
                   >
-                    <Star size={11} style={{ fill: '#09090B', color: '#09090B' }} />
-                    <span style={{ color: '#09090B', fontSize: 11, fontWeight: 600 }}>Most popular</span>
+                    <Star size={11} style={{ fill: '#FFFFFF', color: '#FFFFFF' }} />
+                    <span style={{ color: '#FFFFFF', fontSize: 11, fontWeight: 600 }}>Most popular</span>
                   </div>
                 )}
 
                 <div className="flex-1 flex flex-col">
-                  <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>
+                  <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#666666' }}>
                     {plan.name}
                   </p>
 
                   <div className="flex items-end gap-1" style={{ marginTop: 16 }}>
-                    <span style={{ ...mono, fontSize: 48, fontWeight: 700, color: '#fff', lineHeight: 1 }}>
+                    <span style={{ ...mono, fontSize: 48, fontWeight: 700, color: '#171717', lineHeight: 1 }}>
                       {plan.price === 0 ? (
                         'Free'
                       ) : (
@@ -270,24 +271,24 @@ export default function PricingPage() {
                       )}
                     </span>
                     {plan.price !== 0 && (
-                      <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 4 }}>/{plan.period}</span>
+                      <span style={{ fontSize: 14, color: '#666666', marginBottom: 4 }}>/{plan.period}</span>
                     )}
                   </div>
 
-                  <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', marginTop: 6 }}>
+                  <p style={{ fontSize: 12, color: '#999999', marginTop: 6 }}>
                     {plan.price === 0 ? 'Free forever' : isMonthly ? 'billed monthly' : 'billed annually'}
                   </p>
 
                   <ul className="flex flex-col flex-1" style={{ marginTop: 24, gap: 10 }}>
                     {plan.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-2.5">
-                        <Check size={15} style={{ color: 'var(--green)', flexShrink: 0, marginTop: 2 }} />
-                        <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>{feature}</span>
+                        <Check size={15} style={{ color: '#16A34A', flexShrink: 0, marginTop: 2 }} />
+                        <span style={{ fontSize: 13, color: '#404040' }}>{feature}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <hr style={{ width: '100%', margin: '20px 0', border: 0, borderTop: '1px solid rgba(255,255,255,0.07)' }} />
+                  <hr style={{ width: '100%', margin: '20px 0', border: 0, borderTop: '1px solid #EAEAEA' }} />
 
                   <motion.div whileTap={{ scale: 0.97 }}>
                     <Link
@@ -295,25 +296,25 @@ export default function PricingPage() {
                       className="block text-center font-semibold"
                       style={
                         plan.isPopular
-                          ? { background: 'var(--brand)', color: '#09090B', borderRadius: 6, padding: '10px', fontSize: 14, textDecoration: 'none', transition: 'opacity 150ms' }
-                          : { background: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 6, padding: '10px', fontSize: 14, textDecoration: 'none', transition: 'border-color 150ms, color 150ms' }
+                          ? { background: '#D4A017', color: '#FFFFFF', borderRadius: 8, padding: '10px', fontSize: 14, textDecoration: 'none', transition: 'background 150ms' }
+                          : { background: '#FFFFFF', color: '#171717', border: '1px solid #EAEAEA', borderRadius: 8, padding: '10px', fontSize: 14, textDecoration: 'none', transition: 'border-color 150ms, color 150ms' }
                       }
                       onMouseEnter={(e) => {
                         const el = e.currentTarget as HTMLElement;
                         if (plan.isPopular) {
-                          el.style.opacity = '0.88';
+                          el.style.background = '#B8860B';
                         } else {
-                          el.style.borderColor = 'rgba(255,215,0,0.4)';
-                          el.style.color = 'var(--brand)';
+                          el.style.borderColor = '#D4A017';
+                          el.style.color = '#D4A017';
                         }
                       }}
                       onMouseLeave={(e) => {
                         const el = e.currentTarget as HTMLElement;
                         if (plan.isPopular) {
-                          el.style.opacity = '1';
+                          el.style.background = '#D4A017';
                         } else {
-                          el.style.borderColor = 'rgba(255,255,255,0.15)';
-                          el.style.color = '#fff';
+                          el.style.borderColor = '#EAEAEA';
+                          el.style.color = '#171717';
                         }
                       }}
                     >
@@ -321,7 +322,7 @@ export default function PricingPage() {
                     </Link>
                   </motion.div>
 
-                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', textAlign: 'center', marginTop: 14 }}>
+                  <p style={{ fontSize: 11, color: '#999999', textAlign: 'center', marginTop: 14 }}>
                     {plan.description}
                   </p>
                 </div>
@@ -342,16 +343,18 @@ export default function PricingPage() {
       <section className="py-20 px-8">
         <div className="max-w-2xl mx-auto text-center">
           <ScrollReveal>
-            <h2 className="font-bold mb-5" style={{ fontSize: 36, letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+            <h2 className="font-bold mb-5" style={{ fontSize: 36, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#171717' }}>
               The next deck you open<br />shouldn&apos;t take 45 minutes.
             </h2>
-            <p className="mb-8" style={{ fontSize: 16, color: 'rgba(255,255,255,0.55)' }}>
+            <p className="mb-8" style={{ fontSize: 16, color: '#666666' }}>
               Free to try. No credit card. No onboarding call.
             </p>
             <Link
               href="/login"
               className="inline-flex items-center gap-2 font-semibold"
-              style={{ background: 'var(--brand)', color: '#09090B', borderRadius: 6, padding: '12px 28px', fontSize: 15, textDecoration: 'none' }}
+              style={{ background: '#D4A017', color: '#FFFFFF', borderRadius: 8, padding: '12px 28px', fontSize: 15, textDecoration: 'none', transition: 'background 150ms' }}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#B8860B')}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#D4A017')}
             >
               Open Thesis, it&apos;s free <ArrowRight size={15} />
             </Link>

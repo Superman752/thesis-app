@@ -23,15 +23,15 @@ export default function LoginPage() {
   };
 
   const inputStyle = {
-    background: 'var(--surface3)',
-    border: '1px solid var(--border2)',
-    color: 'var(--text)',
+    background: '#FFFFFF',
+    border: '1px solid #EAEAEA',
+    color: '#171717',
   };
 
   return (
     <div
       className="min-h-screen flex items-center justify-center p-6"
-      style={{ background: '#09090B' }}
+      style={{ background: '#FAFAFA' }}
     >
       <motion.div
         initial={{ opacity: 0, y: 16 }}
@@ -42,10 +42,10 @@ export default function LoginPage() {
       >
         {/* Card */}
         <div
-          className="rounded-xl relative overflow-hidden"
+          className="rounded-xl relative overflow-hidden shadow-sm"
           style={{
-            background: 'var(--surface)',
-            border: '1px solid var(--border)',
+            background: '#FFFFFF',
+            border: '1px solid #EAEAEA',
             padding: 32,
           }}
         >
@@ -57,9 +57,9 @@ export default function LoginPage() {
               style={{ background: 'var(--brand)' }}
             >
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                <rect x="2" y="2"    width="12" height="2.5" rx="1" fill="#09090B"/>
-                <rect x="2" y="6.75" width="8"  height="2.5" rx="1" fill="#09090B"/>
-                <rect x="2" y="11.5" width="5"  height="2.5" rx="1" fill="#09090B"/>
+                <rect x="2" y="2"    width="12" height="2.5" rx="1" fill="#FFFFFF"/>
+                <rect x="2" y="6.75" width="8"  height="2.5" rx="1" fill="#FFFFFF"/>
+                <rect x="2" y="11.5" width="5"  height="2.5" rx="1" fill="#FFFFFF"/>
               </svg>
             </div>
             <span
@@ -74,11 +74,11 @@ export default function LoginPage() {
           <div className="mb-7">
             <h1
               className="text-2xl font-bold mb-1.5"
-              style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}
+              style={{ color: '#171717', letterSpacing: '-0.02em' }}
             >
               Set up your workspace
             </h1>
-            <p className="text-sm" style={{ color: 'var(--muted)' }}>
+            <p className="text-sm" style={{ color: '#666666' }}>
               Analyze pitch decks against your thesis in seconds.
             </p>
           </div>
@@ -86,7 +86,7 @@ export default function LoginPage() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="label-xs block mb-2">Firm Name</label>
+              <label className="label-xs block mb-2" style={{ color: '#171717' }}>Firm Name</label>
               <input
                 type="text"
                 value={firmName}
@@ -95,13 +95,13 @@ export default function LoginPage() {
                 required
                 className="input-base"
                 style={inputStyle}
-                onFocus={(e) => { e.target.style.borderColor = 'var(--brand)'; }}
-                onBlur={(e)  => { e.target.style.borderColor = 'var(--border2)'; }}
+                onFocus={(e) => { e.target.style.borderColor = '#D4A017'; }}
+                onBlur={(e)  => { e.target.style.borderColor = '#EAEAEA'; }}
               />
             </div>
 
             <div>
-              <label className="label-xs block mb-2">Your Name</label>
+              <label className="label-xs block mb-2" style={{ color: '#171717' }}>Your Name</label>
               <input
                 type="text"
                 value={analystName}
@@ -110,15 +110,15 @@ export default function LoginPage() {
                 required
                 className="input-base"
                 style={inputStyle}
-                onFocus={(e) => { e.target.style.borderColor = 'var(--brand)'; }}
-                onBlur={(e)  => { e.target.style.borderColor = 'var(--border2)'; }}
+                onFocus={(e) => { e.target.style.borderColor = '#D4A017'; }}
+                onBlur={(e)  => { e.target.style.borderColor = '#EAEAEA'; }}
               />
             </div>
 
             <div>
-              <label className="label-xs block mb-2">
+              <label className="label-xs block mb-2" style={{ color: '#171717' }}>
                 Work Email{' '}
-                <span style={{ color: 'var(--muted3)', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>
+                <span style={{ color: '#999999', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>
                   (optional)
                 </span>
               </label>
@@ -129,8 +129,8 @@ export default function LoginPage() {
                 placeholder="alex@meridiancap.com"
                 className="input-base"
                 style={inputStyle}
-                onFocus={(e) => { e.target.style.borderColor = 'var(--brand)'; }}
-                onBlur={(e)  => { e.target.style.borderColor = 'var(--border2)'; }}
+                onFocus={(e) => { e.target.style.borderColor = '#D4A017'; }}
+                onBlur={(e)  => { e.target.style.borderColor = '#EAEAEA'; }}
               />
             </div>
 
@@ -139,13 +139,15 @@ export default function LoginPage() {
               disabled={loading || !firmName.trim() || !analystName.trim()}
               whileTap={{ scale: 0.97 }}
               className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all duration-150 mt-2 disabled:opacity-40 disabled:cursor-not-allowed"
-              style={{ background: 'var(--brand)', color: '#09090B' }}
+              style={{ background: '#D4A017', color: '#FFFFFF' }}
               onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
                 if (!(e.currentTarget as HTMLButtonElement).disabled) {
+                  (e.currentTarget as HTMLElement).style.background = '#B8860B';
                   (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
                 }
               }}
               onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
+                (e.currentTarget as HTMLElement).style.background = '#D4A017';
                 (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
               }}
             >
@@ -154,7 +156,7 @@ export default function LoginPage() {
           </form>
 
           {/* Disclaimer */}
-          <p className="text-xs text-center mt-6" style={{ color: 'var(--muted3)' }}>
+          <p className="text-xs text-center mt-6" style={{ color: '#999999' }}>
             No account needed. Data stays in your browser.
           </p>
 
@@ -165,9 +167,9 @@ export default function LoginPage() {
         <p className="text-center mt-5 text-xs">
           <Link
             href="/"
-            style={{ color: 'var(--muted3)' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--muted)'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--muted3)'; }}
+            style={{ color: '#999999' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#666666'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#999999'; }}
           >
             ← Back to overview
           </Link>

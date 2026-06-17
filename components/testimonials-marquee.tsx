@@ -1,6 +1,5 @@
 "use client"
 
-import { cn } from "@/lib/utils"
 import { Marquee } from "@/registry/magicui/marquee"
 import { motion } from "framer-motion"
 
@@ -20,11 +19,12 @@ const secondRow = reviews.slice(4)
 
 const ReviewCard = ({ name, username, body }: { name: string; username: string; body: string }) => (
   <figure
+    className="shadow-sm"
     style={{
       width: "280px",
       borderRadius: "12px",
-      border: "1px solid rgba(255,255,255,0.07)",
-      background: "rgba(255,255,255,0.03)",
+      border: "1px solid #EAEAEA",
+      background: "#FFFFFF",
       padding: "16px",
       flexShrink: 0,
     }}
@@ -38,11 +38,11 @@ const ReviewCard = ({ name, username, body }: { name: string; username: string; 
         alt={name}
       />
       <div className="flex flex-col">
-        <figcaption style={{ color: "white", fontSize: "14px", fontWeight: 500 }}>{name}</figcaption>
-        <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "12px" }}>{username}</p>
+        <figcaption style={{ color: "#171717", fontSize: "14px", fontWeight: 500 }}>{name}</figcaption>
+        <p style={{ color: "#666666", fontSize: "12px" }}>{username}</p>
       </div>
     </div>
-    <blockquote style={{ marginTop: "12px", color: "rgba(255,255,255,0.7)", fontSize: "13px", lineHeight: 1.6 }}>
+    <blockquote style={{ marginTop: "12px", color: "#666666", fontSize: "13px", lineHeight: 1.6 }}>
       {body}
     </blockquote>
   </figure>
@@ -57,7 +57,7 @@ export function TestimonialsMarquee() {
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <p className="text-center text-xs font-medium tracking-[0.2em] uppercase mb-12" style={{ color: "rgba(255,255,255,0.4)" }}>
+      <p className="text-center text-xs font-medium tracking-[0.2em] uppercase mb-12" style={{ color: "#666666" }}>
         What analysts say
       </p>
       <div className="relative flex w-full flex-col gap-4 overflow-hidden">
@@ -67,8 +67,8 @@ export function TestimonialsMarquee() {
         <Marquee reverse pauseOnHover className="[--duration:38s]">
           {secondRow.map((r) => <ReviewCard key={r.username} {...r} />)}
         </Marquee>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#0A0A0A]" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-[#0A0A0A]" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-white" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white" />
       </div>
     </motion.section>
   )

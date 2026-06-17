@@ -48,17 +48,18 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
       viewport={{ once: true }}
       transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.05 }}
       className="border-b"
-      style={{ borderColor: "rgba(255,255,255,0.08)" }}
+      style={{ borderColor: "#EAEAEA" }}
     >
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between py-5 text-left gap-4"
       >
-        <span className="text-sm font-medium text-white">{q}</span>
+        <span className="text-sm font-medium" style={{ color: "#171717" }}>{q}</span>
         <motion.span
           animate={{ rotate: open ? 45 : 0 }}
           transition={{ duration: 0.2 }}
-          className="text-white/40 text-xl leading-none flex-shrink-0"
+          className="text-xl leading-none flex-shrink-0"
+          style={{ color: "#999999" }}
         >
           +
         </motion.span>
@@ -72,7 +73,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
             transition={{ duration: 0.25, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+            <p className="pb-5 text-sm leading-relaxed" style={{ color: "#666666" }}>
               {a}
             </p>
           </motion.div>
@@ -90,7 +91,8 @@ export function FAQAccordion() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="text-3xl font-bold text-white mb-12"
+        className="text-3xl font-bold mb-12"
+        style={{ color: "#171717" }}
       >
         Common questions.
       </motion.h2>

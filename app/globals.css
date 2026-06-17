@@ -6,7 +6,61 @@
 @tailwind utilities;
 
 :root {
-  /* Backgrounds */
+  /* ── Design tokens (light theme) ──────────────────────────────────── */
+  --background: #FFFFFF;
+  --background-secondary: #FAFAFA;
+  --foreground: #171717;
+  --foreground-secondary: #666666;
+  --thesis-gold: #D4A017;
+  --thesis-gold-hover: #B8860B;
+  --card-bg: #FFFFFF;
+  --card-border: #EAEAEA;
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+
+  /* ── Legacy aliases, remapped to the light theme ─────────────────────
+     The marketing components reference these names heavily; mapping them
+     to light values flips the whole marketing site without per-prop edits.
+     The dark values live in .theme-dark (authenticated app only). */
+  --bg: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface2: #FAFAFA;
+  --surface3: #FFFFFF;
+  --border: #EAEAEA;
+  --border2: #EAEAEA;
+
+  /* Brand */
+  --brand: #D4A017;
+  --brand-dim: rgba(212, 160, 23, 0.08);
+  --brand-glow: rgba(212, 160, 23, 0.15);
+
+  /* Semantic (tuned for contrast on white) */
+  --green: #16A34A;
+  --green-dim: rgba(22, 163, 74, 0.1);
+  --green-text: #16A34A;
+  --red: #DC2626;
+  --red-dim: rgba(220, 38, 38, 0.1);
+  --red-text: #DC2626;
+  --blue: #2563EB;
+  --blue-dim: rgba(37, 99, 235, 0.1);
+  --blue-text: #2563EB;
+  --amber: #D97706;
+  --amber-dim: rgba(217, 119, 6, 0.1);
+  --amber-text: #D97706;
+
+  /* Text */
+  --text: #171717;
+  --text2: #404040;
+  --muted: #666666;
+  --muted2: #737373;
+  --muted3: #999999;
+
+  /* Light theme (memo print) */
+  --light-bg: #FAFAFA;
+  --light-text: #171717;
+}
+
+/* ── Dark theme — scoped to the authenticated app only ──────────────── */
+.theme-dark {
   --bg: #09090B;
   --surface: #111113;
   --surface2: #1C1C1F;
@@ -14,12 +68,10 @@
   --border: #2A2A2E;
   --border2: #363639;
 
-  /* Brand */
   --brand: #F4C542;
   --brand-dim: rgba(244, 197, 66, 0.1);
   --brand-glow: rgba(244, 197, 66, 0.2);
 
-  /* Semantic */
   --green: #22C55E;
   --green-dim: rgba(34, 197, 94, 0.1);
   --green-text: #4ADE80;
@@ -33,16 +85,14 @@
   --amber-dim: rgba(245, 158, 11, 0.1);
   --amber-text: #FBB345;
 
-  /* Text */
   --text: #F4F4F5;
   --text2: #D4D4D8;
   --muted: #A1A1AA;
   --muted2: #71717A;
   --muted3: #52525B;
 
-  /* Light theme (memo print) */
-  --light-bg: #F4F4F5;
-  --light-text: #18181B;
+  background: var(--bg);
+  color: var(--text);
 }
 
 * {
@@ -54,8 +104,8 @@ html {
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
+  background: var(--background);
+  color: var(--foreground);
   font-family: 'Geist', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -107,7 +157,7 @@ body {
 
 /* Input base class */
 .input-base {
-  background: var(--surface2);
+  background: var(--surface3);
   border: 1px solid var(--border2);
   color: var(--text);
   border-radius: 8px;
