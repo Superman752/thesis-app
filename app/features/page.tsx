@@ -168,6 +168,51 @@ const features = [
       </div>
     ),
   },
+  {
+    name: "Thesis Fit Breakdown",
+    description: "Not just a fit score. See exactly which criteria matched and which didn't, weighted by what your fund actually cares about.",
+    href: "/login",
+    cta: "See scoring logic",
+    className: "col-span-3 lg:col-span-2",
+    visual: (
+      <div className="flex flex-col gap-1.5 p-3 h-full justify-center">
+        {[
+          { label: "Sector Fit", pct: 98 },
+          { label: "Stage Fit", pct: 95 },
+          { label: "Geography Fit", pct: 100 },
+          { label: "Market Size Fit", pct: 85 },
+        ].map((row) => (
+          <div key={row.label} className="flex items-center gap-2 text-xs">
+            <span className="w-28 text-[#666] text-right flex-shrink-0">{row.label}</span>
+            <div className="flex-1 h-1.5 rounded-full bg-[#EAEAEA]">
+              <div className="h-full rounded-full bg-[#D4A017]" style={{ width: `${row.pct}%` }} />
+            </div>
+            <span className="w-8 text-right text-[#171717] font-medium flex-shrink-0">{row.pct}</span>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  {
+    name: "Founder Credibility Score",
+    description: "Founder background, prior exits, and execution signals rolled into one score. See it before you take the meeting.",
+    href: "/login",
+    cta: "See an example",
+    className: "col-span-3 lg:col-span-1",
+    visual: (
+      <div className="flex flex-col items-center justify-center h-full gap-1.5">
+        <div className="text-4xl font-black text-[#D4A017]">9.1</div>
+        <div className="text-[10px] text-[#999] tracking-wide">FOUNDER CREDIBILITY</div>
+        <div className="flex gap-1 mt-1">
+          {["Prior exit", "Domain expert", "Technical co-founder"].map((tag) => (
+            <span key={tag} className="text-[8px] px-1.5 py-0.5 rounded-full bg-[#FAFAFA] border border-[#EAEAEA] text-[#666]">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    ),
+  },
 ]
 
 const stats = [

@@ -347,7 +347,7 @@ export default function LandingPage() {
       {/* ── Scroll velocity band ──────────────────────────────────────── */}
       <div className="w-full border-y border-[#EAEAEA] bg-[#FAFAFA] py-10 overflow-hidden">
         <ScrollVelocityContainer className="text-2xl md:text-3xl font-semibold tracking-tight text-[#171717]">
-          <ScrollVelocityRow baseVelocity={1.2} direction={1}>
+          <ScrollVelocityRow baseVelocity={2.5} direction={1}>
             Pre-seed&nbsp;&nbsp;·&nbsp;&nbsp;Seed&nbsp;&nbsp;·&nbsp;&nbsp;Series A&nbsp;&nbsp;·&nbsp;&nbsp;30 Second Analysis&nbsp;&nbsp;·&nbsp;&nbsp;No Spreadsheets&nbsp;&nbsp;·&nbsp;&nbsp;Built for Analysts&nbsp;&nbsp;·&nbsp;&nbsp;
           </ScrollVelocityRow>
         </ScrollVelocityContainer>
