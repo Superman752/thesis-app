@@ -20,7 +20,6 @@ export function BentoCard({
   name,
   className,
   visual,
-  Icon,
   description,
   href,
   cta,
@@ -28,7 +27,6 @@ export function BentoCard({
   name: string
   className?: string
   visual: React.ReactNode
-  Icon: React.ElementType
   description: string
   href: string
   cta: string
@@ -48,7 +46,7 @@ export function BentoCard({
 
       {/* Text zone — always below the visual, never behind it */}
       <div className="flex flex-col p-5 flex-1">
-        <Icon className="h-5 w-5 text-[#D4A017] mb-2" />
+        <div className="h-0.5 w-8 bg-[#D4A017] mb-3" />
         <h3 className="text-sm font-semibold text-[#171717] mb-1">{name}</h3>
         <p className="text-xs text-[#666666] leading-relaxed mb-3 flex-1">{description}</p>
         <Link

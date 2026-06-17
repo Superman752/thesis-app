@@ -1,15 +1,6 @@
 "use client"
 
-import Link from "next/link"
 import { motion } from "framer-motion"
-import {
-  BarChart2Icon,
-  BrainIcon,
-  FileTextIcon,
-  ShieldAlertIcon,
-  UsersIcon,
-  ZapIcon,
-} from "lucide-react"
 import { BentoCard, BentoGrid } from "@/registry/magicui/bento-grid"
 import { NumberTicker } from "@/registry/magicui/number-ticker"
 import SiteNavbar from "@/components/SiteNavbar"
@@ -35,7 +26,6 @@ const redFlagItems = [
 
 const features = [
   {
-    Icon: BarChart2Icon,
     name: "Deal Pipeline",
     description:
       "Kanban and table views for your full pipeline. Sort by score, drag between stages, see red flag counts at a glance.",
@@ -66,7 +56,6 @@ const features = [
     ),
   },
   {
-    Icon: BrainIcon,
     name: "Thesis Fit Scoring",
     description:
       "Deals scored against your firm's criteria, weighted by what matters. Configurable per fund.",
@@ -81,7 +70,6 @@ const features = [
     ),
   },
   {
-    Icon: FileTextIcon,
     name: "Investment Memo Generation",
     description:
       "One-page internal memo written like a human analyst. Structured for partner meetings, ready in seconds.",
@@ -107,7 +95,6 @@ const features = [
     ),
   },
   {
-    Icon: ShieldAlertIcon,
     name: "AI Authorship Detection",
     description:
       "Flag AI-generated decks before you spend diligence time on them. Section-level scoring with flagged excerpts.",
@@ -122,7 +109,6 @@ const features = [
     ),
   },
   {
-    Icon: ZapIcon,
     name: "Automated Red Flags",
     description:
       "Solo founder, missing revenue model, unsourced market claims. Surfaced automatically, every time.",
@@ -143,13 +129,12 @@ const features = [
     ),
   },
   {
-    Icon: UsersIcon,
     name: "Team Pipeline & Sharing",
     description:
       "Share deals with your team, message colleagues inside the app, and track who's reviewing what.",
     href: "/login",
     cta: "View plans",
-    className: "col-span-3 lg:col-span-1",
+    className: "col-span-3 lg:col-span-2",
     visual: (
       <div className="flex flex-col items-center justify-center h-full gap-2">
         <div className="flex -space-x-3">
@@ -164,6 +149,22 @@ const features = [
           ))}
         </div>
         <div className="text-[10px] text-[#999]">4 analysts active</div>
+      </div>
+    ),
+  },
+  {
+    name: "30-Second Turnaround",
+    description: "From upload to structured analysis. No queue, no waiting, no 'check back later.'",
+    href: "/login",
+    cta: "See it work",
+    className: "col-span-3 lg:col-span-1",
+    visual: (
+      <div className="flex flex-col items-center justify-center h-full gap-1">
+        <div className="text-4xl font-black text-[#D4A017]">
+          <NumberTicker value={30} />
+          <span className="text-2xl">s</span>
+        </div>
+        <div className="text-[10px] text-[#999] tracking-wide">AVERAGE ANALYSIS TIME</div>
       </div>
     ),
   },
@@ -260,7 +261,6 @@ export default function FeaturesPage() {
               <BentoCard
                 name={f.name}
                 description={f.description}
-                Icon={f.Icon}
                 href={f.href}
                 cta={f.cta}
                 visual={f.visual}
