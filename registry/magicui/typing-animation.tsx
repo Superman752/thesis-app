@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 
 interface TypingAnimationProps {
@@ -13,33 +13,37 @@ interface TypingAnimationProps {
 export function TypingAnimation({
   children,
   className,
-  duration = 50,
+  duration = 40,
   delay = 0,
 }: TypingAnimationProps) {
-  const [displayedText, setDisplayedText] = useState("")
-  const [started, setStarted] = useState(false)
+  const [displayed, setDisplayed] = useState("")
+  const [started, setStarted] = useState(delay === 0)
+  const indexRef = useRef(0)
 
   useEffect(() => {
-    const startTimeout = setTimeout(() => setStarted(true), delay)
-    return () => clearTimeout(startTimeout)
+    if (delay === 0) return
+    const t = setTimeout(() => setStarted(true), delay)
+    return () => clearTimeout(t)
   }, [delay])
 
   useEffect(() => {
     if (!started) return
-    if (displayedText === children) return
-
-    const timeout = setTimeout(() => {
-      setDisplayedText(children.slice(0, displayedText.length + 1))
+    if (indexRef.current >= children.length) return
+    const t = setTimeout(() => {
+      indexRef.current += 1
+      setDisplayed(children.slice(0, indexRef.current))
     }, duration)
-
-    return () => clearTimeout(timeout)
-  }, [started, displayedText, children, duration])
+    return () => clearTimeout(t)
+  }, [started, displayed, children, duration])
 
   return (
     <span className={cn("inline", className)}>
-      {displayedText}
-      {displayedText !== children && (
-        <span className="animate-pulse">|</span>
+      {displayed}
+      {displayed.length < children.length && (
+        <span
+          className="ml-0.5 inline-block w-[2px] animate-pulse bg-current align-middle"
+          style={{ height: "0.9em" }}
+        />
       )}
     </span>
   )

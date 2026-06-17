@@ -11,6 +11,8 @@ import { PulsatingButton } from '@/registry/magicui/pulsating-button';
 import { InteractiveHoverButton } from '@/registry/magicui/interactive-hover-button';
 import { TypingAnimation } from '@/registry/magicui/typing-animation';
 import { NumberTicker } from '@/registry/magicui/number-ticker';
+import { Ripple } from '@/registry/magicui/ripple';
+import { ScrollVelocityContainer, ScrollVelocityRow } from '@/registry/magicui/scroll-based-velocity';
 
 // ─── Utility components ────────────────────────────────────────────────────
 
@@ -342,6 +344,18 @@ export default function LandingPage() {
       <StatStrip />
       <SectionDivider />
 
+      {/* ── Scroll velocity band ──────────────────────────────────────── */}
+      <div className="w-full border-y border-[#EAEAEA] bg-[#FAFAFA] py-6 overflow-hidden">
+        <ScrollVelocityContainer className="text-sm font-medium tracking-[0.15em] uppercase text-[#999999]">
+          <ScrollVelocityRow baseVelocity={4} direction={1}>
+            Deal Flow Intelligence · Thesis Fit Scoring · Investment Memos · Red Flag Detection · Stage Coverage · Pipeline Management ·
+          </ScrollVelocityRow>
+          <ScrollVelocityRow baseVelocity={4} direction={-1}>
+            Pre-seed · Seed · Series A · 30 Second Analysis · No Spreadsheets · Built for Analysts ·
+          </ScrollVelocityRow>
+        </ScrollVelocityContainer>
+      </div>
+
       {/* ── Brief product section ─────────────────────────────────────── */}
       <section className="py-24 px-8" style={{ background: '#FFFFFF' }}>
         <div className="max-w-3xl mx-auto text-center">
@@ -382,7 +396,8 @@ export default function LandingPage() {
       <SectionDivider />
 
       {/* ── Final CTA ────────────────────────────────────────────────── */}
-      <section className="py-24 px-8" style={{ background: '#FFFFFF' }}>
+      <section className="py-24 px-8 relative overflow-hidden" style={{ background: '#FFFFFF' }}>
+        <Ripple />
         <ScrollReveal>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-bold mb-5" style={{ fontSize: 48, letterSpacing: '-0.025em', lineHeight: 1.1, color: '#171717' }}>

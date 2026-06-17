@@ -18,6 +18,7 @@ module.exports = {
       animation: {
         marquee: 'marquee var(--duration, 40s) infinite linear',
         'marquee-vertical': 'marquee-vertical var(--duration, 40s) linear infinite',
+        ripple: 'ripple 3.5s ease-in-out infinite',
       },
       keyframes: {
         marquee: {
@@ -27,6 +28,10 @@ module.exports = {
         'marquee-vertical': {
           from: { transform: 'translateY(0)' },
           to: { transform: 'translateY(calc(-100% - var(--gap)))' },
+        },
+        ripple: {
+          '0%, 100%': { transform: 'translate(-50%, -50%) scale(1)' },
+          '50%': { transform: 'translate(-50%, -50%) scale(0.9)' },
         },
       },
     },

@@ -14,33 +14,32 @@ interface NumberTickerProps {
 export function NumberTicker({
   value,
   className,
-  duration = 1500,
+  duration = 1200,
   delay = 0,
 }: NumberTickerProps) {
   const ref = useRef<HTMLSpanElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-50px" })
+  const isInView = useInView(ref, { once: true, margin: "-80px" })
   const [current, setCurrent] = useState(0)
+  const hasStarted = useRef(false)
 
   useEffect(() => {
-    if (!isInView) return
+    if (!isInView || hasStarted.current) return
+    hasStarted.current = true
 
-    const startTimeout = setTimeout(() => {
+    const timeout = setTimeout(() => {
       const startTime = performance.now()
-
       const tick = (now: number) => {
         const elapsed = now - startTime
         const progress = Math.min(elapsed / duration, 1)
-        // ease out cubic
         const eased = 1 - Math.pow(1 - progress, 3)
-        setCurrent(Math.floor(eased * value))
+        const next = Math.round(eased * value)
+        setCurrent(next)
         if (progress < 1) requestAnimationFrame(tick)
-        else setCurrent(value)
       }
-
       requestAnimationFrame(tick)
     }, delay)
 
-    return () => clearTimeout(startTimeout)
+    return () => clearTimeout(timeout)
   }, [isInView, value, duration, delay])
 
   return (
