@@ -148,23 +148,12 @@ export default function SiteNavbar() {
         <div className="flex items-center gap-8">
           <ThesisLogo />
           <nav className="hidden md:flex items-center gap-8">
-            <NavDropdown
-              label="Features"
-              items={[
-                { title: 'Deal Pipeline', description: 'Track every deal in one place', href: '/features' },
-                { title: 'Thesis Fit Scoring', description: "Score deals against your fund's criteria", href: '/features' },
-                { title: 'Investment Memos', description: 'One-page memos generated in seconds', href: '/features' },
-                { title: 'AI Authorship Detection', description: 'Flag AI-generated decks before diligence', href: '/features' },
-              ]}
-            />
-            <NavDropdown
-              label="How it works"
-              items={[
-                { title: 'Upload the deck', description: 'Drag in any PDF, no formatting required', href: '/how-it-works' },
-                { title: 'Review the analysis', description: 'Structured output in under 30 seconds', href: '/how-it-works' },
-                { title: 'Share the memo', description: 'Partner-ready, exportable instantly', href: '/how-it-works' },
-              ]}
-            />
+            <Link href="/features" className="text-sm text-[#666] hover:text-[#171717] transition-colors py-2">
+              Features
+            </Link>
+            <Link href="/how-it-works" className="text-sm text-[#666] hover:text-[#171717] transition-colors py-2">
+              How it works
+            </Link>
             <Link href="/pricing" className="text-sm text-[#666] hover:text-[#171717] transition-colors py-2">Pricing</Link>
           </nav>
         </div>

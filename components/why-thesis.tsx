@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { motion } from "framer-motion"
 import { DatabaseIcon, TargetIcon, ZapIcon, NetworkIcon, CalendarCheckIcon, HistoryIcon } from "lucide-react"
@@ -17,7 +17,7 @@ const reasons = [
   {
     Icon: ZapIcon,
     title: "Built for Deal Velocity",
-    description: "Structured analysis and a partner-ready memo in under 30 seconds, every time.",
+    description: "Structured analysis and a partner ready memo in under 30 seconds, every time.",
   },
   {
     Icon: NetworkIcon,
@@ -66,9 +66,22 @@ export function WhyThesis() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.4, delay: i * 0.07 }}
-              className="rounded-xl border border-[#EAEAEA] bg-white p-6 hover:border-[#D4A017]/30 hover:shadow-sm transition-all"
+              whileHover={{ y: -3 }}
+              className="group rounded-xl border border-[#EAEAEA] bg-white p-6 hover:border-[#D4A017]/30 hover:shadow-sm transition-all"
             >
-              <r.Icon className="h-5 w-5 text-[#D4A017] mb-3" />
+              <motion.div
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#FFFDF5] mb-3"
+                animate={{ y: [0, -3, 0] }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.3,
+                }}
+                whileHover={{ rotate: 8, scale: 1.08 }}
+              >
+                <r.Icon className="h-4 w-4 text-[#D4A017]" />
+              </motion.div>
               <h3 className="text-sm font-semibold text-[#171717] mb-1.5">{r.title}</h3>
               <p className="text-xs text-[#666] leading-relaxed">{r.description}</p>
             </motion.div>
@@ -82,11 +95,8 @@ export function WhyThesis() {
           transition={{ duration: 0.4, delay: 0.3 }}
           className="text-center mt-12"
         >
-          <a
-            href="/why-thesis"
-            className="text-sm font-medium text-[#D4A017] hover:text-[#B8860B] transition-colors"
-          >
-            See the full case for Thesis →
+          <a href="/why-thesis" className="text-sm font-medium text-[#D4A017] hover:text-[#B8860B] transition-colors">
+            See the full case for Thesis
           </a>
         </motion.div>
       </div>
