@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { BorderBeam } from '@/registry/magicui/border-beam';
+import { RippleButton } from '@/registry/magicui/ripple-button';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -134,25 +135,13 @@ export default function LoginPage() {
               />
             </div>
 
-            <motion.button
+            <RippleButton
               type="submit"
               disabled={loading || !firmName.trim() || !analystName.trim()}
-              whileTap={{ scale: 0.97 }}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all duration-150 mt-2 disabled:opacity-40 disabled:cursor-not-allowed"
-              style={{ background: '#D4A017', color: '#FFFFFF' }}
-              onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
-                if (!(e.currentTarget as HTMLButtonElement).disabled) {
-                  (e.currentTarget as HTMLElement).style.background = '#B8860B';
-                  (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
-                }
-              }}
-              onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
-                (e.currentTarget as HTMLElement).style.background = '#D4A017';
-                (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-              }}
+              className="w-full mt-2 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {loading ? 'Opening...' : (<>Open Thesis <ArrowRight size={15} /></>)}
-            </motion.button>
+            </RippleButton>
           </form>
 
           {/* Disclaimer */}

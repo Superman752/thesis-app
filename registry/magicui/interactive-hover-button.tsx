@@ -10,7 +10,7 @@ export function InteractiveHoverButton({ className, children, href, ...props }: 
     <button
       className={cn(
         "group relative flex cursor-pointer items-center justify-center rounded-lg border px-6 py-3 text-sm font-medium transition-all duration-300",
-        "border-[#EAEAEA] bg-white text-[#171717] hover:border-[#D4A017]",
+        "border-[#EAEAEA] bg-white text-[#171717] hover:border-[#D4A017] hover:bg-[#FAFAFA]",
         className
       )}
       {...props}

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { RippleButton } from '@/registry/magicui/ripple-button';
 
 function ThesisLogo() {
   return (
@@ -138,22 +139,9 @@ export default function SiteNavbar() {
           >
             Log in
           </Link>
-          <motion.span whileTap={{ scale: 0.97 }} style={{ display: 'inline-flex' }}>
-            <Link
-              href="/login"
-              className="rounded-lg px-4 py-2 text-sm font-medium"
-              style={{
-                background: '#D4A017',
-                color: '#FFFFFF',
-                textDecoration: 'none',
-                transition: 'background 150ms',
-              }}
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#B8860B')}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#D4A017')}
-            >
-              Start for free
-            </Link>
-          </motion.span>
+          <RippleButton href="/login" className="px-4 py-2">
+            Start for free
+          </RippleButton>
         </div>
       </header>
     </>

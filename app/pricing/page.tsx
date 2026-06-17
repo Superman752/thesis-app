@@ -1,9 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useState, useRef } from 'react';
 import { Check, Star, ArrowRight } from 'lucide-react';
+import { RippleButton } from '@/registry/magicui/ripple-button';
+import { InteractiveHoverButton } from '@/registry/magicui/interactive-hover-button';
 import confetti from 'canvas-confetti';
 import NumberFlow from '@number-flow/react';
 import { useMediaQuery } from '@/hooks/use-media-query';
@@ -290,37 +291,15 @@ export default function PricingPage() {
 
                   <hr style={{ width: '100%', margin: '20px 0', border: 0, borderTop: '1px solid #EAEAEA' }} />
 
-                  <motion.div whileTap={{ scale: 0.97 }}>
-                    <Link
-                      href={plan.href}
-                      className="block text-center font-semibold"
-                      style={
-                        plan.isPopular
-                          ? { background: '#D4A017', color: '#FFFFFF', borderRadius: 8, padding: '10px', fontSize: 14, textDecoration: 'none', transition: 'background 150ms' }
-                          : { background: '#FFFFFF', color: '#171717', border: '1px solid #EAEAEA', borderRadius: 8, padding: '10px', fontSize: 14, textDecoration: 'none', transition: 'border-color 150ms, color 150ms' }
-                      }
-                      onMouseEnter={(e) => {
-                        const el = e.currentTarget as HTMLElement;
-                        if (plan.isPopular) {
-                          el.style.background = '#B8860B';
-                        } else {
-                          el.style.borderColor = '#D4A017';
-                          el.style.color = '#D4A017';
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        const el = e.currentTarget as HTMLElement;
-                        if (plan.isPopular) {
-                          el.style.background = '#D4A017';
-                        } else {
-                          el.style.borderColor = '#EAEAEA';
-                          el.style.color = '#171717';
-                        }
-                      }}
-                    >
+                  {plan.isPopular ? (
+                    <RippleButton href={plan.href} className="w-full">
                       {plan.buttonText}
-                    </Link>
-                  </motion.div>
+                    </RippleButton>
+                  ) : (
+                    <InteractiveHoverButton href={plan.href} className="w-full">
+                      {plan.buttonText}
+                    </InteractiveHoverButton>
+                  )}
 
                   <p style={{ fontSize: 11, color: '#999999', textAlign: 'center', marginTop: 14 }}>
                     {plan.description}
@@ -349,15 +328,9 @@ export default function PricingPage() {
             <p className="mb-8" style={{ fontSize: 16, color: '#666666' }}>
               Free to try. No credit card. No onboarding call.
             </p>
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-2 font-semibold"
-              style={{ background: '#D4A017', color: '#FFFFFF', borderRadius: 8, padding: '12px 28px', fontSize: 15, textDecoration: 'none', transition: 'background 150ms' }}
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#B8860B')}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#D4A017')}
-            >
+            <RippleButton href="/login">
               Open Thesis, it&apos;s free <ArrowRight size={15} />
-            </Link>
+            </RippleButton>
           </ScrollReveal>
         </div>
       </section>

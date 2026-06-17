@@ -7,7 +7,8 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
 import { TestimonialsMarquee } from '@/components/testimonials-marquee';
-import { PulsatingButton } from '@/registry/magicui/pulsating-button';
+import { WhyThesis } from '@/components/why-thesis';
+import { RippleButton } from '@/registry/magicui/ripple-button';
 import { InteractiveHoverButton } from '@/registry/magicui/interactive-hover-button';
 import { TypingAnimation } from '@/registry/magicui/typing-animation';
 import { NumberTicker } from '@/registry/magicui/number-ticker';
@@ -299,7 +300,7 @@ export default function LandingPage() {
                 className="flex items-center gap-3 flex-wrap"
                 style={{ marginBottom: 24 }}
               >
-                <PulsatingButton href="/login">Start for free →</PulsatingButton>
+                <RippleButton href="/login">Start for free →</RippleButton>
                 <InteractiveHoverButton href="/how-it-works">See how it works</InteractiveHoverButton>
               </motion.div>
 
@@ -391,6 +392,7 @@ export default function LandingPage() {
       <TestimonialsMarquee />
 
       <SectionDivider />
+      <WhyThesis />
 
       {/* ── Final CTA ────────────────────────────────────────────────── */}
       <section className="py-24 px-8 relative overflow-hidden" style={{ background: '#FFFFFF' }}>
@@ -403,17 +405,9 @@ export default function LandingPage() {
             <p className="mb-10" style={{ fontSize: 18, color: '#666666' }}>
               Free to try. No credit card. No onboarding call. Just upload a deck and see what comes back.
             </p>
-            <motion.span whileTap={{ scale: 0.97 }} style={{ display: 'inline-flex' }}>
-              <Link
-                href="/login"
-                className="inline-flex items-center gap-2 font-semibold"
-                style={{ background: '#D4A017', color: '#FFFFFF', borderRadius: 8, padding: '14px 32px', fontSize: 16, textDecoration: 'none', transition: 'background 150ms' }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#B8860B')}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#D4A017')}
-              >
-                Open Thesis, it&apos;s free <ArrowRight size={16} />
-              </Link>
-            </motion.span>
+            <RippleButton href="/login" className="px-8 py-4 text-base">
+              Open Thesis, it&apos;s free <ArrowRight size={16} />
+            </RippleButton>
           </div>
         </ScrollReveal>
       </section>

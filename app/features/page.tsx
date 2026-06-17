@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { BentoCard, BentoGrid } from "@/registry/magicui/bento-grid"
+import { RippleButton } from "@/registry/magicui/ripple-button"
 import { NumberTicker } from "@/registry/magicui/number-ticker"
 import SiteNavbar from "@/components/SiteNavbar"
 import SiteFooter from "@/components/SiteFooter"
@@ -321,12 +322,7 @@ export default function FeaturesPage() {
           Ready to cut your prep time?
         </h2>
         <p className="text-[#666] mb-8">Free to try. No credit card. No onboarding call.</p>
-        <a
-          href="/login"
-          className="inline-flex items-center gap-2 bg-[#D4A017] hover:bg-[#B8860B] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-        >
-          Start for free
-        </a>
+        <RippleButton href="/login">Start for free</RippleButton>
       </section>
 
       <SiteFooter />

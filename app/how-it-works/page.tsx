@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import SiteNavbar from '@/components/SiteNavbar';
+import { RippleButton } from '@/registry/magicui/ripple-button';
 import SiteFooter from '@/components/SiteFooter';
 
 function ScrollReveal({
@@ -208,15 +208,9 @@ export default function HowItWorksPage() {
             <p className="mb-8" style={{ fontSize: 16, color: '#666666' }}>
               Free to try. No credit card. No onboarding call.
             </p>
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-2 font-semibold"
-              style={{ background: '#D4A017', color: '#FFFFFF', borderRadius: 8, padding: '12px 28px', fontSize: 15, textDecoration: 'none', transition: 'background 150ms' }}
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#B8860B')}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#D4A017')}
-            >
+            <RippleButton href="/login">
               Upload a deck <ArrowRight size={15} />
-            </Link>
+            </RippleButton>
           </ScrollReveal>
         </div>
       </section>
