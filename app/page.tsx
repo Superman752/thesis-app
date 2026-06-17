@@ -9,6 +9,8 @@ import SiteFooter from '@/components/SiteFooter';
 import { TestimonialsMarquee } from '@/components/testimonials-marquee';
 import { PulsatingButton } from '@/registry/magicui/pulsating-button';
 import { InteractiveHoverButton } from '@/registry/magicui/interactive-hover-button';
+import { TypingAnimation } from '@/registry/magicui/typing-animation';
+import { NumberTicker } from '@/registry/magicui/number-ticker';
 
 // ─── Utility components ────────────────────────────────────────────────────
 
@@ -187,7 +189,7 @@ function StatStrip() {
             label: 'decks / analyst / week',
             node: (
               <span style={numStyle}>
-                50+
+                <NumberTicker value={50} />+
               </span>
             ),
           },
@@ -195,7 +197,7 @@ function StatStrip() {
             label: 'average analysis time',
             node: (
               <span style={numStyle}>
-                30 sec
+                <NumberTicker value={30} delay={200} /> sec
               </span>
             ),
           },
@@ -274,7 +276,9 @@ export default function LandingPage() {
                 className="font-bold"
                 style={{ fontSize: 'clamp(42px, 5vw, 68px)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.03em', color: '#171717', marginBottom: 24 }}
               >
-                Your deal pipeline shouldn&apos;t live in a spreadsheet.
+                <TypingAnimation duration={35}>
+                  Your deal pipeline shouldn&apos;t live in a spreadsheet.
+                </TypingAnimation>
               </motion.h1>
 
               <motion.p
