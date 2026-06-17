@@ -8,6 +8,7 @@ import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
 import { TestimonialsMarquee } from '@/components/testimonials-marquee';
 import { WhyThesis } from '@/components/why-thesis';
+import { MemoPreview } from '@/components/memo-preview';
 import { RippleButton } from '@/registry/magicui/ripple-button';
 import { InteractiveHoverButton } from '@/registry/magicui/interactive-hover-button';
 import { TypingAnimation } from '@/registry/magicui/typing-animation';
@@ -393,6 +394,7 @@ export default function LandingPage() {
 
       <SectionDivider />
       <WhyThesis />
+      <MemoPreview />
 
       {/* ── Final CTA ────────────────────────────────────────────────── */}
       <section className="py-24 px-8 relative overflow-hidden" style={{ background: '#FFFFFF' }}>
