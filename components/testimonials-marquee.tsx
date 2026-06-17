@@ -1,7 +1,17 @@
 "use client"
 
 import { Marquee } from "@/registry/magicui/marquee"
+import { AvatarCircles } from "@/registry/magicui/avatar-circles"
 import { motion } from "framer-motion"
+
+const avatars = [
+  { imageUrl: "https://avatars.githubusercontent.com/u/16860528", profileUrl: "#" },
+  { imageUrl: "https://avatars.githubusercontent.com/u/20110627", profileUrl: "#" },
+  { imageUrl: "https://avatars.githubusercontent.com/u/106103625", profileUrl: "#" },
+  { imageUrl: "https://avatars.githubusercontent.com/u/59228569", profileUrl: "#" },
+  { imageUrl: "https://avatars.githubusercontent.com/u/59442788", profileUrl: "#" },
+  { imageUrl: "https://avatars.githubusercontent.com/u/89768406", profileUrl: "#" },
+]
 
 const reviews = [
   { name: "Jordan K.", username: "@jordank", body: "Cut my deck review time from 45 minutes to under a minute. The thesis fit scoring is eerily accurate." },
@@ -57,9 +67,12 @@ export function TestimonialsMarquee() {
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <p className="text-center text-xs font-medium tracking-[0.2em] uppercase mb-12" style={{ color: "#666666" }}>
-        What analysts say
-      </p>
+      <div className="flex flex-col items-center gap-4 mb-12">
+        <AvatarCircles numPeople={99} avatarUrls={avatars} />
+        <p className="text-center text-xs font-medium tracking-[0.2em] uppercase" style={{ color: "#666666" }}>
+          What analysts say
+        </p>
+      </div>
       <div className="relative flex w-full flex-col gap-4 overflow-hidden">
         <Marquee pauseOnHover className="[--duration:38s]">
           {firstRow.map((r) => <ReviewCard key={r.username} {...r} />)}

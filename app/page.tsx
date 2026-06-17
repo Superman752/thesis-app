@@ -6,8 +6,6 @@ import { useRef } from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
-import { NumberTicker } from '@/components/magicui/number-ticker';
-import { TypingAnimation } from '@/components/magicui/typing-animation';
 import { TestimonialsMarquee } from '@/components/testimonials-marquee';
 import { PulsatingButton } from '@/registry/magicui/pulsating-button';
 import { InteractiveHoverButton } from '@/registry/magicui/interactive-hover-button';
@@ -189,7 +187,7 @@ function StatStrip() {
             label: 'decks / analyst / week',
             node: (
               <span style={numStyle}>
-                <NumberTicker value={50} />+
+                50+
               </span>
             ),
           },
@@ -197,7 +195,7 @@ function StatStrip() {
             label: 'average analysis time',
             node: (
               <span style={numStyle}>
-                <NumberTicker value={30} delay={100} /> sec
+                30 sec
               </span>
             ),
           },
@@ -276,13 +274,7 @@ export default function LandingPage() {
                 className="font-bold"
                 style={{ fontSize: 'clamp(42px, 5vw, 68px)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.03em', color: '#171717', marginBottom: 24 }}
               >
-                <TypingAnimation duration={38} delay={320}>
-                  Your deal pipeline
-                </TypingAnimation>
-                <br />
-                <span>shouldn&apos;t live in</span>
-                <br />
-                <span>a spreadsheet.</span>
+                Your deal pipeline shouldn&apos;t live in a spreadsheet.
               </motion.h1>
 
               <motion.p
