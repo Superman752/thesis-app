@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
@@ -76,7 +76,7 @@ export default function PipelinePage() {
     return { total: deals.length, activeDiligence: activeDiligence.length, totalFlags, avgScore };
   }, [deals]);
 
-  // Synthetic weekly deal inflow for sparkline — distributes total across 8 weeks
+  // Synthetic weekly deal inflow for sparkline, distributes total across 8 weeks
   // with a rising curve so the chart reads as growing pipeline activity.
   const sparklineData = useMemo(() => {
     const n = deals.length;

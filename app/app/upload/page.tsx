@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -31,7 +31,7 @@ function HorizontalSteps() {
     <div className="flex items-start mt-8 select-none" aria-hidden="true">
       {STEPS.map((step, i) => (
         <div key={step.label} className="flex-1 flex flex-col items-center relative">
-          {/* Connecting line — spans from center of previous node to center of this one */}
+          {/* Connecting line spanning from center of previous node to center of this one */}
           {i > 0 && (
             <div
               className="absolute"
@@ -159,7 +159,7 @@ export default function UploadPage() {
   };
 
   const handleDemoAnalysis = () => {
-    // Navigate directly to the existing Conduit mock deal — no API call needed
+    // Navigate directly to the existing Conduit mock deal, no API call needed
     router.push('/app/deal/deal-conduit-004');
   };
 

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { AlertTriangle } from 'lucide-react';
@@ -86,7 +86,7 @@ export default function DealCard({ deal, draggable = false, onDragStart }: DealC
         </div>
       </div>
 
-      {/* Card bottom — score + flags */}
+      {/* Card bottom: score + flags */}
       <div
         className="flex items-center justify-between px-4 py-3"
         style={{ borderTop: '1px solid var(--border)' }}

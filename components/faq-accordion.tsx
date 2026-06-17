@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -10,7 +10,7 @@ const faqs = [
   },
   {
     q: "How accurate is the thesis fit scoring?",
-    a: "The scoring is calibrated against your fund's stated thesis — stage, sector, check size, and geography. It's not a black box: every score comes with a breakdown so you can see exactly why a deal ranked the way it did. Most analysts find it flags genuine mismatches they'd have caught themselves, just faster."
+    a: "The scoring is calibrated against your fund's stated thesis: stage, sector, check size, and geography. It's not a black box: every score comes with a breakdown so you can see exactly why a deal ranked the way it did. Most analysts find it flags genuine mismatches they'd have caught themselves, just faster."
   },
   {
     q: "Can I change plans later?",
@@ -18,15 +18,15 @@ const faqs = [
   },
   {
     q: "Is there a trial for Pro?",
-    a: "The Solo plan is free forever with 10 decks per month. That's the trial — no time limit, no credit card required. Upgrade when the volume or team features make sense for you."
+    a: "The Solo plan is free forever with 10 decks per month. That's the trial, no time limit, no credit card required. Upgrade when the volume or team features make sense for you."
   },
   {
     q: "How does Firm billing work?",
-    a: "Flat $99/month for up to 10 analysts, unlimited decks across the team. If your team is larger than 10, contact us — we do custom pricing for larger firms and multi-fund structures."
+    a: "Flat $99/month for up to 10 analysts, unlimited decks across the team. If your team is larger than 10, contact us. We do custom pricing for larger firms and multi-fund structures."
   },
   {
     q: "Where does my data go?",
-    a: "Decks are processed and immediately discarded — we don't store your pitch deck files after analysis is complete. The structured output (scores, memos, red flags) lives in your Thesis account and is never used to train models or shared with third parties."
+    a: "Decks are processed and immediately discarded. We don't store your pitch deck files after analysis is complete. The structured output (scores, memos, red flags) lives in your Thesis account and is never used to train models or shared with third parties."
   },
   {
     q: "How long does analysis actually take?",
@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     q: "Does this replace my analyst?",
-    a: "No. Thesis handles the first-pass read so your analyst spends time on deals worth their attention, not on filtering obvious mismatches. The memo output is a starting point, not a final word — your judgment still drives every investment decision."
+    a: "No. Thesis handles the first-pass read so your analyst spends time on deals worth their attention, not on filtering obvious mismatches. The memo output is a starting point, not a final word. Your judgment still drives every investment decision."
   },
 ]
 

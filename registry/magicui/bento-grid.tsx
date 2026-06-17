@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils"
+﻿import { cn } from "@/lib/utils"
 import { ArrowRightIcon } from "lucide-react"
 import Link from "next/link"
 
@@ -39,12 +39,12 @@ export function BentoCard({
         className
       )}
     >
-      {/* Visual zone — fixed height, normal flow, never overlaps text below */}
+      {/* Visual zone: fixed height, normal flow, never overlaps text below */}
       <div className="relative h-40 w-full overflow-hidden bg-[#FAFAFA] border-b border-[#EAEAEA]">
         {visual}
       </div>
 
-      {/* Text zone — always below the visual, never behind it */}
+      {/* Text zone: always below the visual, never behind it */}
       <div className="flex flex-col p-5 flex-1">
         <div className="h-0.5 w-8 bg-[#D4A017] mb-3" />
         <h3 className="text-sm font-semibold text-[#171717] mb-1">{name}</h3>

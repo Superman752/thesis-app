@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { Marquee } from "@/registry/magicui/marquee"
 import { AvatarCircles } from "@/registry/magicui/avatar-circles"
@@ -16,62 +16,62 @@ const avatars = [
 const reviews = [
   {
     name: "Jordan K.", username: "@jordank",
-    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&crop=faces&auto=format",
+    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&crop=faces&auto=format&q=80",
     body: "Cut my deck review time from 45 minutes to under a minute. The thesis fit scoring is eerily accurate.",
   },
   {
     name: "Priya S.", username: "@priyas",
-    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&fit=crop&crop=faces&auto=format",
+    img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=80&h=80&fit=crop&crop=faces&auto=format&q=80",
     body: "I was skeptical. Then it flagged a red flag in a deck I'd already bookmarked to pursue. Now I run it on everything.",
   },
   {
     name: "Marcus W.", username: "@marcusw",
-    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=64&h=64&fit=crop&crop=faces&auto=format",
+    img: "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=80&h=80&fit=crop&crop=faces&auto=format&q=80",
     body: "The memo output is clean enough to paste directly into our Notion. That alone saves 20 minutes per deal.",
   },
   {
     name: "Aisha T.", username: "@aishat",
-    img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=64&h=64&fit=crop&crop=faces&auto=format",
+    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&crop=faces&auto=format&q=80",
     body: "Finally stopped living in spreadsheets. The pipeline view actually shows where each deal stands.",
   },
   {
     name: "Devon R.", username: "@devonr",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=faces&auto=format",
+    img: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=80&h=80&fit=crop&crop=faces&auto=format&q=80",
     body: "We process 80+ inbound decks a month. Thesis handles first-pass on all of them now.",
   },
   {
     name: "Lena M.", username: "@lenam",
-    img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&fit=crop&crop=faces&auto=format",
+    img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&h=80&fit=crop&crop=faces&auto=format&q=80",
     body: "The AI authorship detection flagged something in week one that I would have missed. Genuinely useful.",
   },
   {
     name: "Chris B.", username: "@chrisb",
-    img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=64&h=64&fit=crop&crop=faces&auto=format",
+    img: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=80&h=80&fit=crop&crop=faces&auto=format&q=80",
     body: "Stage fit scoring alone changed how I filter pre-seed decks. Stops me wasting time on obvious mismatches.",
   },
   {
     name: "Yuki N.", username: "@yukin",
-    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=64&h=64&fit=crop&crop=faces&auto=format",
+    img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=80&h=80&fit=crop&crop=faces&auto=format&q=80",
     body: "Setup took 3 minutes. First deck I uploaded had a memo ready before I finished my coffee.",
   },
   {
     name: "Sam O.", username: "@samo",
-    img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=64&h=64&fit=crop&crop=faces&auto=format",
+    img: "https://images.unsplash.com/photo-1601412436009-d964bd02edbc?w=80&h=80&fit=crop&crop=faces&auto=format&q=80",
     body: "Partner meetings used to start with 10 minutes of deck recap. Now everyone's already read the memo.",
   },
   {
     name: "Mia P.", username: "@miap",
-    img: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=64&h=64&fit=crop&crop=faces&auto=format",
+    img: "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=80&h=80&fit=crop&crop=faces&auto=format&q=80",
     body: "Red flag detection on solo founders alone has saved us from at least three time-wasting diligence processes.",
   },
   {
     name: "Tyler H.", username: "@tylerh",
-    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=64&h=64&fit=crop&crop=faces&auto=format",
+    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=faces&auto=format&q=80",
     body: "I pulled up a structured memo in front of a founder mid-call. They were more impressed than I was.",
   },
   {
     name: "Nadia C.", username: "@nadiac",
-    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=64&h=64&fit=crop&crop=faces&auto=format",
+    img: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=80&h=80&fit=crop&crop=faces&auto=format&q=80",
     body: "Thesis fit scoring gave us a shared vocabulary across the team. Easier to debate a number than argue gut feelings.",
   },
 ]

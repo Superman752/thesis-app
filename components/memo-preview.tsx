@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { motion } from "framer-motion"
 
@@ -30,7 +30,7 @@ export function MemoPreview() {
             This is the memo. Not a mockup.
           </h2>
           <p className="text-[#666] mt-3 max-w-lg mx-auto">
-            Every deck you upload generates exactly this — structured, scored, and ready to forward to a partner.
+            Every deck you upload generates exactly this. Structured, scored, and ready to forward to a partner.
           </p>
         </motion.div>
 

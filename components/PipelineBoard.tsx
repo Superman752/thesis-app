@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -130,7 +130,7 @@ export default function PipelineBoard({ deals, onStatusChange }: PipelineBoardPr
               </span>
             </div>
 
-            {/* Cards list — only takes space it needs */}
+            {/* Cards list: only takes space it needs */}
             {colDeals.length > 0 && (
               <motion.div
                 variants={cardListVariants}
@@ -151,7 +151,7 @@ export default function PipelineBoard({ deals, onStatusChange }: PipelineBoardPr
               </motion.div>
             )}
 
-            {/* Drop zone — always present, fills remaining column height */}
+            {/* Drop zone: always present, fills remaining column height */}
             <div
               style={{
                 flex: 1,

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
@@ -22,7 +22,7 @@ const SEVERITY_CONFIG = {
   low: { color: 'var(--blue-text)', bg: 'var(--blue-dim)', border: 'rgba(59,130,246,0.2)', label: 'Low' },
 };
 
-// Section reveal — pure variants child, timing driven by staggerChildren parent.
+// Section reveal: pure variants child, timing driven by staggerChildren parent.
 // No whileInView: the parent column container animates all children with 0.08s stagger.
 function Reveal({ children }: { children: React.ReactNode }) {
   return (
@@ -37,7 +37,7 @@ function Reveal({ children }: { children: React.ReactNode }) {
   );
 }
 
-// Section header uses surface2 background for tonal shelf — no side-stripe accent.
+// Section header uses surface2 background for tonal shelf, no side-stripe accent.
 // The .label-xs typography provides the hierarchy; the background step does the separation.
 function SectionHeader({ label }: { label: string }) {
   return (
@@ -172,7 +172,7 @@ export default function DealPage() {
     );
   }
 
-  // Semantic color tokens — never concatenate CSS vars with opacity suffixes
+  // Semantic color tokens, never concatenate CSS vars with opacity suffixes
   const sColor = deal.overallThesisScore >= 7.5 ? 'var(--green-text)' : deal.overallThesisScore >= 5 ? 'var(--amber-text)' : 'var(--red-text)';
   const sBg    = deal.overallThesisScore >= 7.5 ? 'var(--green-dim)' : deal.overallThesisScore >= 5 ? 'var(--amber-dim)' : 'var(--red-dim)';
   const sBorder = deal.overallThesisScore >= 7.5 ? 'rgba(34,197,94,0.2)' : deal.overallThesisScore >= 5 ? 'rgba(245,158,11,0.2)' : 'rgba(239,68,68,0.2)';
@@ -215,7 +215,7 @@ export default function DealPage() {
                   className="font-mono text-xs font-bold px-2 py-1 rounded-lg flex-shrink-0"
                   style={{ background: sBg, color: sColor, border: `1px solid ${sBorder}` }}
                 >
-                  {deal.overallThesisScore.toFixed(1)} — {scoreLabel}
+                  {deal.overallThesisScore.toFixed(1)}: {scoreLabel}
                 </span>
               </div>
               <p className="text-sm mt-0.5 truncate" style={{ color: 'var(--muted)' }}>{deal.oneLiner}</p>
@@ -443,7 +443,7 @@ export default function DealPage() {
               <SectionHeader label="Red Flags" />
               <div className="px-5 py-4">
                 {deal.redFlags.length === 0 ? (
-                  // Positive signal gets the same visual weight as amber/red — decisive, not invisible
+                  // Positive signal gets the same visual weight as amber/red, decisive, not invisible
                   <div className="flex items-center gap-2 p-3 rounded-lg text-sm"
                     style={{ background: 'var(--green-dim)', border: '1px solid rgba(34,197,94,0.2)', color: 'var(--green-text)' }}>
                     <CheckCircle2 size={14} /> No significant red flags detected

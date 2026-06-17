@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Thesis — Deal Flow Intelligence",
+  title: "Thesis: Deal Flow Intelligence",
   description: "AI-driven deal analysis and investment memo generation for VC analysts.",
 };
 

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -100,7 +100,7 @@ function NavDropdown({ label, items }: NavDropdownProps) {
 export default function SiteNavbar() {
   return (
     <>
-      {/* Announcement bar — in document flow, not fixed, pushes navbar down */}
+      {/* Announcement bar, in document flow, not fixed, pushes navbar down */}
       <div
         className="w-full flex items-center justify-center gap-3 flex-wrap px-4"
         style={{
@@ -135,7 +135,7 @@ export default function SiteNavbar() {
         </Link>
       </div>
 
-      {/* Navbar — sticky, white */}
+      {/* Navbar: sticky, white */}
       <header
         className="sticky top-0 left-0 right-0 z-50 flex items-center justify-between px-8"
         style={{
@@ -147,7 +147,7 @@ export default function SiteNavbar() {
       >
         <div className="flex items-center gap-8">
           <ThesisLogo />
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-8">
             <NavDropdown
               label="Features"
               items={[
@@ -165,14 +165,7 @@ export default function SiteNavbar() {
                 { title: 'Share the memo', description: 'Partner-ready, exportable instantly', href: '/how-it-works' },
               ]}
             />
-            <NavDropdown
-              label="Pricing"
-              items={[
-                { title: 'Solo', description: 'Free forever, 10 decks a month', href: '/pricing' },
-                { title: 'Pro', description: 'For active analysts, unlimited decks', href: '/pricing' },
-                { title: 'Firm', description: '$99/month, up to 10 analysts', href: '/pricing' },
-              ]}
-            />
+            <Link href="/pricing" className="text-sm text-[#666] hover:text-[#171717] transition-colors py-2">Pricing</Link>
           </nav>
         </div>
 

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion } from 'framer-motion';
 import { Deal } from '@/lib/types';
@@ -8,7 +8,7 @@ interface MemoDocumentProps {
 }
 
 // Light-surface semantic colors for the memo document.
-// These are intentionally separate from the dark-shell design tokens —
+// These are intentionally separate from the dark-shell design tokens.
 // the memo renders on --light-bg (#F4F4F5) as a print document.
 const RECOMMENDATION_STYLES = {
   PURSUE: { word: '#15803d', bg: '#f0fdf4', border: '#86efac' },
@@ -16,7 +16,7 @@ const RECOMMENDATION_STYLES = {
   PASS:   { word: '#b91c1c', bg: '#fef2f2', border: '#fca5a5' },
 };
 
-// Memo section label — consistent across all sections.
+// Memo section label, consistent across all sections.
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <div
@@ -28,7 +28,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-// Subtle reveal — opacity + minimal lift, ease-out.
+// Subtle reveal: opacity + minimal lift, ease-out.
 // No bounce. No elastic. Documents don't fly in.
 function Appear({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -84,7 +84,7 @@ export default function MemoDocument({ deal }: MemoDocumentProps) {
         </div>
       </Appear>
 
-      {/* 2. Recommendation — appears FIRST per PRODUCT.md:
+      {/* 2. Recommendation, appears FIRST per PRODUCT.md:
            "The GP reads the recommendation section first."
            "The recommendation should be the biggest text on the memo page." */}
       <Appear delay={0.06}>

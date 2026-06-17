@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
@@ -70,7 +70,7 @@ export default function MemoPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--light-bg)' }}>
-        {/* Use a dark ink value — var(--muted) is a dark-shell token that fails contrast on light-bg */}
+        {/* Use a dark ink value. var(--muted) is a dark-shell token that fails contrast on light-bg */}
         <Loader2 size={24} className="animate-spin" style={{ color: '#71717A' }} />
       </div>
     );

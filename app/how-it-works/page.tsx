@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -48,7 +48,7 @@ const STEPS = [
   {
     title: 'Upload the deck',
     desc: 'Drag in any pitch deck PDF. Thesis reads the full document natively. No copying, no formatting, no manual extraction.',
-    detail: 'Supports any PDF up to 50MB. Thesis sends the document directly to Claude as a document content block — no OCR, no text extraction, no parsing library in the middle.',
+    detail: 'Supports any PDF up to 50MB. Thesis sends the document directly to Claude as a document content block. No OCR, no text extraction, no parsing library in the middle.',
   },
   {
     title: 'Review the analysis',
@@ -109,7 +109,7 @@ export default function HowItWorksPage() {
 
       <SectionDivider />
 
-      {/* Steps — clean stacked cards with stagger */}
+      {/* Steps: clean stacked cards with stagger */}
       <section className="py-24 px-8">
         <div className="max-w-4xl mx-auto">
           <div>
@@ -171,7 +171,7 @@ export default function HowItWorksPage() {
               },
               {
                 title: 'Six parallel scoring calls',
-                body: "Each thesis criterion — market size, team, traction, stage fit, business model, sector match — runs as its own API call in parallel. Results arrive in about the same time as a single call.",
+                body: "Each thesis criterion, market size, team, traction, stage fit, business model, sector match, runs as its own API call in parallel. Results arrive in about the same time as a single call.",
               },
               {
                 title: 'Graceful fallbacks',

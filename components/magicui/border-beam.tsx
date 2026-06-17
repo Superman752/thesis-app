@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 interface BorderBeamProps {
   className?: string;
@@ -27,7 +27,7 @@ export function BorderBeam({
         pointerEvents: 'none',
       }}
     >
-      {/* Spinning conic gradient — larger than container so beam travels the perimeter */}
+      {/* Spinning conic gradient, larger than container so beam travels the perimeter */}
       <div
         style={{
           position: 'absolute',
@@ -41,7 +41,7 @@ export function BorderBeam({
           animation: `border-beam-spin ${duration}s linear infinite`,
         }}
       />
-      {/* Inner mask — covers the card body, leaving only a thin beam on the border */}
+      {/* Inner mask: covers the card body, leaving only a thin beam on the border */}
       <div
         style={{
           position: 'absolute',

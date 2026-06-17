@@ -1,15 +1,7 @@
 "use client"
 
 import { useRef } from "react"
-import {
-  motion,
-  useAnimationFrame,
-  useMotionValue,
-  useScroll,
-  useSpring,
-  useTransform,
-  useVelocity,
-} from "framer-motion"
+import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 interface ScrollVelocityRowProps {
@@ -21,18 +13,13 @@ interface ScrollVelocityRowProps {
 
 export function ScrollVelocityRow({
   children,
-  baseVelocity = 3,
+  baseVelocity = 2.5,
   direction = 1,
   className,
 }: ScrollVelocityRowProps) {
   const baseX = useMotionValue(0)
-  const { scrollY } = useScroll()
-  const scrollVelocity = useVelocity(scrollY)
-  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 })
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], { clamp: false })
   const directionFactor = useRef<number>(direction)
 
-  // Wrap cleanly within a single copy's width (-25% to 0, since we render 4 copies)
   const x = useTransform(baseX, (v) => `${wrap(-25, 0, v)}%`)
 
   function wrap(min: number, max: number, v: number) {
@@ -42,10 +29,7 @@ export function ScrollVelocityRow({
   }
 
   useAnimationFrame((_, delta) => {
-    let moveBy = directionFactor.current * baseVelocity * (delta / 1000)
-    if (velocityFactor.get() < 0) directionFactor.current = -1 * direction
-    else if (velocityFactor.get() > 0) directionFactor.current = direction
-    moveBy += directionFactor.current * moveBy * velocityFactor.get()
+    const moveBy = directionFactor.current * baseVelocity * (delta / 1000)
     baseX.set(baseX.get() + moveBy)
   })
 
