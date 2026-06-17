@@ -10,7 +10,7 @@ export function BentoGrid({
   className?: string
 }) {
   return (
-    <div className={cn("grid grid-cols-3 gap-4 auto-rows-[16rem]", className)}>
+    <div className={cn("grid grid-cols-3 gap-4", className)}>
       {children}
     </div>
   )
@@ -19,7 +19,7 @@ export function BentoGrid({
 export function BentoCard({
   name,
   className,
-  background,
+  visual,
   Icon,
   description,
   href,
@@ -27,7 +27,7 @@ export function BentoCard({
 }: {
   name: string
   className?: string
-  background: React.ReactNode
+  visual: React.ReactNode
   Icon: React.ElementType
   description: string
   href: string
@@ -36,23 +36,21 @@ export function BentoCard({
   return (
     <div
       className={cn(
-        "group relative flex flex-col justify-between overflow-hidden rounded-xl",
-        "bg-white border border-[#EAEAEA] shadow-sm",
+        "flex flex-col overflow-hidden rounded-xl bg-white border border-[#EAEAEA] shadow-sm",
         "transition-all duration-300 hover:shadow-md hover:border-[#D4A017]/30",
         className
       )}
     >
-      {/* Background layer — sits at top, fades to white at bottom */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 z-0">{background}</div>
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none" />
+      {/* Visual zone — fixed height, normal flow, never overlaps text below */}
+      <div className="relative h-40 w-full overflow-hidden bg-[#FAFAFA] border-b border-[#EAEAEA]">
+        {visual}
       </div>
 
-      {/* Foreground content — always at bottom, always readable */}
-      <div className="relative z-20 mt-auto p-5 pt-0">
+      {/* Text zone — always below the visual, never behind it */}
+      <div className="flex flex-col p-5 flex-1">
         <Icon className="h-5 w-5 text-[#D4A017] mb-2" />
-        <h3 className="text-sm font-semibold text-[#171717] mb-0.5">{name}</h3>
-        <p className="text-xs text-[#666666] leading-relaxed mb-3">{description}</p>
+        <h3 className="text-sm font-semibold text-[#171717] mb-1">{name}</h3>
+        <p className="text-xs text-[#666666] leading-relaxed mb-3 flex-1">{description}</p>
         <Link
           href={href}
           className="inline-flex items-center gap-1 text-xs font-medium text-[#D4A017] hover:text-[#B8860B] transition-colors"

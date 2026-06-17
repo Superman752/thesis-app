@@ -10,36 +10,27 @@ import {
   UsersIcon,
   ZapIcon,
 } from "lucide-react"
-import { FileTextIcon as RadixFileIcon } from "@radix-ui/react-icons"
 import { BentoCard, BentoGrid } from "@/registry/magicui/bento-grid"
-import { AnimatedList, AnimatedListItem } from "@/registry/magicui/animated-list"
 import { NumberTicker } from "@/registry/magicui/number-ticker"
-import { Marquee } from "@/registry/magicui/marquee"
 import SiteNavbar from "@/components/SiteNavbar"
 import SiteFooter from "@/components/SiteFooter"
 
 const deals = [
-  { name: "Conduit", stage: "Series A", score: "9.1", color: "bg-[#D4A017]" },
-  { name: "Flux", stage: "Seed · B2B SaaS", score: "8.2", color: "bg-blue-400" },
-  { name: "Harbr", stage: "Series A · Climate", score: "7.6", color: "bg-purple-400" },
-  { name: "Tempo", stage: "Pre-seed · Health", score: "6.1", color: "bg-gray-300" },
-  { name: "Nova", stage: "Seed · AI Infra", score: "8.8", color: "bg-green-400" },
+  { name: "Conduit", stage: "Series A", score: "9.1", color: "#D4A017" },
+  { name: "Flux", stage: "Seed", score: "8.2", color: "#3B82F6" },
+  { name: "Harbr", stage: "Series A", score: "7.6", color: "#8B5CF6" },
 ]
 
 const pdfFiles = [
-  { name: "conduit-deck.pdf", pages: "47 slides", status: "Analyzed" },
-  { name: "flux-series-a.pdf", pages: "32 slides", status: "Memo ready" },
-  { name: "harbr-pitch.pdf", pages: "28 slides", status: "Flagged" },
-  { name: "tempo-seed.pdf", pages: "19 slides", status: "Analyzed" },
-  { name: "nova-deck.pdf", pages: "41 slides", status: "Analyzing..." },
+  { name: "conduit-deck.pdf", status: "Analyzed", color: "text-green-600 bg-green-50" },
+  { name: "harbr-pitch.pdf", status: "Flagged", color: "text-red-600 bg-red-50" },
+  { name: "nova-deck.pdf", status: "Analyzing", color: "text-blue-600 bg-blue-50" },
 ]
 
 const redFlagItems = [
-  { label: "Solo founder, no co-founder listed", severity: "high" },
-  { label: "Market size unsourced", severity: "medium" },
-  { label: "No revenue model stated", severity: "high" },
-  { label: "Unrealistic 10x growth projection", severity: "medium" },
-  { label: "Missing team bios", severity: "low" },
+  "Solo founder, no co-founder listed",
+  "Market size unsourced",
+  "No revenue model stated",
 ]
 
 const features = [
@@ -51,24 +42,27 @@ const features = [
     href: "/login",
     cta: "View pipeline",
     className: "col-span-3 lg:col-span-2",
-    background: (
-      <AnimatedList
-        className="absolute top-4 left-4 right-4 max-h-[200px] overflow-hidden"
-        delay={1800}
-      >
+    visual: (
+      <div className="flex flex-col gap-1.5 p-3 h-full justify-center">
         {deals.map((d) => (
-          <AnimatedListItem key={d.name}>
-            <div className="flex items-center justify-between rounded-lg border border-[#EAEAEA] bg-white px-3 py-2 text-xs shadow-sm">
-              <div className="flex items-center gap-2">
-                <div className={`h-2 w-2 rounded-full flex-shrink-0 ${d.color}`} />
-                <span className="font-medium text-[#171717]">{d.name}</span>
-                <span className="text-[#999]">{d.stage}</span>
-              </div>
-              <span className="font-bold text-[#D4A017]">{d.score}</span>
+          <div
+            key={d.name}
+            className="flex items-center justify-between rounded-lg border border-[#EAEAEA] bg-white px-3 py-2 text-xs shadow-sm"
+          >
+            <div className="flex items-center gap-2">
+              <div
+                className="h-2 w-2 rounded-full flex-shrink-0"
+                style={{ backgroundColor: d.color }}
+              />
+              <span className="font-medium text-[#171717]">{d.name}</span>
+              <span className="text-[#999]">{d.stage}</span>
             </div>
-          </AnimatedListItem>
+            <span className="font-bold" style={{ color: d.color }}>
+              {d.score}
+            </span>
+          </div>
         ))}
-      </AnimatedList>
+      </div>
     ),
   },
   {
@@ -79,31 +73,10 @@ const features = [
     href: "/login",
     cta: "See scoring",
     className: "col-span-3 lg:col-span-1",
-    background: (
-      <div className="absolute top-4 left-0 right-0 flex flex-col items-center">
-        <div className="text-5xl font-black text-[#D4A017] opacity-80">9.1</div>
-        <div className="text-[10px] text-[#999] mb-3">THESIS FIT</div>
-        <div className="w-full px-4 space-y-1.5">
-          {[
-            { label: "Market Size", pct: 100 },
-            { label: "Team", pct: 100 },
-            { label: "Traction", pct: 90 },
-            { label: "Stage Fit", pct: 80 },
-          ].map((row) => (
-            <div key={row.label} className="flex items-center gap-2 text-[10px]">
-              <span className="w-16 text-[#666] text-right">{row.label}</span>
-              <div className="flex-1 h-1 rounded-full bg-[#EAEAEA]">
-                <motion.div
-                  className="h-full rounded-full bg-[#D4A017]"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${row.pct}%` }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
+    visual: (
+      <div className="flex flex-col items-center justify-center h-full gap-1">
+        <div className="text-4xl font-black text-[#D4A017]">9.1</div>
+        <div className="text-[10px] text-[#999] tracking-wide">THESIS FIT</div>
       </div>
     ),
   },
@@ -115,40 +88,22 @@ const features = [
     href: "/login",
     cta: "See an example",
     className: "col-span-3 lg:col-span-1",
-    background: (
-      <Marquee
-        pauseOnHover
-        vertical
-        className="absolute top-4 left-3 right-3 h-[160px] [mask-image:linear-gradient(to_bottom,transparent_0%,#fff_20%,#fff_80%,transparent_100%)] [--duration:12s]"
-      >
+    visual: (
+      <div className="flex flex-col gap-1.5 p-3 h-full justify-center">
         {pdfFiles.map((f) => (
           <div
             key={f.name}
-            className="flex items-center justify-between rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] px-3 py-2 text-[10px] mb-1"
+            className="flex items-center justify-between rounded-lg border border-[#EAEAEA] bg-white px-2.5 py-1.5 text-[10px]"
           >
-            <div className="flex items-center gap-1.5">
-              <RadixFileIcon className="h-3 w-3 text-[#D4A017]" />
-              <span className="font-medium text-[#171717] truncate max-w-[100px]">
-                {f.name}
-              </span>
-            </div>
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <span className="text-[#999]">{f.pages}</span>
-              <span
-                className={`rounded-full px-1.5 py-0.5 text-[9px] font-medium ${
-                  f.status === "Flagged"
-                    ? "bg-red-50 text-red-500"
-                    : f.status === "Analyzing..."
-                    ? "bg-blue-50 text-blue-500"
-                    : "bg-green-50 text-green-600"
-                }`}
-              >
-                {f.status}
-              </span>
-            </div>
+            <span className="font-medium text-[#171717] truncate max-w-[90px]">
+              {f.name}
+            </span>
+            <span className={`rounded-full px-1.5 py-0.5 font-medium ${f.color}`}>
+              {f.status}
+            </span>
           </div>
         ))}
-      </Marquee>
+      </div>
     ),
   },
   {
@@ -159,39 +114,10 @@ const features = [
     href: "/login",
     cta: "See detection",
     className: "col-span-3 lg:col-span-1",
-    background: (
-      <div className="absolute top-4 left-0 right-0 flex flex-col items-center gap-2 px-4">
-        <div className="relative h-20 w-20">
-          <svg viewBox="0 0 80 80" className="h-full w-full -rotate-90">
-            <circle cx="40" cy="40" r="30" fill="none" stroke="#EAEAEA" strokeWidth="8" />
-            <motion.circle
-              cx="40"
-              cy="40"
-              r="30"
-              fill="none"
-              stroke="#D4A017"
-              strokeWidth="8"
-              strokeDasharray={`${2 * Math.PI * 30 * 0.08} ${2 * Math.PI * 30 * 0.92}`}
-              strokeLinecap="round"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-            />
-          </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-lg font-black text-[#171717]">8%</span>
-            <span className="text-[9px] text-[#999]">AI</span>
-          </div>
-        </div>
-        <p className="text-[10px] text-green-600 font-medium">Likely human-authored</p>
-        <div className="w-full space-y-1">
-          {["Executive Summary", "Problem / Solution", "Market Sizing"].map((s, i) => (
-            <div key={s} className="flex items-center justify-between text-[10px]">
-              <span className="text-[#666]">{s}</span>
-              <span className="text-[#999]">{[6, 9, 14][i]}%</span>
-            </div>
-          ))}
-        </div>
+    visual: (
+      <div className="flex flex-col items-center justify-center h-full gap-1">
+        <div className="text-4xl font-black text-[#171717]">8%</div>
+        <div className="text-[10px] text-green-600 font-medium">Likely human-authored</div>
       </div>
     ),
   },
@@ -203,20 +129,15 @@ const features = [
     href: "/login",
     cta: "Learn more",
     className: "col-span-3 lg:col-span-1",
-    background: (
-      <div className="absolute top-4 left-3 right-3 space-y-1.5">
-        {redFlagItems.map((flag, i) => (
-          <motion.div
-            key={flag.label}
-            initial={{ opacity: 0, x: -8 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="flex items-start gap-2 rounded-lg bg-red-50 border border-red-100 px-2.5 py-2 text-[10px]"
+    visual: (
+      <div className="flex flex-col gap-1.5 p-3 h-full justify-center">
+        {redFlagItems.map((flag) => (
+          <div
+            key={flag}
+            className="rounded-lg bg-red-50 border border-red-100 px-2.5 py-1.5 text-[10px] text-red-700"
           >
-            <span className="text-red-400 mt-0.5 flex-shrink-0">!</span>
-            <span className="text-red-700 leading-tight">{flag.label}</span>
-          </motion.div>
+            {flag}
+          </div>
         ))}
       </div>
     ),
@@ -225,43 +146,24 @@ const features = [
     Icon: UsersIcon,
     name: "Team Pipeline & Sharing",
     description:
-      "Share deals with your team, message colleagues inside the app, and track who's reviewing what. No more forwarded PDFs.",
+      "Share deals with your team, message colleagues inside the app, and track who's reviewing what.",
     href: "/login",
     cta: "View plans",
     className: "col-span-3 lg:col-span-1",
-    background: (
-      <div className="absolute top-4 left-0 right-0 flex flex-col items-center gap-3">
+    visual: (
+      <div className="flex flex-col items-center justify-center h-full gap-2">
         <div className="flex -space-x-3">
           {["#D4A017", "#3B82F6", "#8B5CF6", "#10B981"].map((color, i) => (
             <div
               key={i}
-              className="h-9 w-9 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold shadow-sm"
+              className="h-8 w-8 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold"
               style={{ backgroundColor: color }}
             >
               {["A", "B", "C", "D"][i]}
             </div>
           ))}
-          <div className="h-9 w-9 rounded-full border-2 border-white bg-[#EAEAEA] flex items-center justify-center text-[#666] text-xs font-medium shadow-sm">
-            +3
-          </div>
         </div>
         <div className="text-[10px] text-[#999]">4 analysts active</div>
-        <div className="w-full px-4 space-y-1.5">
-          {[
-            { analyst: "Alex K.", action: "reviewing Conduit", time: "2m ago" },
-            { analyst: "Maya R.", action: "left note on Flux", time: "8m ago" },
-            { analyst: "Chris B.", action: "flagged Harbr", time: "12m ago" },
-          ].map((item) => (
-            <div
-              key={item.analyst}
-              className="flex items-center justify-between text-[10px] rounded border border-[#EAEAEA] bg-[#FAFAFA] px-2 py-1.5"
-            >
-              <span className="font-medium text-[#171717]">{item.analyst}</span>
-              <span className="text-[#999]">{item.action}</span>
-              <span className="text-[#bbb]">{item.time}</span>
-            </div>
-          ))}
-        </div>
       </div>
     ),
   },
@@ -346,21 +248,25 @@ export default function FeaturesPage() {
           <p className="text-[#666] mt-1">Nobody should have to.</p>
         </motion.div>
         <BentoGrid>
-          {features.map((f, i) => {
-            const { className: colSpan, ...cardProps } = f
-            return (
-              <motion.div
-                key={f.name}
-                className={colSpan}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-              >
-                <BentoCard {...cardProps} className="" />
-              </motion.div>
-            )
-          })}
+          {features.map((f, i) => (
+            <motion.div
+              key={f.name}
+              className={f.className}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.4, delay: i * 0.06 }}
+            >
+              <BentoCard
+                name={f.name}
+                description={f.description}
+                Icon={f.Icon}
+                href={f.href}
+                cta={f.cta}
+                visual={f.visual}
+              />
+            </motion.div>
+          ))}
         </BentoGrid>
       </section>
 
@@ -370,12 +276,12 @@ export default function FeaturesPage() {
           Ready to cut your prep time?
         </h2>
         <p className="text-[#666] mb-8">Free to try. No credit card. No onboarding call.</p>
-        <Link
+        <a
           href="/login"
           className="inline-flex items-center gap-2 bg-[#D4A017] hover:bg-[#B8860B] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
         >
           Start for free
-        </Link>
+        </a>
       </section>
 
       <SiteFooter />
