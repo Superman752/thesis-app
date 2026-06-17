@@ -345,13 +345,13 @@ export default function LandingPage() {
       <SectionDivider />
 
       {/* ── Scroll velocity band ──────────────────────────────────────── */}
-      <div className="w-full border-y border-[#EAEAEA] bg-[#FAFAFA] py-6 overflow-hidden">
+      <div className="w-full border-y border-[#EAEAEA] bg-[#FAFAFA] py-8 overflow-hidden">
         <ScrollVelocityContainer className="text-sm font-medium tracking-[0.15em] uppercase text-[#999999]">
-          <ScrollVelocityRow baseVelocity={4} direction={1}>
-            Deal Flow Intelligence · Thesis Fit Scoring · Investment Memos · Red Flag Detection · Stage Coverage · Pipeline Management ·
+          <ScrollVelocityRow baseVelocity={1.2} direction={1}>
+            Deal Flow Intelligence   ·   Thesis Fit Scoring   ·   Investment Memos   ·   Red Flag Detection   ·   Stage Coverage   ·   Pipeline Management   ·
           </ScrollVelocityRow>
-          <ScrollVelocityRow baseVelocity={4} direction={-1}>
-            Pre-seed · Seed · Series A · 30 Second Analysis · No Spreadsheets · Built for Analysts ·
+          <ScrollVelocityRow baseVelocity={1.2} direction={-1}>
+            Pre-seed   ·   Seed   ·   Series A   ·   30 Second Analysis   ·   No Spreadsheets   ·   Built for Analysts   ·
           </ScrollVelocityRow>
         </ScrollVelocityContainer>
       </div>

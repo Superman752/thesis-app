@@ -1,427 +1,266 @@
-'use client';
+"use client"
 
-import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import Link from "next/link"
+import { motion } from "framer-motion"
 import {
-  BarChart2, Target, FileText, AlertTriangle, Bot, Shield, CheckCircle2,
-} from 'lucide-react';
-import SiteNavbar from '@/components/SiteNavbar';
-import SiteFooter from '@/components/SiteFooter';
-import { MagicCard } from '@/components/magicui/magic-card';
+  FileTextIcon,
+  BarChart2Icon,
+  ShieldAlertIcon,
+  UsersIcon,
+  ZapIcon,
+  BrainIcon,
+} from "lucide-react"
+import SiteNavbar from "@/components/SiteNavbar"
+import SiteFooter from "@/components/SiteFooter"
+import { NumberTicker } from "@/registry/magicui/number-ticker"
+import { BentoGrid, BentoCard } from "@/registry/magicui/bento-grid"
 
-function ScrollReveal({
-  children,
-  delay = 0,
-  className = '',
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 16 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.4, delay, ease: [0.23, 1, 0.32, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
+const stats = [
+  { value: 50, suffix: "+", label: "decks per week", sub: "at a typical early-stage VC firm" },
+  { value: 45, suffix: " min", label: "per deck", sub: "spent on extraction, notes, and write-ups" },
+  { value: 0, suffix: " tools", label: "built for this", sub: "built specifically for analyst-level deal triage, until now" },
+]
 
-function SectionDivider() {
-  return (
-    <div
-      style={{
-        width: '100%',
-        height: 1,
-        background:
-          'radial-gradient(ellipse 60% 1px at 50% 50%, rgba(0,0,0,0.08) 0%, transparent 100%)',
-      }}
-    />
-  );
-}
-
-function PipelineMockup() {
-  const deals = [
-    { name: 'Conduit', score: 9.1, stage: 'Series A', sector: 'Fintech', status: 'Active Diligence', scoreColor: '#16A34A' },
-    { name: 'Flux', score: 8.2, stage: 'Seed', sector: 'B2B SaaS', status: 'Under Review', scoreColor: '#16A34A' },
-    { name: 'Harbr', score: 7.6, stage: 'Series A', sector: 'Climate Tech', status: 'Meeting Scheduled', scoreColor: '#16A34A' },
-    { name: 'Tempo', score: 6.1, stage: 'Pre-seed', sector: 'Healthtech', status: 'New', scoreColor: '#D97706' },
-  ];
-  return (
-    <div
-      className="w-full overflow-hidden shadow-sm"
-      style={{
-        background: '#FFFFFF',
-        border: '1px solid #EAEAEA',
-        borderRadius: 8,
-      }}
-    >
-      <div
-        className="px-4 py-3 flex items-center justify-between"
-        style={{ background: '#FAFAFA', borderBottom: '1px solid #EAEAEA' }}
-      >
-        <span className="text-xs font-semibold" style={{ color: '#171717', fontFamily: 'Geist, sans-serif' }}>
-          Deal Pipeline
-        </span>
-        <div className="flex items-center gap-3">
-          <span style={{ fontSize: 10, fontFamily: 'Geist Mono, monospace', color: '#666666' }}>5 deals</span>
-          <div
-            className="px-2.5 py-1 text-[10px] font-semibold"
-            style={{ background: '#D4A017', color: '#FFFFFF', borderRadius: 4, fontFamily: 'Geist, sans-serif' }}
-          >
-            + Analyze
-          </div>
-        </div>
-      </div>
-      <div className="divide-y" style={{ borderColor: '#EAEAEA' }}>
-        {deals.map((d, i) => (
-          <motion.div
-            key={d.name}
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 + i * 0.07 }}
-            className="px-4 py-3 flex items-center gap-3"
-          >
-            <div
-              className="w-7 h-7 flex items-center justify-center text-[10px] font-bold flex-shrink-0"
-              style={{
-                background: '#FAFAFA',
-                color: '#D4A017',
-                border: '1px solid #EAEAEA',
-                borderRadius: 6,
-                fontFamily: 'Geist, sans-serif',
-              }}
-            >
-              {d.name[0]}
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-xs font-semibold" style={{ color: '#171717', fontFamily: 'Geist, sans-serif' }}>{d.name}</div>
-              <div className="text-[10px] mt-0.5" style={{ color: '#666666', fontFamily: 'Geist, sans-serif' }}>
-                {d.stage} · {d.sector}
+const features = [
+  {
+    Icon: BarChart2Icon,
+    name: "Deal Pipeline",
+    description: "Kanban and table views for your full pipeline. Drag deals between stages, sort by score, and see red flag counts at a glance.",
+    href: "/login",
+    cta: "View pipeline",
+    className: "col-span-3 lg:col-span-2",
+    background: (
+      <div className="absolute inset-0 p-6 pt-12 opacity-60 group-hover:opacity-80 transition-opacity">
+        <div className="rounded-lg border border-[#EAEAEA] bg-[#FAFAFA] p-3 text-xs font-mono space-y-2">
+          {[
+            { name: "Conduit", stage: "Series A", score: "9.1", status: "Active Diligence", color: "bg-[#D4A017]" },
+            { name: "Flux", stage: "Seed", score: "8.2", status: "Under Review", color: "bg-blue-400" },
+            { name: "Harbr", stage: "Series A", score: "7.6", status: "Meeting Scheduled", color: "bg-purple-400" },
+            { name: "Tempo", stage: "Pre-seed", score: "6.1", status: "New", color: "bg-gray-300" },
+          ].map((deal) => (
+            <div key={deal.name} className="flex items-center justify-between rounded border border-[#EAEAEA] bg-white px-3 py-2">
+              <div className="flex items-center gap-2">
+                <div className={`h-2 w-2 rounded-full ${deal.color}`} />
+                <span className="font-medium text-[#171717]">{deal.name}</span>
+                <span className="text-[#999]">{deal.stage}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="font-bold text-[#D4A017]">{deal.score}</span>
+                <span className="rounded-full bg-[#FAFAFA] border border-[#EAEAEA] px-2 py-0.5 text-[#666]">{deal.status}</span>
               </div>
             </div>
-            <div className="text-right flex-shrink-0">
-              <div style={{ fontFamily: 'Geist Mono, monospace', fontSize: 12, fontWeight: 700, color: d.scoreColor }}>{d.score}</div>
-              <div className="text-[10px] mt-0.5" style={{ color: '#999999', fontFamily: 'Geist, sans-serif' }}>{d.status}</div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function AIDetectionMockup() {
-  return (
-    <div
-      className="overflow-hidden shadow-sm"
-      style={{
-        background: '#FFFFFF',
-        border: '1px solid #EAEAEA',
-        borderRadius: 8,
-      }}
-    >
-      <div
-        className="px-4 py-3 flex items-center justify-between"
-        style={{ background: '#FAFAFA', borderBottom: '1px solid #EAEAEA' }}
-      >
-        <div className="flex items-center gap-2">
-          <Bot size={12} style={{ color: '#666666' }} />
-          <span style={{ fontSize: 10, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#666666', fontFamily: 'Geist, sans-serif' }}>
-            AI Authorship
-          </span>
+          ))}
         </div>
-        <span
-          className="px-2 py-0.5 text-[10px] font-semibold"
-          style={{ color: '#16A34A', background: 'rgba(22,163,74,0.1)', border: '1px solid rgba(22,163,74,0.3)', borderRadius: 4, fontFamily: 'Geist Mono, monospace' }}
-        >
-          8% Human
-        </span>
       </div>
-      <div className="px-4 py-3 space-y-2">
-        {[
-          { n: 'Executive Summary', s: 6 },
-          { n: 'Problem / Solution', s: 9 },
-          { n: 'Market Sizing', s: 14 },
-          { n: 'Traction', s: 5 },
-        ].map((s, i) => (
-          <div key={s.n}>
-            <div className="flex items-center justify-between mb-0.5">
-              <span style={{ fontSize: 10, color: '#666666', fontFamily: 'Geist, sans-serif' }}>{s.n}</span>
-              <span style={{ fontFamily: 'Geist Mono, monospace', fontSize: 10, color: '#16A34A' }}>{s.s}%</span>
-            </div>
-            <div className="h-1.5" style={{ background: '#F0F0F0', borderRadius: 99 }}>
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${s.s}%` }}
-                transition={{ duration: 0.4, delay: 0.6 + i * 0.05 }}
-                style={{ height: '100%', borderRadius: 99, background: '#16A34A' }}
-              />
-            </div>
+    ),
+  },
+  {
+    Icon: BrainIcon,
+    name: "Thesis Fit Scoring",
+    description: "Deals scored against your firm’s investment criteria, weighted by what matters to you. Configurable per fund.",
+    href: "/login",
+    cta: "See scoring",
+    className: "col-span-3 lg:col-span-1",
+    background: (
+      <div className="absolute inset-0 flex items-center justify-center opacity-50 group-hover:opacity-70 transition-opacity">
+        <div className="text-center">
+          <div className="text-6xl font-bold text-[#D4A017]">9.1</div>
+          <div className="text-xs text-[#666] mt-1">Thesis Fit Score</div>
+          <div className="mt-3 space-y-1 text-left px-4">
+            {["Market Size", "Team", "Traction", "Stage Fit"].map((label, i) => (
+              <div key={label} className="flex items-center gap-2 text-xs">
+                <span className="w-16 text-[#666]">{label}</span>
+                <div className="flex-1 h-1.5 rounded-full bg-[#EAEAEA]">
+                  <div className="h-full rounded-full bg-[#D4A017]" style={{ width: `${[100, 100, 90, 80][i]}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    Icon: FileTextIcon,
+    name: "Investment Memo Generation",
+    description: "One-page internal memo written to sound like a human analyst. Structured for partner meetings, ready in seconds.",
+    href: "/login",
+    cta: "See an example",
+    className: "col-span-3 lg:col-span-1",
+    background: (
+      <div className="absolute inset-0 p-4 pt-10 opacity-50 group-hover:opacity-70 transition-opacity overflow-hidden">
+        <div className="space-y-2 text-xs text-[#666] font-mono">
+          <div className="font-semibold text-[#171717]">INVESTMENT MEMO — CONDUIT</div>
+          <div className="text-[#D4A017]">RECOMMENDATION: PURSUE</div>
+          <div className="border-t border-[#EAEAEA] pt-2 space-y-1">
+            <div><span className="text-[#171717] font-medium">Market:</span> $4.3B TAM, 112% YoY</div>
+            <div><span className="text-[#171717] font-medium">Team:</span> 2x founders, prior exits</div>
+            <div><span className="text-[#171717] font-medium">Risks:</span> Regulatory, 3 flagged</div>
+            <div><span className="text-[#171717] font-medium">Ask:</span> $8M Series A</div>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    Icon: ShieldAlertIcon,
+    name: "AI Authorship Detection",
+    description: "Flag AI-generated decks before you spend diligence time on them. Section-level scoring with flagged excerpts.",
+    href: "/login",
+    cta: "See detection",
+    className: "col-span-3 lg:col-span-1",
+    background: (
+      <div className="absolute inset-0 flex items-center justify-center opacity-50 group-hover:opacity-70 transition-opacity">
+        <div className="text-center space-y-2">
+          <div className="text-4xl font-bold text-[#171717]">8%</div>
+          <div className="text-xs text-[#666]">AI-generated content</div>
+          <div className="text-xs text-green-600 font-medium">{"✓"} Likely human-authored</div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    Icon: ZapIcon,
+    name: "Automated Red Flags",
+    description: "Solo founder, missing revenue model, unsourced market claims. Surfaced automatically, every time.",
+    href: "/login",
+    cta: "Learn more",
+    className: "col-span-3 lg:col-span-1",
+    background: (
+      <div className="absolute inset-0 p-4 pt-10 opacity-50 group-hover:opacity-70 transition-opacity space-y-2">
+        {["Solo founder, no co-founder listed", "Market size unsourced", "No revenue model stated"].map((flag) => (
+          <div key={flag} className="flex items-start gap-2 text-xs">
+            <span className="text-red-500 mt-0.5">{"⚠"}</span>
+            <span className="text-[#666]">{flag}</span>
           </div>
         ))}
-        <p
-          className="text-[10px] leading-relaxed"
-          style={{ color: '#666666', borderTop: '1px solid #EAEAEA', paddingTop: 8, marginTop: 4, fontFamily: 'Geist, sans-serif' }}
-        >
-          No meaningful AI generation markers. Deck reads as hand-authored by operators who know this space deeply.
-        </p>
       </div>
-    </div>
-  );
-}
-
-const FEATURES = [
-  {
-    icon: BarChart2,
-    title: 'Structured deal analysis',
-    desc: 'Company, market, traction, team, and ask extracted from any PDF into a consistent format. Every deal looks the same so you can actually compare them.',
+    ),
   },
   {
-    icon: Target,
-    title: 'Thesis fit scoring',
-    desc: "Deals scored against your firm's investment criteria, weighted by what matters to you. Configurable per fund, per analyst.",
+    Icon: UsersIcon,
+    name: "Team Pipeline & Sharing",
+    description: "Share deals with your team, message colleagues inside the app, and track who’s looking at what.",
+    href: "/login",
+    cta: "View plans",
+    className: "col-span-3 lg:col-span-1",
+    background: (
+      <div className="absolute inset-0 flex items-end p-4 pb-10 opacity-50 group-hover:opacity-70 transition-opacity">
+        <div className="flex -space-x-2">
+          {["A", "B", "C", "D"].map((l) => (
+            <div key={l} className="h-7 w-7 rounded-full bg-[#D4A017] border-2 border-white flex items-center justify-center text-white text-xs font-bold">
+              {l}
+            </div>
+          ))}
+          <div className="h-7 w-7 rounded-full bg-[#EAEAEA] border-2 border-white flex items-center justify-center text-[#666] text-xs">
+            +3
+          </div>
+        </div>
+      </div>
+    ),
   },
-  {
-    icon: FileText,
-    title: 'Investment memo generation',
-    desc: 'One-page internal memo written to sound like a human analyst. Structured for partner meetings, ready in seconds.',
-  },
-  {
-    icon: Bot,
-    title: 'AI authorship detection',
-    desc: 'Flag AI-generated decks before you spend diligence time on them. Section-level scoring with flagged excerpts.',
-  },
-  {
-    icon: AlertTriangle,
-    title: 'Automated red flags',
-    desc: 'Solo founder, missing revenue model, unsourced market claims, unrealistic projections. Surfaced automatically every time.',
-  },
-  {
-    icon: Shield,
-    title: 'Team pipeline and sharing',
-    desc: "Share deals with your team, message colleagues inside the app, and track who's looking at what. No more forwarding PDFs. (Firm)",
-  },
-];
+]
 
 export default function FeaturesPage() {
-  const geist = { fontFamily: 'Geist, sans-serif' } as const;
-  const mono = { fontFamily: 'Geist Mono, monospace' } as const;
-
   return (
-    <div style={{ background: '#FFFFFF', color: '#171717', ...geist }} className="min-h-screen">
+    <div style={{ background: "#FFFFFF", color: "#171717", fontFamily: "Geist, sans-serif" }} className="min-h-screen">
       <SiteNavbar />
 
-      {/* Page header */}
-      <section className="py-20 px-8">
-        <div className="max-w-6xl mx-auto">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#666666', fontWeight: 500, marginBottom: 16 }}
-          >
-            WHAT YOU GET
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-            style={{ fontSize: 40, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#171717', marginBottom: 16 }}
-          >
-            The complete analyst stack.
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, delay: 0.08, ease: [0.23, 1, 0.32, 1] }}
-            style={{ fontSize: 16, color: '#666666', maxWidth: 520 }}
-          >
-            Everything a VC analyst needs, minus the four hours of prep work.
-          </motion.p>
-        </div>
+      {/* Hero */}
+      <section className="pt-24 pb-16 px-6 max-w-5xl mx-auto text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="text-xs font-medium tracking-[0.2em] uppercase text-[#666] mb-4"
+        >
+          What you get
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-5xl font-bold text-[#171717] mb-4"
+        >
+          The complete analyst stack.
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-lg text-[#666] max-w-xl mx-auto"
+        >
+          Everything a VC analyst needs, minus the four hours of prep work.
+        </motion.p>
       </section>
 
-      <SectionDivider />
-
-      {/* Problem section */}
-      <section className="py-24 px-8" style={{ background: '#FFFFFF' }}>
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal>
-            <h2
-              className="font-bold text-center mb-4"
-              style={{ fontSize: 36, color: '#171717', letterSpacing: '-0.02em', lineHeight: 1.1 }}
+      {/* Animated Stats */}
+      <section className="pb-16 px-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-3 divide-x divide-[#EAEAEA] border border-[#EAEAEA] rounded-xl bg-[#FAFAFA]">
+          {stats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              className="p-8 text-center"
             >
-              Every analyst does this manually.<br />Nobody should have to.
-            </h2>
-            <p className="text-center text-base mb-14" style={{ color: '#666666', maxWidth: 500, margin: '0 auto 56px' }}>
-              Read the deck. Extract market size. Google the founders. Write the notes. Score against thesis. Put it in the spreadsheet. Repeat 50 times a week.
-            </p>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              { stat: '50+', label: 'decks per week', detail: 'at a typical early-stage VC firm' },
-              { stat: '45 min', label: 'per deck', detail: 'spent on extraction, notes, and write-ups before any real thinking' },
-              { stat: '0 tools', label: 'built for this', detail: 'built specifically for analyst-level deal triage, until now' },
-            ].map((item, i) => (
-              <ScrollReveal key={item.stat} delay={i * 0.07}>
-                <div
-                  className="p-6 h-full shadow-sm"
-                  style={{ background: '#FFFFFF', border: '1px solid #EAEAEA', borderRadius: 12 }}
-                >
-                  <div style={{ ...mono, fontWeight: 700, fontSize: 30, color: '#D4A017', marginBottom: 4 }}>{item.stat}</div>
-                  <div className="text-sm font-semibold mb-2" style={{ color: '#171717' }}>{item.label}</div>
-                  <div className="text-sm leading-relaxed" style={{ color: '#666666' }}>{item.detail}</div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+              <div className="text-4xl font-bold text-[#171717] mb-1 flex items-center justify-center gap-0.5">
+                <NumberTicker value={s.value} />
+                <span>{s.suffix}</span>
+              </div>
+              <div className="text-sm font-medium text-[#171717] mb-1">{s.label}</div>
+              <div className="text-xs text-[#999]">{s.sub}</div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      <SectionDivider />
-
-      {/* Pipeline section */}
-      <section className="py-24 px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-            <ScrollReveal className="flex-1 max-w-[480px]">
-              <p style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#666666', fontWeight: 500, marginBottom: 16 }}>
-                Pipeline
-              </p>
-              <h2 className="font-bold mb-4" style={{ fontSize: 36, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#171717' }}>
-                Every deal, tracked in one place.
-              </h2>
-              <p className="text-base leading-relaxed mb-6" style={{ color: '#666666' }}>
-                Kanban board and table view for your full deal pipeline. Drag deals between stages, sort by score, and see red flag counts at a glance.
-              </p>
-              <ul className="space-y-3 mb-8">
-                {['Kanban and table views for your pipeline', 'Score-sorted deal ranking', 'One-click status updates', 'Export to CSV for LP reporting'].map(f => (
-                  <li key={f} className="flex items-center gap-3 text-sm" style={{ color: '#666666' }}>
-                    <CheckCircle2 size={14} style={{ color: '#16A34A', flexShrink: 0 }} /> {f}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/login"
-                className="inline-flex items-center gap-2 text-sm font-semibold"
-                style={{ background: 'rgba(212,160,23,0.08)', color: '#D4A017', border: '1px solid rgba(212,160,23,0.3)', borderRadius: 8, padding: '10px 20px', textDecoration: 'none' }}
+      {/* Bento Grid */}
+      <section className="pb-24 px-6 max-w-5xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="text-2xl font-bold text-[#171717] mb-8"
+        >
+          Every analyst does this manually.<br />
+          <span className="text-[#666] font-normal">Nobody should have to.</span>
+        </motion.h2>
+        <BentoGrid>
+          {features.map((f, i) => {
+            const { className: colSpan, ...cardProps } = f
+            return (
+              <motion.div
+                key={f.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                className={colSpan}
               >
-                View your pipeline →
-              </Link>
-            </ScrollReveal>
-            <ScrollReveal delay={0.1} className="flex-1 w-full max-w-[420px]">
-              <PipelineMockup />
-            </ScrollReveal>
-          </div>
-        </div>
+                <BentoCard {...cardProps} />
+              </motion.div>
+            )
+          })}
+        </BentoGrid>
       </section>
 
-      <SectionDivider />
-
-      {/* AI Detection section */}
-      <section className="py-24 px-8" style={{ background: '#FAFAFA' }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col lg:flex-row-reverse items-center gap-16">
-            <ScrollReveal className="flex-1 max-w-[480px]">
-              <p style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#666666', fontWeight: 500, marginBottom: 16 }}>
-                New Feature
-              </p>
-              <h2 className="font-bold mb-4" style={{ fontSize: 36, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#171717' }}>
-                Know if a deck<br />was written by AI.
-              </h2>
-              <p className="text-base leading-relaxed mb-6" style={{ color: '#666666' }}>
-                AI-generated pitch decks are showing up in inboxes at scale. Thesis checks each deck for AI authorship markers and flags the specific sections and excerpts that triggered it.
-              </p>
-              <ul className="space-y-3 mb-8">
-                {['Section-by-section AI score breakdown', 'Flagged excerpts with plain-English reason', 'Analyst-facing summary note', 'Calibrated to common pitch deck patterns'].map(f => (
-                  <li key={f} className="flex items-center gap-3 text-sm" style={{ color: '#666666' }}>
-                    <CheckCircle2 size={14} style={{ color: '#16A34A', flexShrink: 0 }} /> {f}
-                  </li>
-                ))}
-              </ul>
-            </ScrollReveal>
-            <ScrollReveal delay={0.1} className="flex-1 w-full max-w-[360px]">
-              <AIDetectionMockup />
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      <SectionDivider />
-
-      {/* Full feature list — 2-col alternating */}
-      <section className="py-24 px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="space-y-20">
-            {FEATURES.map((feat, i) => (
-              <ScrollReveal key={feat.title}>
-                <div className={`flex flex-col lg:flex-row items-start gap-16 ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-                  <div className="flex-1 max-w-md">
-                    <feat.icon size={18} style={{ color: '#D4A017', marginBottom: 20 }} />
-                    <h3 className="font-bold mb-4" style={{ fontSize: 28, letterSpacing: '-0.02em', lineHeight: 1.15, color: '#171717' }}>
-                      {feat.title}
-                    </h3>
-                    <p className="leading-relaxed mb-6" style={{ fontSize: 15, color: '#666666' }}>
-                      {feat.desc}
-                    </p>
-                    <div style={{ width: 36, height: 2, background: '#D4A017' }} />
-                  </div>
-                  <div className="flex-1 flex items-center">
-                    <MagicCard
-                      className="w-full"
-                      gradientColor="rgba(212,160,23,0.08)"
-                      gradientSize={250}
-                    >
-                      <div
-                        className="w-full flex items-center justify-center"
-                        style={{ height: 140, background: '#FAFAFA', border: '1px solid #EAEAEA', borderRadius: 8 }}
-                      >
-                        <feat.icon size={36} style={{ color: 'rgba(0,0,0,0.08)' }} />
-                      </div>
-                    </MagicCard>
-                  </div>
-                </div>
-                {i < FEATURES.length - 1 && <div style={{ marginTop: 80, height: 1, background: '#EAEAEA' }} />}
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <SectionDivider />
-
-      {/* CTA */}
-      <section className="py-20 px-8">
-        <div className="max-w-2xl mx-auto text-center">
-          <ScrollReveal>
-            <h2 className="font-bold mb-5" style={{ fontSize: 36, letterSpacing: '-0.02em', lineHeight: 1.1, color: '#171717' }}>
-              Ready to cut your prep time?
-            </h2>
-            <p className="mb-8" style={{ fontSize: 16, color: '#666666' }}>
-              Free to try. No credit card. No onboarding call.
-            </p>
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-2 font-semibold"
-              style={{ background: '#D4A017', color: '#FFFFFF', borderRadius: 8, padding: '12px 28px', fontSize: 15, textDecoration: 'none', transition: 'background 150ms' }}
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#B8860B')}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = '#D4A017')}
-            >
-              Start for free →
-            </Link>
-          </ScrollReveal>
-        </div>
+      {/* Bottom CTA */}
+      <section className="py-24 px-6 text-center border-t border-[#EAEAEA]">
+        <h2 className="text-3xl font-bold text-[#171717] mb-4">Ready to cut your prep time?</h2>
+        <p className="text-[#666] mb-8">Free to try. No credit card. No onboarding call.</p>
+        <Link
+          href="/login"
+          className="inline-flex items-center gap-2 bg-[#D4A017] hover:bg-[#B8860B] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+        >
+          Start for free →
+        </Link>
       </section>
 
       <SiteFooter />
     </div>
-  );
+  )
 }
