@@ -10,7 +10,7 @@ import { useMediaQuery } from '@/hooks/use-media-query';
 import { cn } from '@/lib/utils';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
-import { FAQAccordion } from '@/components/faq-accordion';
+import { FAQSection } from '@/components/ui/faq-section';
 
 function ScrollReveal({
   children,
@@ -335,7 +335,7 @@ export default function PricingPage() {
       <SectionDivider />
 
       {/* FAQ */}
-      <FAQAccordion />
+      <FAQSection />
 
       <SectionDivider />
 
