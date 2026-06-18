@@ -1,5 +1,6 @@
 ﻿"use client"
 
+import { useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { DatabaseIcon, TargetIcon, ZapIcon, NetworkIcon, CalendarCheckIcon, HistoryIcon } from "lucide-react"
 
@@ -36,6 +37,63 @@ const reasons = [
   },
 ]
 
+function TiltCard({ reason, index }: { reason: typeof reasons[0]; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [rotate, setRotate] = useState({ x: 0, y: 0 })
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current
+    if (!card) return
+    const rect = card.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+    const rotateX = ((y - centerY) / centerY) * -6
+    const rotateY = ((x - centerX) / centerX) * 6
+    setRotate({ x: rotateX, y: rotateY })
+  }
+
+  const handleMouseLeave = () => {
+    setRotate({ x: 0, y: 0 })
+  }
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.4, delay: index * 0.07 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: `perspective(800px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+        transition: "transform 0.15s ease-out",
+      }}
+      className="group rounded-xl border border-[#EAEAEA] bg-white p-6 hover:border-[#D4A017]/30 hover:shadow-md transition-shadow"
+    >
+      <motion.div
+        className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#FFFDF5] mb-3"
+        animate={{ y: [0, -3, 0] }}
+        transition={{
+          duration: 2.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: index * 0.3,
+        }}
+        style={{
+          transform: `translateZ(20px) rotate(${rotate.y * 0.5}deg)`,
+        }}
+      >
+        <reason.Icon className="h-4 w-4 text-[#D4A017]" />
+      </motion.div>
+      <h3 className="text-sm font-semibold text-[#171717] mb-1.5">{reason.title}</h3>
+      <p className="text-xs text-[#666] leading-relaxed">{reason.description}</p>
+    </motion.div>
+  )
+}
+
 export function WhyThesis() {
   return (
     <section className="py-24 px-6 bg-white border-y border-[#EAEAEA]">
@@ -60,31 +118,7 @@ export function WhyThesis() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {reasons.map((r, i) => (
-            <motion.div
-              key={r.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.4, delay: i * 0.07 }}
-              whileHover={{ y: -3 }}
-              className="group rounded-xl border border-[#EAEAEA] bg-white p-6 hover:border-[#D4A017]/30 hover:shadow-sm transition-all"
-            >
-              <motion.div
-                className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#FFFDF5] mb-3"
-                animate={{ y: [0, -3, 0] }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.3,
-                }}
-                whileHover={{ rotate: 8, scale: 1.08 }}
-              >
-                <r.Icon className="h-4 w-4 text-[#D4A017]" />
-              </motion.div>
-              <h3 className="text-sm font-semibold text-[#171717] mb-1.5">{r.title}</h3>
-              <p className="text-xs text-[#666] leading-relaxed">{r.description}</p>
-            </motion.div>
+            <TiltCard key={r.title} reason={r} index={i} />
           ))}
         </div>
 

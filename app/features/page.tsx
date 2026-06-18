@@ -316,6 +316,57 @@ export default function FeaturesPage() {
         </BentoGrid>
       </section>
 
+      {/* Workflow fit Q&A */}
+      <section className="py-24 px-6 max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="text-center mb-14"
+        >
+          <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#666] mb-3">
+            How it fits your workflow
+          </p>
+          <h2 className="text-3xl font-bold text-[#171717]">
+            Built around how decks actually move through a firm.
+          </h2>
+        </motion.div>
+
+        <div className="space-y-6">
+          {[
+            {
+              q: "Where does this fit if my firm already uses Affinity or a CRM?",
+              a: "Thesis isn't a CRM replacement. It handles the first-pass read and memo generation before a deal is worth logging seriously. Most teams keep their CRM for relationship tracking and use Thesis for the analysis step that happens before that.",
+            },
+            {
+              q: "Can multiple analysts work on the same pipeline?",
+              a: "Yes. The Firm plan supports up to 10 analysts sharing one pipeline, with each deal's analysis visible to the whole team regardless of who uploaded the deck.",
+            },
+            {
+              q: "What if a deck doesn't have much information in it?",
+              a: "Each scoring dimension falls back gracefully rather than failing. If a deck is missing financials or a clear GTM section, Thesis scores what it can and flags what's missing instead of producing an incomplete or broken analysis.",
+            },
+            {
+              q: "Does the scoring adjust to my fund's specific thesis?",
+              a: "Yes. Thesis fit scoring is calibrated to the stage, sector, and check size your fund actually invests in, not a generic startup checklist.",
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={item.q}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ duration: 0.35, delay: i * 0.06 }}
+              className="rounded-xl border border-[#EAEAEA] bg-white p-6"
+            >
+              <h3 className="text-sm font-semibold text-[#171717] mb-2">{item.q}</h3>
+              <p className="text-sm text-[#666] leading-relaxed">{item.a}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Bottom CTA */}
       <section className="py-24 px-6 text-center border-t border-[#EAEAEA]">
         <h2 className="text-3xl font-bold text-[#171717] mb-4">
