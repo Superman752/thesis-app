@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import SiteNavbar from '@/components/SiteNavbar';
 import { RippleButton } from '@/registry/magicui/ripple-button';
 import SiteFooter from '@/components/SiteFooter';
-import { DisplayCards } from '@/registry/magicui/display-cards';
+import DisplayCards from '@/registry/magicui/display-cards';
 
 function ScrollReveal({
   children,

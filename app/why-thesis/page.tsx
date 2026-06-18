@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { motion } from "framer-motion"
 import SiteNavbar from "@/components/SiteNavbar"
@@ -71,6 +71,23 @@ export default function WhyThesisPage() {
             <p className="text-[#666] leading-relaxed">{s.body}</p>
           </motion.div>
         ))}
+      </section>
+
+      <section className="pb-24 px-6 max-w-3xl mx-auto">
+        <div className="rounded-xl border border-[#EAEAEA] bg-[#FAFAFA] p-8">
+          <h2 className="text-xl font-semibold text-[#171717] mb-6">Is it actually worth $99 a month</h2>
+          <div className="space-y-4 text-[#666] leading-relaxed">
+            <p>
+              An analyst reviewing 20 decks a week at 45 minutes each spends about 15 hours a week on extraction and first-pass write-ups alone, before any actual judgment happens. At even a junior analyst's loaded cost, that is a meaningful chunk of a work week spent on work that does not require a human to do well.
+            </p>
+            <p>
+              Thesis brings that 45 minutes down to under 30 seconds of processing time, plus a few minutes for the analyst to read the output and form their own opinion. Across 20 decks a week, that is the difference between spending 15 hours a week on triage and spending under 2.
+            </p>
+            <p>
+              For a firm with 10 analysts on a shared workspace, that time difference compounds. The Firm plan is flat at $99 a month for the whole team, unlimited decks, which generally costs less than a single hour of one analyst's time.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section className="py-24 px-6 text-center border-t border-[#EAEAEA]">
