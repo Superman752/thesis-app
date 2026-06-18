@@ -46,15 +46,15 @@ const FOOTER_COLS = [
       { label: 'Features', href: '/features' },
       { label: 'How it works', href: '/how-it-works' },
       { label: 'Pricing', href: '/pricing' },
-      { label: 'Changelog', href: '#' },
+      { label: 'Changelog', href: '/changelog' },
     ],
   },
   {
     label: 'Company',
     links: [
-      { label: 'About', href: '#' },
-      { label: 'Blog', href: '#' },
-      { label: 'Careers', href: '#' },
+      { label: 'About', href: '/about' },
+      { label: 'Blog', href: '/blog' },
+      { label: 'Careers', href: '/careers' },
     ],
   },
   {
