@@ -2,6 +2,7 @@
 
 import SiteNavbar from "@/components/SiteNavbar"
 import SiteFooter from "@/components/SiteFooter"
+import { RippleButton } from "@/registry/magicui/ripple-button"
 
 export default function AboutPage() {
   return (
@@ -38,9 +39,9 @@ export default function AboutPage() {
 
       <section className="py-24 px-6 text-center border-t border-[#EAEAEA]">
         <h2 className="text-3xl font-bold text-[#171717] mb-4">Try it on your next deck.</h2>
-        <a href="/login" className="inline-flex items-center gap-2 bg-[#D4A017] hover:bg-[#B8860B] text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+        <RippleButton href="/login">
           Start for free
-        </a>
+        </RippleButton>
       </section>
 
       <SiteFooter />
