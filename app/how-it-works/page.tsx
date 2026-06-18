@@ -285,39 +285,55 @@ export default function HowItWorksPage() {
             </div>
           </ScrollReveal>
           <div>
-            {STEPS.map((s, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1], delay: i * 0.1 }}
-                style={{ marginBottom: 16 }}
-              >
-                <div
-                  className="shadow-sm"
-                  style={{
-                    border: '1px solid #EAEAEA',
-                    background: '#FFFFFF',
-                    borderRadius: 12,
-                    padding: 24,
-                  }}
+            {STEPS.flatMap((s, i) => {
+              const step = (
+                <motion.div
+                  key={`step-${i}`}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1], delay: i * 0.1 }}
+                  style={{ marginBottom: i < STEPS.length - 1 ? 0 : 16 }}
                 >
-                  <div style={{ ...mono, fontSize: 11, color: '#D4A017', letterSpacing: '0.15em', marginBottom: 14 }}>
-                    {String(i + 1).padStart(2, '0')}
+                  <div
+                    className="shadow-sm"
+                    style={{
+                      border: '1px solid #EAEAEA',
+                      background: '#FFFFFF',
+                      borderRadius: 12,
+                      padding: 24,
+                    }}
+                  >
+                    <div style={{ ...mono, fontSize: 11, color: '#D4A017', letterSpacing: '0.15em', marginBottom: 14 }}>
+                      {String(i + 1).padStart(2, '0')}
+                    </div>
+                    <h2 style={{ ...geist, fontSize: 20, fontWeight: 600, color: '#171717', letterSpacing: '-0.01em', marginBottom: 10 }}>
+                      {s.title}
+                    </h2>
+                    <p style={{ fontSize: 15, color: '#666666', lineHeight: 1.65, marginBottom: 12 }}>
+                      {s.desc}
+                    </p>
+                    <p style={{ fontSize: 13, color: '#999999', lineHeight: 1.65, maxWidth: 560 }}>
+                      {s.detail}
+                    </p>
                   </div>
-                  <h2 style={{ ...geist, fontSize: 20, fontWeight: 600, color: '#171717', letterSpacing: '-0.01em', marginBottom: 10 }}>
-                    {s.title}
-                  </h2>
-                  <p style={{ fontSize: 15, color: '#666666', lineHeight: 1.65, marginBottom: 12 }}>
-                    {s.desc}
-                  </p>
-                  <p style={{ fontSize: 13, color: '#999999', lineHeight: 1.65, maxWidth: 560 }}>
-                    {s.detail}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+              if (i < STEPS.length - 1) {
+                return [step, (
+                  <motion.div
+                    key={`line-${i}`}
+                    initial={{ scaleY: 0 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="w-px h-8 bg-[#EAEAEA] mx-auto"
+                    style={{ transformOrigin: 'top' }}
+                  />
+                )];
+              }
+              return [step];
+            })}
           </div>
         </div>
       </section>
