@@ -5,12 +5,12 @@ import { AvatarCircles } from "@/registry/magicui/avatar-circles"
 import { motion } from "framer-motion"
 
 const avatars = [
-  { imageUrl: "https://avatars.githubusercontent.com/u/16860528", profileUrl: "#" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/20110627", profileUrl: "#" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/106103625", profileUrl: "#" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/59228569", profileUrl: "#" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/59442788", profileUrl: "#" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/89768406", profileUrl: "#" },
+  { imageUrl: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=64&h=64&fit=crop&crop=face&auto=format&q=90", profileUrl: "#" },
+  { imageUrl: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=64&h=64&fit=crop&crop=face&auto=format&q=90", profileUrl: "#" },
+  { imageUrl: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=64&h=64&fit=crop&crop=face&auto=format&q=90", profileUrl: "#" },
+  { imageUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=64&h=64&fit=crop&crop=face&auto=format&q=90", profileUrl: "#" },
+  { imageUrl: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=64&h=64&fit=crop&crop=face&auto=format&q=90", profileUrl: "#" },
+  { imageUrl: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=64&h=64&fit=crop&crop=face&auto=format&q=90", profileUrl: "#" },
 ]
 
 const reviews = [

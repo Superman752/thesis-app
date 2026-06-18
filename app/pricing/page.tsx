@@ -2,13 +2,10 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useState, useRef } from 'react';
-import { Check, Star, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import { RippleButton } from '@/registry/magicui/ripple-button';
-import { InteractiveHoverButton } from '@/registry/magicui/interactive-hover-button';
 import confetti from 'canvas-confetti';
 import NumberFlow from '@number-flow/react';
-import { useMediaQuery } from '@/hooks/use-media-query';
-import { cn } from '@/lib/utils';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
 import { FAQSection } from '@/components/ui/faq-section';
@@ -50,80 +47,10 @@ function SectionDivider() {
   );
 }
 
-interface Plan {
-  name: string;
-  price: number;
-  yearlyPrice: number;
-  period: string;
-  features: string[];
-  description: string;
-  buttonText: string;
-  href: string;
-  isPopular: boolean;
-}
-
-const PLANS: Plan[] = [
-  {
-    name: 'Solo Analyst',
-    price: 0,
-    yearlyPrice: 0,
-    period: 'month',
-    description: 'Get started at no cost',
-    buttonText: 'Start for free',
-    href: '/login',
-    isPopular: false,
-    features: [
-      '10 pitch decks per month',
-      'Full deal analysis and extraction',
-      'Investment memo generation',
-      'Thesis scoring',
-      'Basic pipeline tracking',
-    ],
-  },
-  {
-    name: 'Pro',
-    price: 19,
-    yearlyPrice: 15,
-    period: 'month',
-    description: 'For the serious analyst',
-    buttonText: 'Start Pro',
-    href: '/login',
-    isPopular: true,
-    features: [
-      'Unlimited pitch decks',
-      'AI authorship detection',
-      'Full pipeline tracking',
-      'CSV export for LPs',
-      'Priority processing',
-      'Everything in Solo',
-    ],
-  },
-  {
-    name: 'Firm',
-    price: 99,
-    yearlyPrice: 79,
-    period: 'month',
-    description: 'For the entire fund',
-    buttonText: 'Talk to us',
-    href: '/login',
-    isPopular: false,
-    features: [
-      'Up to 10 analysts',
-      'Shared investment thesis config',
-      'Team pipeline and collaboration',
-      'In-app deal sharing and messaging',
-      'Slack digest and notifications',
-      'Everything in Pro',
-    ],
-  },
-];
-
 export default function PricingPage() {
   const geist = { fontFamily: 'Geist, sans-serif' } as const;
-  const mono = { fontFamily: 'Geist Mono, monospace' } as const;
 
   const [isMonthly, setIsMonthly] = useState(true);
-  const isDesktop = useMediaQuery('(min-width: 768px)');
   const switchRef = useRef<HTMLButtonElement>(null);
 
   const handleToggle = (nextChecked: boolean) => {
@@ -213,101 +140,146 @@ export default function PricingPage() {
               Annual <span style={{ color: '#D4A017' }}>(Save 20%)</span>
             </span>
           </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="text-center text-sm text-[#999] mt-8"
+          >
+            Used by analysts at early-stage funds. No enterprise sales process.
+          </motion.p>
         </div>
       </section>
 
       {/* Pricing cards */}
-      <section className="pb-24 px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
-            {PLANS.map((plan, index) => (
-              <motion.div
-                key={plan.name}
-                initial={{ y: 40, opacity: 0 }}
-                whileInView={
-                  isDesktop
-                    ? {
-                        y: plan.isPopular ? -16 : 0,
-                        opacity: 1,
-                        scale: plan.isPopular ? 1.0 : 0.97,
-                      }
-                    : { opacity: 1, y: 0, scale: 1 }
-                }
-                viewport={{ once: true }}
-                transition={{ duration: 1.2, type: 'spring', stiffness: 100, damping: 30, delay: 0.15 + index * 0.06 }}
-                className={cn('relative flex flex-col shadow-sm')}
-                style={{
-                  borderRadius: 12,
-                  padding: 24,
-                  background: plan.isPopular ? '#FFFDF5' : '#FFFFFF',
-                  border: plan.isPopular ? '1px solid #D4A017' : '1px solid #EAEAEA',
-                  marginTop: !plan.isPopular && isDesktop ? 20 : 0,
-                }}
-              >
-                {plan.isPopular && (
-                  <div
-                    className="absolute top-0 right-0 flex items-center gap-1"
-                    style={{ background: '#D4A017', padding: '3px 9px', borderRadius: '0 12px 0 8px' }}
-                  >
-                    <Star size={11} style={{ fill: '#FFFFFF', color: '#FFFFFF' }} />
-                    <span style={{ color: '#FFFFFF', fontSize: 11, fontWeight: 600 }}>Most popular</span>
-                  </div>
-                )}
+      <section className="pb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto px-6">
+          {/* Solo card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="rounded-2xl border border-[#EAEAEA] bg-white p-8 flex flex-col"
+          >
+            <div className="mb-6">
+              <p className="text-xs font-medium tracking-[0.15em] uppercase text-[#999] mb-2">Solo Analyst</p>
+              <div className="flex items-baseline gap-1">
+                <span className="text-4xl font-bold text-[#171717]">Free</span>
+              </div>
+              <p className="text-sm text-[#666] mt-2">Free forever</p>
+            </div>
+            <ul className="space-y-3 flex-1 mb-8">
+              {[
+                "10 pitch decks per month",
+                "Full deal analysis and extraction",
+                "Investment memo generation",
+                "Thesis fit scoring",
+                "Basic pipeline tracking",
+              ].map((f) => (
+                <li key={f} className="flex items-start gap-2.5 text-sm text-[#444]">
+                  <Check className="h-4 w-4 text-[#D4A017] flex-shrink-0 mt-0.5" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a href="/login" className="block w-full text-center border border-[#EAEAEA] text-[#171717] hover:border-[#D4A017] rounded-lg py-3 text-sm font-medium transition-colors">
+              Get started
+            </a>
+            <p className="text-xs text-center text-[#999] mt-3">No credit card needed</p>
+          </motion.div>
 
-                <div className="flex-1 flex flex-col">
-                  <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#666666' }}>
-                    {plan.name}
-                  </p>
+          {/* Pro card — featured */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.08 }}
+            className="rounded-2xl border-2 border-[#D4A017] bg-white p-8 flex flex-col relative"
+            style={{ boxShadow: "0 8px 32px rgba(212,160,23,0.12)" }}
+          >
+            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#D4A017] text-white text-xs font-semibold px-4 py-1 rounded-full">
+              Most popular
+            </div>
+            <div className="mb-6">
+              <p className="text-xs font-medium tracking-[0.15em] uppercase text-[#999] mb-2">Pro</p>
+              <div className="flex items-baseline gap-1">
+                <span className="text-4xl font-bold text-[#171717]">
+                  <NumberFlow
+                    value={isMonthly ? 19 : 15}
+                    format={{ style: 'currency', currency: 'USD', maximumFractionDigits: 0 }}
+                    willChange
+                  />
+                </span>
+                <span className="text-[#666] text-sm">/month</span>
+              </div>
+              <p className="text-sm text-[#666] mt-2">{isMonthly ? 'Billed monthly' : 'Billed annually'}</p>
+            </div>
+            <ul className="space-y-3 flex-1 mb-8">
+              {[
+                "Unlimited pitch decks",
+                "AI authorship detection",
+                "Full pipeline tracking",
+                "CSV export for LPs",
+                "Priority processing",
+                "Everything in Solo",
+              ].map((f) => (
+                <li key={f} className="flex items-start gap-2.5 text-sm text-[#444]">
+                  <Check className="h-4 w-4 text-[#D4A017] flex-shrink-0 mt-0.5" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a href="/login" className="block w-full text-center bg-[#D4A017] hover:bg-[#B8860B] text-white rounded-lg py-3 text-sm font-semibold transition-colors">
+              Start Pro
+            </a>
+            <p className="text-xs text-center text-[#999] mt-3">For the serious analyst</p>
+          </motion.div>
 
-                  <div className="flex items-end gap-1" style={{ marginTop: 16 }}>
-                    <span style={{ ...mono, fontSize: 48, fontWeight: 700, color: '#171717', lineHeight: 1 }}>
-                      {plan.price === 0 ? (
-                        'Free'
-                      ) : (
-                        <NumberFlow
-                          value={isMonthly ? plan.price : plan.yearlyPrice}
-                          format={{ style: 'currency', currency: 'USD', maximumFractionDigits: 0 }}
-                          willChange
-                        />
-                      )}
-                    </span>
-                    {plan.price !== 0 && (
-                      <span style={{ fontSize: 14, color: '#666666', marginBottom: 4 }}>/{plan.period}</span>
-                    )}
-                  </div>
-
-                  <p style={{ fontSize: 12, color: '#999999', marginTop: 6 }}>
-                    {plan.price === 0 ? 'Free forever' : isMonthly ? 'billed monthly' : 'billed annually'}
-                  </p>
-
-                  <ul className="flex flex-col flex-1" style={{ marginTop: 24, gap: 10 }}>
-                    {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-2.5">
-                        <Check size={15} style={{ color: '#16A34A', flexShrink: 0, marginTop: 2 }} />
-                        <span style={{ fontSize: 13, color: '#404040' }}>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <hr style={{ width: '100%', margin: '20px 0', border: 0, borderTop: '1px solid #EAEAEA' }} />
-
-                  {plan.isPopular ? (
-                    <RippleButton href={plan.href} className="w-full">
-                      {plan.buttonText}
-                    </RippleButton>
-                  ) : (
-                    <InteractiveHoverButton href={plan.href} className="w-full">
-                      {plan.buttonText}
-                    </InteractiveHoverButton>
-                  )}
-
-                  <p style={{ fontSize: 11, color: '#999999', textAlign: 'center', marginTop: 14 }}>
-                    {plan.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          {/* Firm card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.16 }}
+            className="rounded-2xl border border-[#EAEAEA] bg-[#FAFAFA] p-8 flex flex-col"
+          >
+            <div className="mb-6">
+              <p className="text-xs font-medium tracking-[0.15em] uppercase text-[#999] mb-2">Firm</p>
+              <div className="flex items-baseline gap-1">
+                <span className="text-4xl font-bold text-[#171717]">
+                  <NumberFlow
+                    value={isMonthly ? 99 : 79}
+                    format={{ style: 'currency', currency: 'USD', maximumFractionDigits: 0 }}
+                    willChange
+                  />
+                </span>
+                <span className="text-[#666] text-sm">/month</span>
+              </div>
+              <p className="text-sm text-[#666] mt-2">Up to 10 analysts</p>
+            </div>
+            <ul className="space-y-3 flex-1 mb-8">
+              {[
+                "Up to 10 analysts",
+                "Shared investment thesis config",
+                "Team pipeline and collaboration",
+                "In-app deal sharing and messaging",
+                "Slack digest and notifications",
+                "Everything in Pro",
+              ].map((f) => (
+                <li key={f} className="flex items-start gap-2.5 text-sm text-[#444]">
+                  <Check className="h-4 w-4 text-[#D4A017] flex-shrink-0 mt-0.5" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a href="/login" className="block w-full text-center border border-[#EAEAEA] text-[#171717] hover:border-[#D4A017] rounded-lg py-3 text-sm font-medium transition-colors">
+              Talk to us
+            </a>
+            <p className="text-xs text-center text-[#999] mt-3">For the entire fund</p>
+          </motion.div>
         </div>
       </section>
 
