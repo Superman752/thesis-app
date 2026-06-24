@@ -1,6 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { ArrowRightIcon } from "lucide-react"
 import { BentoCard, BentoGrid } from "@/registry/magicui/bento-grid"
 import { RippleButton } from "@/registry/magicui/ripple-button"
 import { NumberTicker } from "@/registry/magicui/number-ticker"
@@ -222,6 +224,93 @@ const stats = [
   { value: 0, suffix: " tools", label: "built for this", sub: "specifically for analyst-level deal triage, until now" },
 ]
 
+const featureCards = [
+  {
+    title: "Structured deal analysis",
+    description: "Company, market, traction, team, and ask extracted from any PDF into a consistent format. Every deal looks the same so you can actually compare them.",
+    color: "#D4A017",
+    href: "/login",
+  },
+  {
+    title: "Thesis fit scoring",
+    description: "Deals scored against your firm's investment criteria, weighted by what matters to you. Configurable per fund, per analyst.",
+    color: "#3B82F6",
+    href: "/login",
+  },
+  {
+    title: "Investment memo generation",
+    description: "One-page internal memo written to sound like a human analyst. Structured for partner meetings, ready in seconds.",
+    color: "#10B981",
+    href: "/login",
+  },
+  {
+    title: "AI authorship detection",
+    description: "Flag AI-generated decks before you spend diligence time on them. Section-level scoring with flagged excerpts.",
+    color: "#8B5CF6",
+    href: "/login",
+  },
+  {
+    title: "Automated red flags",
+    description: "Solo founder, missing revenue model, unsourced market claims, unrealistic projections. Surfaced automatically every time.",
+    color: "#EC4899",
+    href: "/login",
+  },
+  {
+    title: "Team pipeline and sharing",
+    description: "Share deals with your team, message colleagues inside the app, and track who's reviewing what. No more forwarding PDFs.",
+    color: "#F59E0B",
+    href: "/pricing",
+  },
+]
+
+function FeatureCard({ title, description, color, href, index }: { title: string; description: string; color: string; href: string; index: number }) {
+  const [hovered, setHovered] = useState(false)
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.4, delay: index * 0.07 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      whileHover={{ y: -4, scale: 1.01 }}
+      className="relative overflow-hidden rounded-xl border bg-white p-6 cursor-pointer"
+      style={{
+        borderColor: hovered ? color : "#EAEAEA",
+        boxShadow: hovered ? `0 8px 24px -6px ${color}33` : "0 1px 2px rgba(0,0,0,0.02)",
+        transition: "border-color 0.2s, box-shadow 0.2s",
+      }}
+    >
+      <motion.div
+        className="absolute top-0 left-0 h-0.5 rounded-tr-full"
+        style={{ backgroundColor: color }}
+        initial={{ width: 0 }}
+        animate={{ width: hovered ? "100%" : "0%" }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+      />
+      <div className="h-2 w-2 rounded-full mb-4" style={{ backgroundColor: color }} />
+      <h3 className="text-sm font-semibold text-[#171717] mb-2">{title}</h3>
+      <p className="text-xs text-[#666] leading-relaxed">{description}</p>
+      <AnimatePresence>
+        {hovered && (
+          <motion.a
+            href={href}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+            transition={{ duration: 0.15 }}
+            className="mt-3 inline-flex items-center gap-1 text-xs font-medium"
+            style={{ color }}
+          >
+            Get started
+            <ArrowRightIcon className="h-3 w-3" />
+          </motion.a>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  )
+}
+
 export default function FeaturesPage() {
   return (
     <div
@@ -314,6 +403,108 @@ export default function FeaturesPage() {
             </motion.div>
           ))}
         </BentoGrid>
+      </section>
+
+      {/* Real analyst workflow */}
+      <section className="py-24 px-6 max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mb-16"
+        >
+          <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#666] mb-3">By the numbers</p>
+          <h2 className="text-3xl font-bold text-[#171717]">What this actually saves you.</h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+            className="rounded-xl border border-[#EAEAEA] bg-[#FAFAFA] p-8"
+          >
+            <p className="text-xs font-medium uppercase tracking-wide text-[#999] mb-6">Without Thesis</p>
+            <div className="space-y-4">
+              {[
+                { task: "Read the deck end to end", time: "15 min" },
+                { task: "Extract key data manually", time: "10 min" },
+                { task: "Score against thesis criteria", time: "8 min" },
+                { task: "Research team and market", time: "7 min" },
+                { task: "Write up notes for the partner", time: "10 min" },
+              ].map((row) => (
+                <div key={row.task} className="flex items-center justify-between py-2 border-b border-[#EAEAEA] last:border-0">
+                  <span className="text-sm text-[#666]">{row.task}</span>
+                  <span className="text-sm font-medium text-[#999] bg-white border border-[#EAEAEA] rounded px-2 py-0.5">{row.time}</span>
+                </div>
+              ))}
+              <div className="flex items-center justify-between pt-3">
+                <span className="text-sm font-semibold text-[#171717]">Total per deck</span>
+                <span className="text-lg font-bold text-[#171717]">~50 min</span>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.08 }}
+            className="rounded-xl border border-[#D4A017]/30 bg-white p-8"
+            style={{ boxShadow: "0 4px 24px rgba(212,160,23,0.08)" }}
+          >
+            <p className="text-xs font-medium uppercase tracking-wide text-[#D4A017] mb-6">With Thesis</p>
+            <div className="space-y-4">
+              {[
+                { task: "Upload the PDF", time: "5 sec" },
+                { task: "Analysis runs automatically", time: "25 sec" },
+                { task: "Review structured output", time: "2 min" },
+                { task: "Forward memo to partner", time: "30 sec" },
+              ].map((row) => (
+                <div key={row.task} className="flex items-center justify-between py-2 border-b border-[#EAEAEA] last:border-0">
+                  <span className="text-sm text-[#666]">{row.task}</span>
+                  <span className="text-sm font-medium text-[#D4A017] bg-[#FFFDF5] border border-[#D4A017]/20 rounded px-2 py-0.5">{row.time}</span>
+                </div>
+              ))}
+              <div className="flex items-center justify-between pt-3">
+                <span className="text-sm font-semibold text-[#171717]">Total per deck</span>
+                <span className="text-lg font-bold text-[#D4A017]">~3 min</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[
+            { stat: "94%", label: "Time saved per deck", sub: "From ~50 minutes to under 3" },
+            { stat: "50+", label: "Decks per analyst weekly", sub: "That's 40+ hours of extraction saved" },
+            { stat: "30s", label: "Average analysis time", sub: "From upload to full structured output" },
+          ].map((item, i) => (
+            <motion.div
+              key={item.stat}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: i * 0.08 }}
+              className="rounded-xl border border-[#EAEAEA] bg-white p-6 text-center"
+            >
+              <div className="text-4xl font-bold text-[#D4A017] mb-1">{item.stat}</div>
+              <div className="text-sm font-semibold text-[#171717] mb-1">{item.label}</div>
+              <div className="text-xs text-[#999]">{item.sub}</div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Feature cards */}
+      <section className="pb-24 px-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {featureCards.map((card, i) => (
+            <FeatureCard key={card.title} {...card} index={i} />
+          ))}
+        </div>
       </section>
 
       {/* Workflow fit Q&A */}
