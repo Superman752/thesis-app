@@ -17,7 +17,7 @@ export function AvatarCircles({ numPeople, className, avatarUrls }: AvatarCircle
       {avatarUrls.map((url, index) => (
         <a key={index} href={url.profileUrl} target="_blank" rel="noopener noreferrer">
           <img
-            className="h-8 w-8 rounded-full border-2 border-white object-cover"
+            className="h-8 w-8 rounded-full border-2 border-white object-cover transition-transform duration-200 hover:scale-125 hover:z-10 hover:relative"
             src={url.imageUrl}
             width={32}
             height={32}
