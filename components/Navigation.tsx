@@ -82,7 +82,7 @@ export default function Navigation() {
                   href={href}
                   style={
                     active
-                      ? { background: 'var(--brand-dim)', color: 'var(--brand)' }
+                      ? { background: 'var(--nav-active-bg)', borderLeft: '2px solid var(--brand)', paddingLeft: '10px', color: 'var(--nav-active-color)' }
                       : { color: 'var(--muted)' }
                   }
                   className="flex px-3 py-2 rounded-lg text-sm font-medium transition-all duration-100 hover:bg-[var(--surface2)] hover:text-[var(--text2)]"

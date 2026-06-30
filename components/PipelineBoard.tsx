@@ -78,12 +78,13 @@ export default function PipelineBoard({ deals, onStatusChange }: PipelineBoardPr
               flexShrink: 0,
               width: 240,
               minHeight: 'calc(100vh - 220px)',
-              background: isOver ? 'rgba(255,255,255,0.035)' : 'var(--surface)',
+              background: isOver ? 'rgba(212,160,23,0.04)' : 'var(--surface2)',
               border: `1px solid ${isOver ? col.color : 'var(--border)'}`,
               borderRadius: 8,
               display: 'flex',
               flexDirection: 'column',
               transition: 'border-color 0.15s, background 0.15s',
+              boxShadow: 'var(--shadow-sm)',
             }}
             onDragOver={(e) => handleDragOver(e, col.id)}
             onDrop={(e) => handleDrop(e, col.id)}
@@ -98,6 +99,8 @@ export default function PipelineBoard({ deals, onStatusChange }: PipelineBoardPr
                 padding: '10px 14px',
                 borderBottom: '1px solid var(--border)',
                 flexShrink: 0,
+                background: 'var(--surface)',
+                borderRadius: '8px 8px 0 0',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -156,18 +159,20 @@ export default function PipelineBoard({ deals, onStatusChange }: PipelineBoardPr
               style={{
                 flex: 1,
                 margin: '8px',
-                minHeight: 60,
-                border: '1px dashed var(--border)',
+                minHeight: 80,
+                border: '1.5px dashed var(--border2)',
                 borderRadius: 6,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                background: 'transparent',
               }}
             >
               <span
                 style={{
                   fontSize: 11,
                   color: 'var(--muted3)',
+                  userSelect: 'none',
                 }}
               >
                 Drop here

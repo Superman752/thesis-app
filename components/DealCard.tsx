@@ -37,16 +37,19 @@ export default function DealCard({ deal, draggable = false, onDragStart }: DealC
       onDragStart={draggable && onDragStart ? (e) => onDragStart(e, deal.id) : undefined}
       className="block rounded-xl border transition-all duration-150 cursor-pointer"
       style={{
-        background: 'var(--surface2)',
+        background: 'var(--surface)',
         borderColor: 'var(--border)',
+        boxShadow: 'var(--shadow-sm)',
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = 'var(--border2)';
         (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
+        (e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-md)';
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
         (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+        (e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-sm)';
       }}
     >
       {/* Card top */}

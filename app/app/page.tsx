@@ -173,7 +173,7 @@ export default function PipelinePage() {
         {deals.length > 0 && (
           <div
             className="flex items-center gap-5 px-4 py-3 rounded-xl mb-5"
-            style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+            style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
           >
             {/* Sparkline */}
             <div className="flex items-center gap-3 flex-shrink-0">
