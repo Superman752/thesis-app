@@ -1,8 +1,6 @@
 "use client"
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRightIcon } from "lucide-react"
+import { motion } from "framer-motion"
 import { BentoCard, BentoGrid } from "@/registry/magicui/bento-grid"
 import { RippleButton } from "@/registry/magicui/ripple-button"
 import { NumberTicker } from "@/registry/magicui/number-ticker"
@@ -224,93 +222,6 @@ const stats = [
   { value: 0, suffix: " tools", label: "built for this", sub: "specifically for analyst-level deal triage, until now" },
 ]
 
-const featureCards = [
-  {
-    title: "Structured deal analysis",
-    description: "Company, market, traction, team, and ask extracted from any PDF into a consistent format. Every deal looks the same so you can actually compare them.",
-    color: "#D4A017",
-    href: "/login",
-  },
-  {
-    title: "Thesis fit scoring",
-    description: "Deals scored against your firm's investment criteria, weighted by what matters to you. Configurable per fund, per analyst.",
-    color: "#3B82F6",
-    href: "/login",
-  },
-  {
-    title: "Investment memo generation",
-    description: "One-page internal memo written to sound like a human analyst. Structured for partner meetings, ready in seconds.",
-    color: "#10B981",
-    href: "/login",
-  },
-  {
-    title: "AI authorship detection",
-    description: "Flag AI-generated decks before you spend diligence time on them. Section-level scoring with flagged excerpts.",
-    color: "#8B5CF6",
-    href: "/login",
-  },
-  {
-    title: "Automated red flags",
-    description: "Solo founder, missing revenue model, unsourced market claims, unrealistic projections. Surfaced automatically every time.",
-    color: "#EC4899",
-    href: "/login",
-  },
-  {
-    title: "Team pipeline and sharing",
-    description: "Share deals with your team, message colleagues inside the app, and track who's reviewing what. No more forwarding PDFs.",
-    color: "#F59E0B",
-    href: "/pricing",
-  },
-]
-
-function FeatureCard({ title, description, color, href, index }: { title: string; description: string; color: string; href: string; index: number }) {
-  const [hovered, setHovered] = useState(false)
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.4, delay: index * 0.07 }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      whileHover={{ y: -4, scale: 1.01 }}
-      className="relative overflow-hidden rounded-xl border bg-white p-6 cursor-pointer"
-      style={{
-        borderColor: hovered ? color : "#EAEAEA",
-        boxShadow: hovered ? `0 8px 24px -6px ${color}33` : "0 1px 2px rgba(0,0,0,0.02)",
-        transition: "border-color 0.2s, box-shadow 0.2s",
-      }}
-    >
-      <motion.div
-        className="absolute top-0 left-0 h-0.5 rounded-tr-full"
-        style={{ backgroundColor: color }}
-        initial={{ width: 0 }}
-        animate={{ width: hovered ? "100%" : "0%" }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-      />
-      <div className="h-2 w-2 rounded-full mb-4" style={{ backgroundColor: color }} />
-      <h3 className="text-sm font-semibold text-[#171717] mb-2">{title}</h3>
-      <p className="text-xs text-[#666] leading-relaxed">{description}</p>
-      <AnimatePresence>
-        {hovered && (
-          <motion.a
-            href={href}
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 4 }}
-            transition={{ duration: 0.15 }}
-            className="mt-3 inline-flex items-center gap-1 text-xs font-medium"
-            style={{ color }}
-          >
-            Get started
-            <ArrowRightIcon className="h-3 w-3" />
-          </motion.a>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  )
-}
-
 export default function FeaturesPage() {
   return (
     <div
@@ -494,15 +405,6 @@ export default function FeaturesPage() {
               <div className="text-sm font-semibold text-[#171717] mb-1">{item.label}</div>
               <div className="text-xs text-[#999]">{item.sub}</div>
             </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Feature cards */}
-      <section className="pb-24 px-6 max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {featureCards.map((card, i) => (
-            <FeatureCard key={card.title} {...card} index={i} />
           ))}
         </div>
       </section>
