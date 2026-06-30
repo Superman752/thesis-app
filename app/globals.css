@@ -60,7 +60,7 @@
 }
 
 /* ── Dark theme — scoped to the authenticated app only ──────────────── */
-.theme-dark {
+html.app-dark .theme-dark {
   --bg: #09090B;
   --surface: #111113;
   --surface2: #1C1C1F;

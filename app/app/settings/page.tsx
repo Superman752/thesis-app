@@ -3,12 +3,64 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LogOut, Save, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react';
+import { LogOut, Save, CheckCircle2, ChevronDown, ChevronUp, Sun, Moon } from 'lucide-react';
+import { useTheme } from '@/lib/theme-context';
 
 interface Profile {
   firmName: string;
   analystName: string;
   email: string;
+}
+
+function ThemeToggleSection() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <section
+      className="rounded-xl overflow-hidden"
+      style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+    >
+      <div
+        className="px-5 py-3.5"
+        style={{ borderBottom: '1px solid var(--border)', borderLeft: '2px solid var(--muted3)' }}
+      >
+        <h2 className="text-sm font-semibold" style={{ color: 'var(--text)' }}>Appearance</h2>
+        <p className="text-xs mt-0.5" style={{ color: 'var(--muted2)' }}>Choose how the app looks to you.</p>
+      </div>
+      <div className="px-5 py-4 flex items-center justify-between">
+        <div>
+          <div className="text-sm font-medium" style={{ color: 'var(--text)' }}>Theme</div>
+          <div className="text-xs mt-0.5" style={{ color: 'var(--muted2)' }}>Preference is saved locally in your browser.</div>
+        </div>
+        <div className="flex items-center gap-1 p-1 rounded-lg" style={{ background: 'var(--surface2)', border: '1px solid var(--border2)' }}>
+          <button
+            onClick={() => setTheme('light')}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-150"
+            style={
+              theme === 'light'
+                ? { background: 'var(--bg)', color: 'var(--text)', boxShadow: '0 1px 2px rgba(0,0,0,0.12)', border: '1px solid var(--border)' }
+                : { color: 'var(--muted)', border: '1px solid transparent' }
+            }
+          >
+            <Sun size={12} />
+            Light
+          </button>
+          <button
+            onClick={() => setTheme('dark')}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-150"
+            style={
+              theme === 'dark'
+                ? { background: 'var(--bg)', color: 'var(--text)', boxShadow: '0 1px 2px rgba(0,0,0,0.12)', border: '1px solid var(--border)' }
+                : { color: 'var(--muted)', border: '1px solid transparent' }
+            }
+          >
+            <Moon size={12} />
+            Dark
+          </button>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default function SettingsPage() {
@@ -67,6 +119,9 @@ export default function SettingsPage() {
       </div>
 
       <div className="px-6 md:px-8 py-6 max-w-2xl space-y-4">
+        {/* Appearance */}
+        <ThemeToggleSection />
+
         {/* Analyst Profile */}
         <section
           className="rounded-xl overflow-hidden"

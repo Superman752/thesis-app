@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Navigation from '@/components/Navigation';
+import { ThemeProvider } from '@/lib/theme-context';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -13,12 +14,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   }, [router]);
 
   return (
-    <div className="theme-dark flex min-h-screen" style={{ background: 'var(--bg)' }}>
-      <Navigation />
-      {/* Main content , offset for sidebar on desktop, bottom nav on mobile */}
-      <main className="flex-1 min-w-0 md:ml-64 pb-16 md:pb-0">
-        {children}
-      </main>
-    </div>
+    <ThemeProvider>
+      <div className="theme-dark flex min-h-screen" style={{ background: 'var(--bg)' }}>
+        <Navigation />
+        {/* Main content, offset for sidebar on desktop, bottom nav on mobile */}
+        <main className="flex-1 min-w-0 md:ml-64 pb-16 md:pb-0">
+          {children}
+        </main>
+      </div>
+    </ThemeProvider>
   );
 }
