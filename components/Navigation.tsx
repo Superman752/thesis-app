@@ -4,14 +4,16 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { LayoutGrid, Plus, Target, Settings } from 'lucide-react';
+import { LayoutGrid, Plus, Target, Settings, BarChart3, FileText } from 'lucide-react';
 import { AnalystProfile } from '@/lib/types';
 
 const navItems = [
-  { icon: LayoutGrid, label: 'Pipeline', href: '/app' },
-  { icon: Plus, label: 'New Deal', href: '/app/upload' },
-  { icon: Target, label: 'Thesis', href: '/app/thesis' },
-  { icon: Settings, label: 'Settings', href: '/app/settings' },
+  { icon: LayoutGrid, label: 'Pipeline',  href: '/app'           },
+  { icon: BarChart3,  label: 'Analytics', href: '/app/analytics' },
+  { icon: FileText,   label: 'Memos',     href: '/app/memos'     },
+  { icon: Plus,       label: 'New Deal',  href: '/app/upload'    },
+  { icon: Target,     label: 'Thesis',    href: '/app/thesis'    },
+  { icon: Settings,   label: 'Settings',  href: '/app/settings'  },
 ];
 
 function Initials({ name }: { name: string }) {
